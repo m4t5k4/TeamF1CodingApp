@@ -5,6 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SharedModule } from './shared/components/shared.module';
 
+import { EmployeeModule } from './modules/employee/employee.module';
+
 @NgModule({
   declarations: [
     AppComponent
