@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { SharedModule } from './shared/components/shared.module';
+import { SharedModule } from './shared/shared.module';
 
 import { EmployeeModule } from './modules/employee/employee.module';
 
@@ -14,7 +14,8 @@ import { EmployeeModule } from './modules/employee/employee.module';
   imports: [
     SharedModule,
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    EmployeeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
