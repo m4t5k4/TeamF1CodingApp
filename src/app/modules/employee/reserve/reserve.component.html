@@ -1,1 +1,32 @@
-<p>reserve works!</p>
+<div class="container">
+  <div class="row">
+    <img src="../../../../assets/Grondplan Corda 1 +5.png" alt="">
+
+    <div class="col">
+      <div [formGroup]="form">
+
+        <div class="form-group col">
+          <label for="location">Zone</label>
+          <select name="location" id="location" formControlName="selectedLocation" class="form-control">
+            <option *ngFor="let location of locations" value="{{location.name}}">{{location.name}}</option>
+          </select>
+        </div>
+
+        <div class="form-group col">
+          <label for="place">Zitplaats</label>
+          <select name="location" id="location" formControlName="selectedLocation" class="form-control">
+            <option *ngFor="let place of places" value="{{place.number}}">{{place.number}}</option>
+          </select>
+        </div>
+
+        <div class="form-group col">
+          <label for="datum">Datum</label>
+          <ngb-datepicker class="my-datepicker-1"></ngb-datepicker>
+        </div>
+        {{form.controls.date.value}}
+      </div>
+      <button>Reserveren</button>
+    </div>
+  </div>
+
+</div>

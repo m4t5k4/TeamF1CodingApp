@@ -3,8 +3,9 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { SharedModule } from './shared/components/shared.module';
 import { SecurityInterceptor } from './security/interceptors/security.interceptor';
+import { SharedModule } from './shared/shared.module';
+
 import { EmployeeModule } from './modules/employee/employee.module';
 import { SecurityModule } from './security/security.module';
 import {  HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';

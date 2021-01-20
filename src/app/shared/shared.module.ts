@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-//import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MaterialModule } from './material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserModule } from '@angular/platform-browser';
@@ -14,6 +14,7 @@ import { BrowserAnimationsModule } from  '@angular/platform-browser/animations';
         FormsModule,
         ReactiveFormsModule,
         RouterModule,
+        NgbModule,
         FlexLayoutModule,
 
     FlexLayoutModule,
@@ -31,7 +32,7 @@ import { BrowserAnimationsModule } from  '@angular/platform-browser/animations';
 
         MaterialModule,
         FlexLayoutModule,
-
+        NgbModule,
 
       BrowserAnimationsModule,
       BrowserModule

@@ -1,0 +1,48 @@
+.container {
+  height: 100vh;
+  background: #6B00D6;
+  display: grid;
+  place-content: center;
+}
+
+img {
+  //margin-top: 2.5em;
+  border-radius: 15px;
+  @media (max-width: 480px) {
+    margin-top: 4em;
+  }
+}
+
+button {
+  background: #8716F9;
+  border: none;
+  border-radius: 2em;
+  color: white;
+  padding: .5em 1em;
+  margin-top: 1em;
+}
+
+label {
+  color: white;
+  padding-right: 1em;
+}
+
+.form-group {
+  padding-top: 1em;
+}
+
+select {
+  width: 5em;
+}
+
+:host ::ng-deep ngb-datepicker{
+    left: 0px !important;
+    top: 0px !important;
+    padding-top: 0px !important;
+    padding-right: 0px !important;
+    padding-bottom: 0px !important;
+    padding-left: 0px !important;
+    position: relative !important;
+    transform: translate(0px, 28px)!important;
+    background: white !important;
+      }
