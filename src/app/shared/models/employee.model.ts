@@ -6,6 +6,7 @@ export class Employee {
         public email: string,
         public password: string,
         public roleId: number,
+        public token: string,
     ){
 
     }

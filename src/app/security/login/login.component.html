@@ -1,0 +1,17 @@
+<div class="container">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="ml-5 mr-5 mt-5">
+        <h2 class="mb-5">Login</h2>
+        <h5 class="text-danger">{{ message }}</h5>
+        <div class="form-group mt-3">
+            <label>Email</label>
+            <input type="email" class="form-control" formControlName="email" name="email">
+        </div>
+
+        <div class="form-group mt-3">
+            <label>Wachtwoord</label>
+            <input type="password" class="form-control" formControlName=password name="password">
+        </div>
+
+        <button type="submit" [disabled]="!loginForm.valid" class="btn mt-3 mb-5 btn-primary btn-lg btn-block">Login</button>
+    </form>
+</div>
