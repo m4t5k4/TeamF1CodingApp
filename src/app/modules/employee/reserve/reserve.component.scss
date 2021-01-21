@@ -1,15 +1,11 @@
-.container {
-  height: 100vh;
-  background: #6B00D6;
-  display: grid;
-  place-content: center;
+h2 {
+  margin-top: 20px;
 }
 
 img {
-  //margin-top: 2.5em;
   border-radius: 15px;
   @media (max-width: 480px) {
-    margin-top: 4em;
+    width: 99%;
   }
 }
 
@@ -20,19 +16,25 @@ button {
   color: white;
   padding: .5em 1em;
   margin-top: 1em;
+  margin-bottom: 1em;
 }
 
 label {
-  color: white;
+  //color: white;
   padding-right: 1em;
+  vertical-align: top;
 }
 
 .form-group {
   padding-top: 1em;
 }
 
+.form-row {
+  max-width: 360px;
+}
+
 select {
-  width: 5em;
+  width: 100%;
 }
 
 :host ::ng-deep ngb-datepicker{
@@ -45,4 +47,4 @@ select {
     position: relative !important;
     transform: translate(0px, 28px)!important;
     background: white !important;
-      }
+}

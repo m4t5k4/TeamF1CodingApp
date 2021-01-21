@@ -1,9 +1,10 @@
 <div class="container">
-  <div class="row">
-    <img src="../../../../assets/Grondplan Corda 1 +5.png" alt="">
+  <h2 class="mb-5">Reserveer een tafel</h2>
+  <img src="../../../../assets/Grondplan Corda 1 +5.png" alt="">
 
-    <div class="col">
-      <div [formGroup]="form">
+  <div class="formField">
+    <div [formGroup]="reservateForm" (ngSubmit)="onSubmit()">
+      <div class="form-row">
 
         <div class="form-group col">
           <label for="location">Zone</label>
@@ -14,18 +15,56 @@
 
         <div class="form-group col">
           <label for="place">Zitplaats</label>
-          <select name="location" id="location" formControlName="selectedLocation" class="form-control">
+          <select name="location" id="location" formControlName="selectedPlace" class="form-control">
             <option *ngFor="let place of places" value="{{place.number}}">{{place.number}}</option>
           </select>
         </div>
 
-        <div class="form-group col">
-          <label for="datum">Datum</label>
-          <ngb-datepicker class="my-datepicker-1"></ngb-datepicker>
-        </div>
-        {{form.controls.date.value}}
       </div>
-      <button>Reserveren</button>
+
+      <div class="form-row">
+
+        <div class="form-group col">
+          <label for="from">van</label>
+          <input type="time" name="from" id="from" formControlName="from" class="form-control">
+        </div>
+
+        <div class="form-group col">
+          <label for="till">tot</label>
+          <input type="time" name="till" id="till" formControlName="till" class="form-control">
+        </div>
+
+      </div>
+
+      <div class="form-row">
+        <div class="form-group col">
+          <label for="date">Datum</label>
+          <input type="date" id="date" name="date" formControlName="date" class="form-control">
+          <!-- <ngb-datepicker class="my-datepicker-1" formControlName="date" id="date" name="date"></ngb-datepicker> -->
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group col">
+          <label for="amountPersons">Aantal personen</label>
+          <input type="number" id="amountPersons" name="amountPersons" formControlName="amountPersons" class="form-control">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group col">
+          <label for="description">Beschrijving</label>
+          <input type="text" id="description" name="description" formControlName="description" class="form-control">
+        </div>
+      </div>
+
+      {{reservateForm.value | json }}
+      <div class="form-group">
+        <button [disabled]="!reservateForm.valid || submitted" class="btn btn-primary">
+          <span *ngIf="submitted" class="spinner-border spinner-border-sm mr-1"></span>
+          Reserveren
+        </button>
+      </div>
     </div>
   </div>
 
