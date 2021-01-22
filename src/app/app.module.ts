@@ -7,7 +7,10 @@ import { SharedModule } from './shared/shared.module';
 
 import { EmployeeModule } from './modules/employee/employee.module';
 import { SecurityModule } from './security/security.module';
-import {  HttpClientModule } from '@angular/common/http';
+import {LocationsModule} from './modules/locations/locations.module'
+import {TablesModule} from './modules/tables/tables.module'
+
+import {  HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,6 +23,8 @@ import {  HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     EmployeeModule,
     SecurityModule,
+    LocationsModule,
+    TablesModule
   ],
   bootstrap: [AppComponent]
 })

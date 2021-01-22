@@ -1,0 +1,21 @@
+<h1 class="text-center">Locaties</h1>
+<button mat-raised-button class="ml-5" (click)="btnClickNew();">Voeg een nieuwe locatie toe</button>
+<table class="table m-5">
+    <thead>
+        <tr>
+            <th scope="col">Naam</th>
+            <th scope="col">Adres</th>
+            <th scope="col">Omschrijving</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let l of locations">
+            <td>{{l.name}}</td>
+            <td>{{l.address}}</td>
+            <td>{{l.description}}</td>
+            <td><button mat-raised-butto (click)="showDetailLocation(l)">Bewerken</button><button mat-raised-butto
+                    (click)="deleteLocation(l.id,l.name)">Verwijderen</button></td>
+        </tr>
+    </tbody>
+</table>
