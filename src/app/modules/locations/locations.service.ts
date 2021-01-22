@@ -9,6 +9,8 @@ import { LocationsComponent } from './locations/locations.component';
 export class LocationsService {
 
   constructor(private http: HttpClient) { }
+  
+  private location = new Location(0,"","","");
 
   getLocations() : Observable<Location[]>
   {
@@ -28,5 +30,16 @@ export class LocationsService {
   deleteLocation(locationId: number)
   {
     return this.http.delete<Location>(`${environment.baseUrl}/locations/` + locationId);
+  }
+
+  setLocation(location : Location)
+  {
+    this.location = location;
+    console.log(this.location);
+  }
+
+  getLocation()
+  {
+    return this.location;
   }
 }

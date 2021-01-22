@@ -24,21 +24,25 @@ export class LocationsComponent implements OnInit {
     this._locationService.putLocation(number, location).subscribe;
   }
 
-  deleteLocation(locationId: number) {
-    this._locationService.deleteLocation(locationId).subscribe();
-    window.location.reload();
+  deleteLocation(locationId: number, naam : string) {
+    if (confirm("Wil je deze locatie: " + naam +" verwijderen?" )) {
+      this._locationService.deleteLocation(locationId).subscribe();
+      window.location.reload();
+    }
   }
 
   selectedLocation: Location = null;
 
   showDetailLocation(l: Location) {
-    this.selectedLocation = l;
+    //this.selectedLocation = l;
+    this._locationService.setLocation(l);
+    this.router.navigate(['/location/edit']);
   }
 
   ngOnInit(): void {
   }
 
-  btnClickNew() : void {
+  btnClickNew(): void {
     console.log('trigger');
     this.router.navigate(['/location/add']);
   };

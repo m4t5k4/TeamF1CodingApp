@@ -10,5 +10,6 @@
             <input matInput type="text" formControlName="description" class="form-control"/>
     </p>
     <p><button mat-raised-button color="primary" type="submit"
-            [disabled]="!locationForm.valid || submitted">Submit</button></p>
+            [disabled]="!locationForm.valid || submitted">Toevoegen</button></p>
 </form>
+<button mat-raised-button class="ml-5" (click)="btnReturn();">Terug naar overzicht</button>

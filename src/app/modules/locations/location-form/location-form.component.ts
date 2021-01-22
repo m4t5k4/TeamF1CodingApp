@@ -33,6 +33,13 @@ export class LocationFormComponent implements OnInit {
     console.log(this.locationForm.value);
     this.submitted = true;
     this._locationService.addLocation(this.locationForm.value).subscribe();
+    setTimeout(()=>{                          
+      this.router.navigate(["/location"]);
+    }, 1000); 
+  }
+
+  btnReturn()
+  {
     this.router.navigate(["/location"]);
   }
 }
