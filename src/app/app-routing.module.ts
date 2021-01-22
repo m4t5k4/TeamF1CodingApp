@@ -7,6 +7,7 @@ import { LocationFormComponent } from './modules/locations/location-form/locatio
 import { LocationsComponent } from './modules/locations/locations/locations.component';
 import { LoginComponent } from './security/login/login.component';
 import { RegisterComponent } from './security/register/register.component';
+import { TablesComponent } from './modules/tables/tables/tables.component';
 
 const routes: Routes = [
   { path: 'employee', component: ReserveComponent },
@@ -14,7 +15,8 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'location', component: LocationsComponent },
   { path: 'location/add', component: LocationFormComponent },
-  { path: 'location/edit', component: LocationDetailComponent}
+  { path: 'location/edit', component: LocationDetailComponent},
+  { path: 'tables', component: TablesComponent}
 ];
 
 @NgModule({
