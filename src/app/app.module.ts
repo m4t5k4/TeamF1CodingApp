@@ -9,6 +9,7 @@ import { SharedModule } from './shared/shared.module';
 import { EmployeeModule } from './modules/employee/employee.module';
 import { SecurityModule } from './security/security.module';
 import {LocationsModule} from './modules/locations/locations.module'
+import {TablesModule} from './modules/tables/tables.module'
 
 import {  HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 @NgModule({
@@ -23,7 +24,8 @@ import {  HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
     AppRoutingModule,
     EmployeeModule,
     SecurityModule,
-    LocationsModule
+    LocationsModule,
+    TablesModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
