@@ -18,6 +18,22 @@ export class TablesComponent implements OnInit {
       }
       );
   }
+  addTable() {
+    let newTable = new TableLocation(0,"Tafel 500");
+    this._tablesService.addTable(newTable).subscribe();
+    window.location.reload();
+  }
+
+  updateTable() {
+    let tableToUpdate = new TableLocation(1, "Tafel 123");
+    this._tablesService.updateTable(tableToUpdate).subscribe();
+    window.location.reload();
+  }
+
+  deleteTable(id) {
+    this._tablesService.deleteTable(id).subscribe();
+    window.location.reload();
+  }
 
   ngOnInit(): void {
   }

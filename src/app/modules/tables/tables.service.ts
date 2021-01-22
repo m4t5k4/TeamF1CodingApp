@@ -13,4 +13,18 @@ export class TablesService {
   {
     return this.http.get<TableLocation[]>(`${environment.baseUrl}/tables`);
   }
+
+  addTable(table: TableLocation) 
+  {
+    return this.http.post<TableLocation>(`${environment.baseUrl}/tables`, table);
+  }
+
+  updateTable(table: TableLocation) 
+  {
+    return this.http.put<TableLocation>(`${environment.baseUrl}/tables`, table);
+  }
+
+  deleteTable(tableID: number) {
+    return this.http.delete<TableLocation>(`${environment.baseUrl}/tables/` + tableID);
+    }
 }
