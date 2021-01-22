@@ -34,7 +34,9 @@ export class LocationDetailComponent implements OnInit {
     this.submitted = true;
     console.log(this.locationForm.value);
     this._locationService.putLocation(this._locationService.getLocation().id, this.locationForm.value).subscribe();
-    this.router.navigate(["/location"]);
+    setTimeout(()=>{                          
+      this.router.navigate(["/location"]);
+    }, 1000); 
   }
 
   btnReturn() {
