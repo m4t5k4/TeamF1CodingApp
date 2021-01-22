@@ -1,0 +1,21 @@
+<h1 class="text-center">Locations</h1>
+<table class="table ml-5 mr-5 mt-5">
+    <thead>
+        <button mat-raised-button (click)="btnClickNew();">Add a member</button>
+        <tr>
+            <th scope="col">Naam</th>
+            <th scope="col">Adres</th>
+            <th scope="col">Omschrijving</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let l of locations">
+            <td>{{l.name}}</td>
+            <td>{{l.address}}</td>
+            <td>{{l.description}}</td>
+            <td><button (click)="showDetailLocation(l)">Detail</button><button (click)="deleteLocation(l.id)">Delete</button></td>
+        </tr>
+    </tbody>
+</table>
+<!--<li *ngFor="let l of locations">{{l.name}} <button (click)="showDetailLocation(l)"> Show detail</button> <button (click)="deleteLocation(l.id)"> Delete</button></li>-->
+<app-location-detail *ngIf="selectedLocation" [location]="selectedLocation"></app-location-detail>
