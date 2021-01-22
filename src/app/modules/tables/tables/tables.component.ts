@@ -25,7 +25,7 @@ export class TablesComponent implements OnInit {
   }
 
   updateTable() {
-    let tableToUpdate = new TableLocation(1, "Tafel 77");
+    let tableToUpdate = new TableLocation(1, "Tafel 123");
     this._tablesService.updateTable(tableToUpdate).subscribe();
     window.location.reload();
   }
