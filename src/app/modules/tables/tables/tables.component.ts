@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TableLocation } from 'src/app/shared/models/table-location.model';
 import { TablesService } from '../tables.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tables',
@@ -11,17 +12,15 @@ export class TablesComponent implements OnInit {
   
   tables: TableLocation[];
 
-  constructor(private _tablesService : TablesService) { 
+  constructor(private _tablesService : TablesService, private router: Router) { 
     this._tablesService.getTables().subscribe(
       result => {
       this.tables = result;
       }
-      );
+    )
   }
   addTable() {
-    let newTable = new TableLocation(0,"Tafel 500");
-    this._tablesService.addTable(newTable).subscribe();
-    window.location.reload();
+    this.router.navigate(['/table/edit']);
   }
 
   updateTable() {
@@ -30,9 +29,15 @@ export class TablesComponent implements OnInit {
     window.location.reload();
   }
 
-  deleteTable(id) {
+  deleteTable(id: number) {
     this._tablesService.deleteTable(id).subscribe();
     window.location.reload();
+  }
+
+  showDetailTable(table: TableLocation) {
+    this._tablesService.setEditTable(table)
+    console.log(this._tablesService.getTable().name)
+    this.router.navigate(['/tables/edit']);
   }
 
   ngOnInit(): void {

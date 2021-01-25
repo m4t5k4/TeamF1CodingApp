@@ -9,6 +9,7 @@ import { LoginComponent } from './security/login/login.component';
 import { RegisterComponent } from './security/register/register.component';
 import { ProfileComponent } from './security/profile/profile.component';
 import { TablesComponent } from './modules/tables/tables/tables.component';
+import { TablesDetailComponent } from './modules/tables/tables-detail/tables-detail.component';
 import { LogoutComponent } from './security/logout/logout.component';
 import { AuthGuard } from './security/guard/auth.guard';
 
@@ -22,6 +23,8 @@ const routes: Routes = [
   { path: 'location/edit', component: LocationDetailComponent, canActivate: [AuthGuard] },
   { path: 'tables', component: TablesComponent, canActivate: [AuthGuard] },
   { path: 'logout', component: LogoutComponent }
+  { path: 'tables', component: TablesComponent},
+  { path: 'tables/edit', component: TablesDetailComponent}
 ];
 
 @NgModule({

@@ -7,7 +7,9 @@ import { environment } from 'src/environments/environment';
 @Injectable()
 export class TablesService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
+
+  private table = new TableLocation(0,"ABC");
 
   getTables() : Observable<TableLocation[]>
   {
@@ -26,5 +28,13 @@ export class TablesService {
 
   deleteTable(tableID: number) {
     return this.http.delete<TableLocation>(`${environment.baseUrl}tables/` + tableID);
-    }
+  }
+
+  setEditTable(editTable: TableLocation){
+    this.table = editTable;
+  }
+
+  getTable(){
+    return this.table;
+  }
 }
