@@ -9,7 +9,7 @@ export class TablesService {
 
   constructor(private http: HttpClient) {}
 
-  private table = new TableLocation(0,"ABC","A");
+  private table = new TableLocation(0,"EmptyTable","EmptyZone");
 
   getTables() : Observable<TableLocation[]>
   {

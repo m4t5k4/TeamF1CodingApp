@@ -1,5 +1,5 @@
 <h2 class="text-center">Tafels</h2>
-<button mat-raised-button class="ml-5" (click)="addTable();">Voeg een nieuwe tafel toe</button>
+<button mat-raised-button class="ml-5 btn btn-primary mb-2" (click)="addTable();">Voeg een nieuwe tafel toe</button>
 <div class="mx-5">
     <table datatable="ngFor" class="table " style="width: 1200px !important;" id="dataTableTables">
         <thead>
@@ -13,8 +13,8 @@
             <tr *ngFor="let t of tables">
                 <td>{{t.zone}}</td>
                 <td>{{t.name}}</td>
-                <td><button mat-raised-butto (click)="showDetailTable(t)">Bewerken</button><button mat-raised-button 
-                    (click)="deleteTable(t.id)">Verwijderen</button></td>
+                <td><button mat-raised-button class="btn btn-primary mr-1" (click)="showDetailTable(t)">Bewerken</button><button mat-raised-button 
+                    class="btn btn-primary" (click)="deleteTable(t.id)">Verwijderen</button></td>
             </tr>
         </tbody>
     </table>
