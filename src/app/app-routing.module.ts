@@ -9,16 +9,19 @@ import { LoginComponent } from './security/login/login.component';
 import { RegisterComponent } from './security/register/register.component';
 import { ProfileComponent } from './security/profile/profile.component';
 import { TablesComponent } from './modules/tables/tables/tables.component';
+import { LogoutComponent } from './security/logout/logout.component';
+import { AuthGuard } from './security/guard/auth.guard';
 
 const routes: Routes = [
-  { path: 'employee', component: ReserveComponent },
+  { path: 'employee', component: ReserveComponent, canActivate: [AuthGuard] },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent},
-  { path: 'profile', component: ProfileComponent},
-  { path: 'location', component: LocationsComponent },
-  { path: 'location/add', component: LocationFormComponent },
-  { path: 'location/edit', component: LocationDetailComponent},
-  { path: 'tables', component: TablesComponent}
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
+  { path: 'location', component: LocationsComponent, canActivate: [AuthGuard] },
+  { path: 'location/add', component: LocationFormComponent, canActivate: [AuthGuard] },
+  { path: 'location/edit', component: LocationDetailComponent, canActivate: [AuthGuard] },
+  { path: 'tables', component: TablesComponent, canActivate: [AuthGuard] },
+  { path: 'logout', component: LogoutComponent }
 ];
 
 @NgModule({

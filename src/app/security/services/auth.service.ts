@@ -30,6 +30,14 @@ export class AuthService {
       username: user.username,
       password: user.password      
     }, httpOptions);
-    
   }
+
+  isLoggedIn() {
+    if (sessionStorage.getItem("auth-token")) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
 }
