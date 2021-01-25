@@ -17,7 +17,7 @@ import {DashboardComponent} from './modules/dashboard/dashboard/dashboard.compon
 
 const routes: Routes = [
   { path: 'employee', component: ReserveComponent, canActivate: [AuthGuard] },
-  { path: 'employee/reservations', component: ReservationsComponent, canActivate: [AuthGuard] },
+  { path: 'reservations', component: ReservationsComponent, canActivate: [AuthGuard] },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent},
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
