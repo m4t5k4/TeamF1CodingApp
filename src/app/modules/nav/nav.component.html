@@ -24,6 +24,14 @@
                 <a *ngIf="authService.isLoggedIn()" class="nav-link" routerLink="/tables"
                     [routerLinkActive]="['active']">Tafels</a>
             </li>
+            <li class="nav-item">
+                <a *ngIf="authService.isLoggedIn()" class="nav-link" routerLink="/dashboard"
+                    [routerLinkActive]="['active']">Dashboard</a>
+            </li>
+            <li class="nav-item">
+                <a *ngIf="authService.isLoggedIn()" class="nav-link" routerLink="/profile"
+                    [routerLinkActive]="['active']">Profile</a>
+            </li>
         </ul>
 
         <!-- Knoppen rechts -->

@@ -12,6 +12,7 @@ import { TablesComponent } from './modules/tables/tables/tables.component';
 import { TablesDetailComponent } from './modules/tables/tables-detail/tables-detail.component';
 import { LogoutComponent } from './security/logout/logout.component';
 import { AuthGuard } from './security/guard/auth.guard';
+import {DashboardComponent} from './modules/dashboard/dashboard/dashboard.component';
 
 const routes: Routes = [
   { path: 'employee', component: ReserveComponent, canActivate: [AuthGuard] },
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: 'location', component: LocationsComponent, canActivate: [AuthGuard] },
   { path: 'location/add', component: LocationFormComponent, canActivate: [AuthGuard] },
   { path: 'location/edit', component: LocationDetailComponent, canActivate: [AuthGuard] },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'tables', component: TablesComponent, canActivate: [AuthGuard] },
   { path: 'logout', component: LogoutComponent },
   { path: 'tables', component: TablesComponent},
