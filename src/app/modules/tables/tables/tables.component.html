@@ -1,20 +1,23 @@
 <h2 class="text-center">Tafels</h2>
 <button mat-raised-button class="ml-5" (click)="addTable();">Voeg een nieuwe tafel toe</button>
-<table class="table m-5">
-    <thead>
-        <tr>
-            <th scope="col">Id</th>
-            <th scope="col">Naam</th>
-            <th scope="col"></th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let t of tables">
-            <td>{{t.id}}</td>
-            <td>{{t.name}}</td>
-            <td><button mat-raised-butto (click)="showDetailTable(t)">Bewerken</button><button mat-raised-butto
+<div class="mx-5">
+    <table datatable="ngFor" class="table " style="width: 1200px !important;" id="dataTableTables">
+        <thead>
+            <tr>
+                <th scope="col">Zone</th>
+                <th scope="col">Naam</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let t of tables">
+                <td>{{t.zone}}</td>
+                <td>{{t.name}}</td>
+                <td><button mat-raised-butto (click)="showDetailTable(t)">Bewerken</button><button mat-raised-button 
                     (click)="deleteTable(t.id)">Verwijderen</button></td>
-        </tr>
-    </tbody>
-</table>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
 
