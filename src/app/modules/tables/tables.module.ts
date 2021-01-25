@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { TablesComponent } from './tables/tables.component';
 import { TablesService } from './tables.service';
 import { TablesDetailComponent } from './tables-detail/tables-detail.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import { TablesDetailComponent } from './tables-detail/tables-detail.component';
     TablesDetailComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    ReactiveFormsModule
   ],
   providers : [
     TablesService

@@ -22,7 +22,7 @@ const routes: Routes = [
   { path: 'location/add', component: LocationFormComponent, canActivate: [AuthGuard] },
   { path: 'location/edit', component: LocationDetailComponent, canActivate: [AuthGuard] },
   { path: 'tables', component: TablesComponent, canActivate: [AuthGuard] },
-  { path: 'logout', component: LogoutComponent }
+  { path: 'logout', component: LogoutComponent },
   { path: 'tables', component: TablesComponent},
   { path: 'tables/edit', component: TablesDetailComponent}
 ];

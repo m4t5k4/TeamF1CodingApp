@@ -1,5 +1,6 @@
 <h1 class="text-center">Locaties</h1>
 <button mat-raised-button class="ml-5" (click)="btnClickNew();">Voeg een nieuwe locatie toe</button>
+<div class="table-responsive">
 <table class="table m-5">
     <thead>
         <tr>
@@ -14,8 +15,9 @@
             <td>{{l.name}}</td>
             <td>{{l.address}}</td>
             <td>{{l.description}}</td>
-            <td><button mat-raised-butto (click)="showDetailLocation(l)">Bewerken</button><button mat-raised-butto
+            <td><button mat-raised-button (click)="showDetailLocation(l)">Bewerken</button><button mat-raised-button
                     (click)="deleteLocation(l.id,l.name)">Verwijderen</button></td>
         </tr>
     </tbody>
 </table>
+</div>
