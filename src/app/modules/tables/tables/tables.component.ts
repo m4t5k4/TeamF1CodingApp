@@ -15,23 +15,21 @@ export class TablesComponent implements OnInit {
 
   constructor(private _tablesService : TablesService, private router: Router) {
     var table = $('#dataTableTables').DataTable();
-    table.destroy(); 
+    table.destroy();
+    this.router.navigate(['/tables']); 
   }
     
 
   addTable() {
-    this.router.navigate(['/table/edit']);
-  }
-
-  updateTable() {
-    let tableToUpdate = new TableLocation(1, "Tafel 123","A");
-    this._tablesService.updateTable(tableToUpdate).subscribe();
-    window.location.reload();
+    var table = new TableLocation(0,"EmptyTable","EmptyZone");
+    this._tablesService.setEditTable(table)
+    this.router.navigate(['/tables/edit']);
   }
 
   deleteTable(id: number) {
     this._tablesService.deleteTable(id).subscribe();
     window.location.reload();
+    this.router.navigate(['/tables']);
   }
 
   showDetailTable(table: TableLocation) {
