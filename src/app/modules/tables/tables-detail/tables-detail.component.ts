@@ -1,3 +1,4 @@
+import { Input } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { TableLocation } from 'src/app/shared/models/table-location.model';
 import { TablesService } from '../tables.service';
