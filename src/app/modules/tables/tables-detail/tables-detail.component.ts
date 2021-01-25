@@ -19,13 +19,14 @@ export class TablesDetailComponent implements OnInit {
     {
       id: new FormControl(this._tablesService.getTable().id),
       name: new FormControl(this._tablesService.getTable().name, Validators.required),
+      zone: new FormControl(this._tablesService.getTable().zone, Validators.required),
     }
   )
 
   submitted: boolean = false;
 
   saveTable() {
-    let TableToUpdate = new TableLocation(this.tableForm.get("id").value,this.tableForm.get("name").value);
+    let TableToUpdate = new TableLocation(this.tableForm.get("id").value,this.tableForm.get("name").value,this.tableForm.get("zone").value);
     this.submitted = true;
     console.log(TableToUpdate);
     this._tablesService.updateTable(TableToUpdate).subscribe();
