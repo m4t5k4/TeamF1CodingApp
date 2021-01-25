@@ -7,11 +7,12 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { authInterceptorProviders } from './interceptors/auth.interceptor';
 import { ProfileComponent } from './profile/profile.component';
-
+import { LogoutComponent } from './logout/logout.component';
+import { AuthService } from './services/auth.service';
 
 
 @NgModule({
-  declarations: [RegisterComponent, LoginComponent, ProfileComponent],
+  declarations: [RegisterComponent, LoginComponent, ProfileComponent, LogoutComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -19,12 +20,14 @@ import { ProfileComponent } from './profile/profile.component';
     HttpClientModule
   ],
   providers: [
-    authInterceptorProviders
+    authInterceptorProviders,
+    AuthService
   ],
   exports: [
     RegisterComponent,
     LoginComponent,
-    ProfileComponent
+    ProfileComponent,
+    LogoutComponent
   ]
 })
 export class SecurityModule { }

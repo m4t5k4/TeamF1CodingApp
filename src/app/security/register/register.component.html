@@ -1,51 +1,48 @@
 <div class="container">
-    <div class="card card-container">
-        <form *ngIf="!isSuccessful" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate
-            class="ml-5 mr-5 mt-5">
-            <h2 class="mb-5">Registreren</h2>
-            <div class="form-group mt-3">
-                <label for="firstname">Voornaam</label>
-                <input type="text" class="form-control" name="firstname" [(ngModel)]="form.firstname"
-                    #firstname="ngModel">
-            </div>
-
-            <div class="form-group mt-3">
-                <label for="lastname">Achternaam</label>
-                <input type="text" class="form-control" name="lastname" [(ngModel)]="form.lastname" #lastname="ngModel">
-            </div>
-
-            <div class="form-group mt-3">
-                <label for="username">Gebruikersnaam</label>
-                <input type="text" class="form-control" name="username" [(ngModel)]="form.username" required
-                    minlength="3" #username="ngModel">
-                <div class="alert-danger" *ngIf="f.submitted && username.invalid">
-                    <div *ngIf="username.errors.required">Gebruikersnaam is verplicht!</div>
-                    <div *ngIf="username.errors.minlength">Gebruikersnaam moet minimaal 3 karakters bevatten.</div>
-                </div>
-            </div>
-
-            <div class="form-group mt-3">
-                <label for="password">Wachtwoord</label>
-                <input type="password" class="form-control" name="password" [(ngModel)]="form.password" required
-                    minlength="6" #password="ngModel">
-                <div class="alert alert-danger" role="alert" *ngIf="f.submitted && password.invalid">
-                    <div *ngIf="password.errors.required">Wachtwoord is verplicht!</div>
-                    <div *ngIf="password.errors.minlength">Wachtwoord moet minimaal 6 karakters bevatten.</div>
-                </div>
-            </div>
-
-            <div class="form-group mt-3">
-                <button class="btn btn-primary btn-block">Registreer</button>
-            </div>
-
-            <div class="form-group mt-3">
-                <div class="alert alert-warning" role="alert" *ngIf="f.submitted && isRegisterFailed">Registreren
-                    failed:<br /> {{ errorMessage }}</div>
-            </div>
-        </form>
-
-        <div class="alert alert-success" *ngIf="isSuccessful">
-            Uw registratie is gelukt!
+    <form *ngIf="!isSuccessful" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate
+        class="ml-5 mr-5 mt-5">
+        <h2 class="mb-5">Registreren</h2>
+        <div class="form-group mt-3">
+            <label for="firstname">Voornaam</label>
+            <input type="text" class="form-control" name="firstname" [(ngModel)]="form.firstname" #firstname="ngModel">
         </div>
+
+        <div class="form-group mt-3">
+            <label for="lastname">Achternaam</label>
+            <input type="text" class="form-control" name="lastname" [(ngModel)]="form.lastname" #lastname="ngModel">
+        </div>
+
+        <div class="form-group mt-3">
+            <label for="username">Gebruikersnaam</label>
+            <input type="text" class="form-control" name="username" [(ngModel)]="form.username" required minlength="3"
+                #username="ngModel">
+            <div class="alert-danger" *ngIf="f.submitted && username.invalid">
+                <div *ngIf="username.errors.required">Gebruikersnaam is verplicht!</div>
+                <div *ngIf="username.errors.minlength">Gebruikersnaam moet minimaal 3 karakters bevatten.</div>
+            </div>
+        </div>
+
+        <div class="form-group mt-3">
+            <label for="password">Wachtwoord</label>
+            <input type="password" class="form-control" name="password" [(ngModel)]="form.password" required
+                minlength="6" #password="ngModel">
+            <div class="alert alert-danger" role="alert" *ngIf="f.submitted && password.invalid">
+                <div *ngIf="password.errors.required">Wachtwoord is verplicht!</div>
+                <div *ngIf="password.errors.minlength">Wachtwoord moet minimaal 6 karakters bevatten.</div>
+            </div>
+        </div>
+
+        <div class="form-group mt-3">
+            <button class="btn btn-primary btn-block">Registreer</button>
+        </div>
+
+        <div class="form-group mt-3">
+            <div class="alert alert-warning" role="alert" *ngIf="f.submitted && isRegisterFailed">Registreren
+                failed:<br /> {{ errorMessage }}</div>
+        </div>
+    </form>
+
+    <div class="alert alert-success" *ngIf="isSuccessful">
+        Uw registratie is gelukt!
     </div>
 </div>

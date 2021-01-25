@@ -10,11 +10,14 @@ import { SecurityModule } from './security/security.module';
 import {LocationsModule} from './modules/locations/locations.module'
 import {TablesModule} from './modules/tables/tables.module'
 
-import {  HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import {  HttpClientModule } from '@angular/common/http';
+import { NavComponent } from './modules/nav/nav.component';
+import { FooterComponent } from './modules/footer/footer.component';
 @NgModule({
   declarations: [
     AppComponent,
-    
+    NavComponent,
+    FooterComponent
   ],
   imports: [
     SharedModule,
