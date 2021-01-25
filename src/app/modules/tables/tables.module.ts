@@ -4,6 +4,7 @@ import { TablesComponent } from './tables/tables.component';
 import { TablesService } from './tables.service';
 import { ReactiveFormsModule} from '@angular/forms'
 import { TablesDetailComponent } from './tables-detail/tables-detail.component';
+import { DataTablesModule } from 'angular-datatables';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { TablesDetailComponent } from './tables-detail/tables-detail.component';
   ],
   imports: [
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    DataTablesModule
   ],
   providers : [
     TablesService
