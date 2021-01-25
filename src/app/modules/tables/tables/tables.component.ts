@@ -16,7 +16,7 @@ export class TablesComponent implements OnInit {
   constructor(private _tablesService : TablesService, private router: Router) {
     var table = $('#dataTableTables').DataTable();
     table.destroy();
-    this.router.navigate(['/tables']); 
+    //this.router.navigate(['/tables']); 
   }
     
 
