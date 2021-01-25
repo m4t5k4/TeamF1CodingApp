@@ -8,10 +8,13 @@ import { TokenStorageService } from 'src/app/security/services/token-storage.ser
   styleUrls: ['./nav.component.scss']
 })
 export class NavComponent implements OnInit {
+  currentUser: any;
+  token: any;
 
   constructor(private tokenStorage: TokenStorageService, public authService: AuthService) { }
 
   ngOnInit(): void {
+    this.currentUser = this.tokenStorage.getUser();
   }
 
   reloadPage(): void {

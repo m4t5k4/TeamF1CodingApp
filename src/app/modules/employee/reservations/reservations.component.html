@@ -1,0 +1,30 @@
+<h1 class="text-center">Mijn reservaties</h1>
+<button mat-raised-button class="ml-5" (click)="newReservation()"></button>
+<div class="table-responsive">
+  <table class="table m-5">
+    <thead>
+      <tr>
+        <th scope="col">id</th>
+        <th scope="col">amountPersons</th>
+        <th scope="col">date</th>
+        <th scope="col">description</th>
+        <th scope="col">start_hour</th>
+        <th scope="col">end_hour</th>
+        <th scope="col">userId</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let reservation of reservations">
+        <td>{{reservation.id}}</td>
+        <td>{{reservation.amountPersons}}</td>
+        <td>{{reservation.date}}</td>
+        <td>{{reservation.description}}</td>
+        <td>{{reservation.start_hour}}</td>
+        <td>{{reservation.end_hour}}</td>
+        <td>{{reservation.userId}}</td>
+        <td><button class="btn-sm mr-1" (click)="showDetailReservation(reservation)">Bewerken</button><button
+            (click)="deleteReservation(reservation.id,reservation.name)" class="btn-sm mr-1">Verwijderen</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

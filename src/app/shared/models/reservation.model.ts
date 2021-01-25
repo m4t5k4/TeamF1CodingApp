@@ -8,5 +8,6 @@ export class Reservation {
         public endHour: Date,
         public amountPersons: number,
         public description: string,
+        public userId: number,
     ){}
 }

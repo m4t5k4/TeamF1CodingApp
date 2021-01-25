@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { ReserveComponent } from './modules/employee/reserve/reserve.component';
+import { ReservationsComponent } from './modules/employee/reservations/reservations.component'
 import { LocationDetailComponent } from './modules/locations/location-detail/location-detail.component';
 import { LocationFormComponent } from './modules/locations/location-form/location-form.component';
 import { LocationsComponent } from './modules/locations/locations/locations.component';
@@ -16,6 +17,7 @@ import {DashboardComponent} from './modules/dashboard/dashboard/dashboard.compon
 
 const routes: Routes = [
   { path: 'employee', component: ReserveComponent, canActivate: [AuthGuard] },
+  { path: 'employee/reservations', component: ReservationsComponent, canActivate: [AuthGuard] },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent},
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },

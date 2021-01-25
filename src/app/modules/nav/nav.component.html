@@ -21,6 +21,10 @@
                     [routerLinkActive]="['active']">Reserveren</a>
             </li>
             <li class="nav-item">
+              <a *ngIf="authService.isLoggedIn()" class="nav-link" routerLink="/employee/reservations"
+                [routerLinkActive]="['active']">Mijn reservaties</a>
+            </li>
+            <li class="nav-item">
                 <a *ngIf="authService.isLoggedIn()" class="nav-link" routerLink="/tables"
                     [routerLinkActive]="['active']">Tafels</a>
             </li>
@@ -41,6 +45,9 @@
             </li>
             <li class="nav-item">
                 <a *ngIf="!authService.isLoggedIn()" class="nav-link" routerLink="/register" [routerLinkActive]="['active']" >Registreren</a>
+            </li>
+            <li class="nav-item" display="inline-block">
+              <a *ngIf="authService.isLoggedIn()" class="nav-link" routerLink="/profile">Welkom <span style="color: rebeccapurple; margin-right: 1em;">{{currentUser.firstname}}</span></a>
             </li>
             <li class="nav-item">
                 <a *ngIf="authService.isLoggedIn()" class="nav-link" routerLink="/logout">Uitloggen</a>
