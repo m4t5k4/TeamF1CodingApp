@@ -43,6 +43,7 @@ export class TablesComponent implements OnInit {
     var table = $('#dataTableTables').DataTable();
     table.destroy();  
     this.tables
+    this.router.navigate(['/tables']); 
   }
 
   getTables(): void{
