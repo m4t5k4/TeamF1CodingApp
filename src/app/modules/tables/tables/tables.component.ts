@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TableLocation } from 'src/app/shared/models/table-location.model';
 import { TablesService } from '../tables.service';
 import { Router } from '@angular/router';
+import { toJSDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-calendar';
 
 @Component({
   selector: 'app-tables',
@@ -12,13 +13,12 @@ export class TablesComponent implements OnInit {
   
   tables: TableLocation[];
 
-  constructor(private _tablesService : TablesService, private router: Router) { 
-    this._tablesService.getTables().subscribe(
-      result => {
-      this.tables = result;
-      }
-    )
+  constructor(private _tablesService : TablesService, private router: Router) {
+    var table = $('#dataTableTables').DataTable();
+    table.destroy(); 
   }
+    
+
   addTable() {
     this.router.navigate(['/table/edit']);
   }
@@ -41,6 +41,18 @@ export class TablesComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getTables();
+    var table = $('#dataTableTables').DataTable();
+    table.destroy();  
+    this.tables
+  }
+
+  getTables(): void{
+    this._tablesService.getTables().subscribe(
+      result => {
+      this.tables = result;
+      }
+    )
   }
 
 }
