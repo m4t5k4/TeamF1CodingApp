@@ -6,6 +6,7 @@ import { Reservation } from '../../../shared/models/reservation.model';
 import { TablesService } from 'src/app/modules/tables/tables.service';
 import { ReservationService } from '../../../security/services/reservation.service';
 import { TokenStorageService } from '../../../security/services/token-storage.service';
+import { LocalTime } from '@js-joda/core';
 
 @Component({
   selector: 'app-reserve',
@@ -75,10 +76,12 @@ export class ReserveComponent implements OnInit {
     let endHour = this.reservateForm.value.till;
     let amountPersons = this.reservateForm.value.amountPersons;
     let description = this.reservateForm.value.description;
+    let start = LocalTime.parse(startHour);
+    let end = LocalTime.parse(endHour);
 
-    let reservation = new Reservation(0,date,startHour,endHour,amountPersons,description, this.currentUser.id);
-    console.log(this.reservateForm.value);
-    this._reservationService.postReservation(this.reservateForm.value).subscribe({
+    let reservation = new Reservation(0,date,start,end,amountPersons,description, this.currentUser);
+    console.log(reservation);
+    this._reservationService.postReservation(reservation).subscribe({
       next: () => {
         console.log(reservation + " toegevoegd");
       },
