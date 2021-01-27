@@ -1,7 +1,7 @@
 <h2 class="text-center">Tafels</h2>
 <button mat-raised-button class="ml-5 btn btn-primary mb-2" (click)="addTable();">Voeg een nieuwe tafel toe</button>
-<div class="mx-5">
-    <table datatable="ngFor" class="table " style="width: 1200px !important;" id="dataTableTables">
+<div class="mx-5 table-responsive-md table-responsive-sm">
+    <table datatable="ngFor" data-responsive="true" class="table " style="width: 1200px !important;" id="dataTableTables">
         <thead>
             <tr>
                 <th scope="col">Zone</th>
