@@ -14,6 +14,7 @@ import { TablesDetailComponent } from './modules/tables/tables-detail/tables-det
 import { LogoutComponent } from './security/logout/logout.component';
 import { AuthGuard } from './security/guard/auth.guard';
 import {DashboardComponent} from './modules/dashboard/dashboard/dashboard.component';
+import {AdminDashboardComponent} from './modules/admin-dashboard/admin-dashboard/admin-dashboard.component';
 
 const routes: Routes = [
   { path: 'employee', component: ReserveComponent, canActivate: [AuthGuard] },
@@ -28,7 +29,8 @@ const routes: Routes = [
   { path: 'tables', component: TablesComponent, canActivate: [AuthGuard] },
   { path: 'logout', component: LogoutComponent },
   { path: 'tables', component: TablesComponent},
-  { path: 'tables/edit', component: TablesDetailComponent}
+  { path: 'tables/edit', component: TablesDetailComponent},
+  { path: 'admin-dashboard', component : AdminDashboardComponent}
 ];
 
 @NgModule({
