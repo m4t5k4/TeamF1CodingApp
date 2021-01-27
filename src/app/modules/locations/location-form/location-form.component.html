@@ -1,15 +1,16 @@
 <h2 class="text-center">Locations</h2>
 <form [formGroup]="locationForm" (ngSubmit)="onSubmit()" class="ml-5 mr-5 mt-5">
-    <p>Naam:
-            <input matInput type="text" formControlName="name" class="form-control"/>
-    </p>
-    <p>Adres:
-            <input matInput type="text" formControlName="address" class="form-control"/>
-    </p>
-    <p>Omschrijving:
-            <input matInput type="text" formControlName="description" class="form-control"/>
-    </p>
-    <p><button mat-raised-button color="primary" type="submit"
-            [disabled]="!locationForm.valid || submitted">Toevoegen</button></p>
+        <p>Naam:
+                <input matInput type="text" formControlName="name" class="form-control" />
+        </p>
+        <p>Adres:
+                <input matInput type="text" formControlName="address" class="form-control" />
+        </p>
+        <p>Omschrijving:
+                <input matInput type="text" formControlName="description" class="form-control" />
+        </p>
+        <p><button mat-raised-button color="primary" type="submit"
+                        [disabled]="!locationForm.valid || submitted"> <span *ngIf="submitted"
+                        class="spinner-border spinner-border-sm mr-1"></span>Toevoegen</button></p>
 </form>
 <button mat-raised-button class="ml-5" (click)="btnReturn();">Terug naar overzicht</button>
