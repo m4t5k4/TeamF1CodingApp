@@ -11,8 +11,7 @@ export class AppComponent implements OnInit{
 
   private roles: string[];
   isLoggedIn = false;
-  showOfficeManagerBoard = false;
-  showAdminBoard = false;
+  showAdmin = false;
   username: string;
 
   constructor(private tokenStorageService: TokenStorageService) {}
@@ -24,8 +23,7 @@ export class AppComponent implements OnInit{
       const user = this.tokenStorageService.getUser();
       this.roles = user.roles;
 
-      this.showAdminBoard = this.roles.includes('Admin');
-      this.showOfficeManagerBoard = this.roles.includes('OfficeManager');
+      this.showAdmin = this.roles.includes('Admin');
 
       this.username = user.username;
     }
@@ -35,4 +33,5 @@ export class AppComponent implements OnInit{
     this.tokenStorageService.signOut();
     window.location.reload();
   }
+
 }

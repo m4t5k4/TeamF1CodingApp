@@ -13,6 +13,7 @@ import { TablesComponent } from './modules/tables/tables/tables.component';
 import { TablesDetailComponent } from './modules/tables/tables-detail/tables-detail.component';
 import { LogoutComponent } from './security/logout/logout.component';
 import { AuthGuard } from './security/guard/auth.guard';
+import { AdminComponent } from './modules/admin/admin.component';
 import {DashboardComponent} from './modules/dashboard/dashboard/dashboard.component';
 import {AdminDashboardComponent} from './modules/admin-dashboard/admin-dashboard/admin-dashboard.component';
 
@@ -22,7 +23,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent},
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
-  { path: 'location', component: LocationsComponent, canActivate: [AuthGuard] },
+  { path: 'location', component: LocationsComponent, canActivate: [AuthGuard], data: { role: 'Admin' } },
   { path: 'location/add', component: LocationFormComponent, canActivate: [AuthGuard] },
   { path: 'location/edit', component: LocationDetailComponent, canActivate: [AuthGuard] },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
@@ -30,7 +31,8 @@ const routes: Routes = [
   { path: 'logout', component: LogoutComponent },
   { path: 'tables', component: TablesComponent},
   { path: 'tables/edit', component: TablesDetailComponent},
-  { path: 'admin-dashboard', component : AdminDashboardComponent}
+  { path: 'admin-dashboard', component : AdminDashboardComponent},
+  { path: 'admin', component: AdminComponent }
 ];
 
 @NgModule({
