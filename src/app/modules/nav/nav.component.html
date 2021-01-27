@@ -25,7 +25,7 @@
                     [routerLinkActive]="['active']">Mijn reservaties</a>
             </li>
             <li class="nav-item">
-                <a *ngIf="authService.isLoggedIn()" class="nav-link" routerLink="/tables"
+                <a *ngIf="authService.isLoggedIn()  && authService.isLoggedInAsAdmin()" class="nav-link" routerLink="/tables"
                     [routerLinkActive]="['active']">Tafels</a>
             </li>
             <li class="nav-item">
