@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TokenStorageService } from 'src/app/security/services/token-storage.service';
 import { ReservationService } from './reservation.service';
 
 @Component({
@@ -11,10 +12,13 @@ export class ReservationsComponent implements OnInit {
   reservations: any;
 
 
-  constructor(private _reservationService: ReservationService) { }
+  constructor(
+    private _reservationService: ReservationService,
+    private _tokenService: TokenStorageService
+    ) { }
 
   ngOnInit(): void {
-    this._reservationService.getReservations().subscribe(reservations => {
+    this._reservationService.getReservationsById(this._tokenService.getUser().id).subscribe(reservations => {
       this.reservations = reservations;
       console.log(this.reservations);
 

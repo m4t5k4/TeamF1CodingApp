@@ -16,6 +16,10 @@ export class ReservationService {
     return this.http.get<Reservation[]>(`${environment.baseUrl}reservations`);
   }
 
+  getReservationsById(id: number) {
+    return this.http.get<Reservation[]>(`${environment.baseUrl}reservations/user/${id}`);
+  }
+
   addReservation(reservation: Reservation)
   {
     return this.http.post<Reservation>(`${environment.baseUrl}reservations`, reservation);
