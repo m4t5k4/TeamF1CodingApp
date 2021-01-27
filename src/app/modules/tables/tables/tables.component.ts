@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TableLocation } from 'src/app/shared/models/table-location.model';
 import { TablesService } from '../tables.service';
+import { LocationsService } from '../../locations/locations.service';
 import { Router } from '@angular/router';
 import { toJSDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-calendar';
 
@@ -12,16 +13,26 @@ import { toJSDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-calendar';
 export class TablesComponent implements OnInit {
   
   tables: TableLocation[];
+  dtOptions: DataTables.Settings = {pagingType: 'full_numbers'};
 
-  constructor(private _tablesService : TablesService, private router: Router) {
-    var table = $('#dataTableTables').DataTable();
+  constructor(private _tablesService : TablesService,private _locationsService: LocationsService, private router: Router) {
+    var table = $('#dataTableTables').DataTable({
+      "columns": [
+        { "searchable": false },
+        null,
+        null,
+        null,
+        null
+      ]
+    });
     table.destroy();
     //this.router.navigate(['/tables']); 
   }
     
 
   addTable() {
-    var table = new TableLocation(0,"EmptyTable","EmptyZone");
+    var locations = this._locationsService.getLocations();
+    var table = new TableLocation(0,"EmptyTable","EmptyZone",locations[0]);
     this._tablesService.setEditTable(table)
     this.router.navigate(['/tables/edit']);
   }

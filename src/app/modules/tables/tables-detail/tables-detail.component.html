@@ -1,5 +1,10 @@
 <form [formGroup]="tableForm" (ngSubmit)="saveTable()" class="ml-5 mr-5 mt-5">
     <input type="hidden" id="Id" name="Id" formControlName="id">
+    <p>Locatie:
+        <select name="location" id="locationSelect" formControlName="locationSelect" class="form-control">
+            <option *ngFor="let location of locations" [ngValue]="location" value="{{location}}">{{location.name}}</option>
+        </select>
+    </p>
     <p>Zone:
         <input matInput type="text" formControlName="zone" class="form-control" />
     </p>

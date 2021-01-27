@@ -2,6 +2,7 @@ export class TableLocation {
     constructor(
         public id: number,
         public name: string,
-        public zone: string
+        public zone: string,
+        public location: Location
     ){}
 }
