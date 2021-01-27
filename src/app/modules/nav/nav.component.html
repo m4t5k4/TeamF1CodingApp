@@ -4,7 +4,7 @@
     </div>
 </header> -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" routerLink="/">Home</a>
+    <a class="navbar-brand" routerLink="/"><img src="../../../assets/f1logo.png" alt="" height="50px"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler"
         aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -21,21 +21,32 @@
                     [routerLinkActive]="['active']">Reserveren</a>
             </li>
             <li class="nav-item">
-                <a *ngIf="authService.isLoggedIn() && authService.isLoggedInAsAdmin()" class="nav-link" routerLink="/tables"
+                <a *ngIf="authService.isLoggedIn()" class="nav-link" routerLink="/reservations"
+                    [routerLinkActive]="['active']">Mijn reservaties</a>
+            </li>
+            <li class="nav-item">
+                <a *ngIf="authService.isLoggedIn()" class="nav-link" routerLink="/tables"
                     [routerLinkActive]="['active']">Tafels</a>
+            </li>
+            <li class="nav-item">
+                <a *ngIf="authService.isLoggedIn()" class="nav-link" routerLink="/dashboard"
+                    [routerLinkActive]="['active']">Dashboard</a>
             </li>
         </ul>
 
         <!-- Knoppen rechts -->
         <ul class="navbar-nav navbar-right">
             <li class="nav-item">
-                <a *ngIf="!authService.isLoggedIn()" class="nav-link" routerLink="/login" [routerLinkActive]="['active']">Login</a>
+                <a *ngIf="!authService.isLoggedIn()" class="nav-link" routerLink="/login"
+                    [routerLinkActive]="['active']">Login</a>
             </li>
             <li class="nav-item">
-                <a *ngIf="!authService.isLoggedIn()" class="nav-link" routerLink="/register" [routerLinkActive]="['active']" >Registreren</a>
+                <a *ngIf="!authService.isLoggedIn()" class="nav-link" routerLink="/register"
+                    [routerLinkActive]="['active']">Registreren</a>
             </li>
-            <li class="nav-item">
-                <a *ngIf="authService.isLoggedIn()" class="nav-link" routerLink="/profile" [routerLinkActive]="['active']">Profiel</a>
+            <li class="nav-item" display="inline-block">
+                <a *ngIf="authService.isLoggedIn()" class="nav-link" routerLink="/profile">Welkom <span
+                        style="color: rebeccapurple; margin-right: 1em;">{{currentUser.firstname}}</span></a>
             </li>
             <li class="nav-item">
                 <a *ngIf="authService.isLoggedIn()" class="nav-link" routerLink="/logout">Uitloggen</a>

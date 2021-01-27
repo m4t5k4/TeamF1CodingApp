@@ -14,21 +14,30 @@ export class TablesDetailComponent implements OnInit {
 
   constructor(private _tablesService: TablesService, private router: Router) { }
 
-
   tableForm = new FormGroup(
     {
       id: new FormControl(this._tablesService.getTable().id),
       name: new FormControl(this._tablesService.getTable().name, Validators.required),
+      zone: new FormControl(this._tablesService.getTable().zone, Validators.required),
     }
   )
 
   submitted: boolean = false;
 
   saveTable() {
-    let TableToUpdate = new TableLocation(this.tableForm.get("id").value,this.tableForm.get("name").value);
+    let Table = this._tablesService.getTable();
+    let TableToUpdate = new TableLocation(this.tableForm.get("id").value,this.tableForm.get("name").value,this.tableForm.get("zone").value);
+    
     this.submitted = true;
     console.log(TableToUpdate);
-    this._tablesService.updateTable(TableToUpdate).subscribe();
+
+    if(Table.name == "EmptyTable"){
+      this._tablesService.addTable(TableToUpdate).subscribe();
+    }
+    else{
+      this._tablesService.updateTable(TableToUpdate).subscribe();
+    }
+
     setTimeout(()=>{                          
       this.router.navigate(["/tables"]);
     }, 1000); 
@@ -40,6 +49,13 @@ export class TablesDetailComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this._tablesService.getTable().name+ "Test")
+    let Table = this._tablesService.getTable();
+    if(Table.name == "EmptyTable"){
+      this.tableForm.setValue({id:0,name:"",zone:""});
+    }
+    else{
+      this.tableForm.setValue({id:Table.id,name:Table.name,zone:Table.zone});
+    }
   }
 
 }

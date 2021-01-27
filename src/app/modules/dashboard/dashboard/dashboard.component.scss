@@ -1,0 +1,12 @@
+button {
+    background: #8716F9;
+    border: none;
+    border-radius: 2em;
+    color: white;
+    padding: .5em 1em;
+  }
+
+  button:disabled,button[disabled]
+  {
+      opacity: 0.4;
+  }

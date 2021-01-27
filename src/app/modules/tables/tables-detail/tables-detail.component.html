@@ -1,9 +1,12 @@
 <form [formGroup]="tableForm" (ngSubmit)="saveTable()" class="ml-5 mr-5 mt-5">
     <input type="hidden" id="Id" name="Id" formControlName="id">
+    <p>Zone:
+        <input matInput type="text" formControlName="zone" class="form-control" />
+    </p>
     <p>Naam:
         <input matInput type="text" formControlName="name" class="form-control" />
     </p>
-    <p><button mat-raised-button color="primary" type="submit"
+    <p><button mat-raised-button class="btn btn-primary" color="primary" type="submit"
             [disabled]="!tableForm.valid || submitted">Opslaan</button></p>
 </form>
-<button mat-raised-button class="ml-5" (click)="btnReturn();">Terug naar overzicht</button>
+<button mat-raised-button class="ml-5 btn btn-primary" (click)="btnReturn();">Terug naar overzicht</button>

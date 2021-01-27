@@ -1,23 +1,24 @@
 <h1 class="text-center">Locaties</h1>
 <button mat-raised-button class="ml-5" (click)="btnClickNew();">Voeg een nieuwe locatie toe</button>
 <div class="table-responsive">
-<table class="table m-5">
-    <thead>
-        <tr>
-            <th scope="col">Naam</th>
-            <th scope="col">Adres</th>
-            <th scope="col">Omschrijving</th>
-            <th scope="col"></th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let l of locations">
-            <td>{{l.name}}</td>
-            <td>{{l.address}}</td>
-            <td>{{l.description}}</td>
-            <td><button mat-raised-button class="btn-sm mr-1" (click)="showDetailLocation(l)">Bewerken</button><button mat-raised-button
-                    (click)="deleteLocation(l.id,l.name)" class="btn-sm mr-1">Verwijderen</button></td>
-        </tr>
-    </tbody>
-</table>
+    <table class="table m-5">
+        <thead>
+            <tr>
+                <th scope="col">Naam</th>
+                <th scope="col">Adres</th>
+                <th scope="col">Omschrijving</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let l of locations">
+                <td>{{l.name}}</td>
+                <td>{{l.address}}</td>
+                <td>{{l.description}}</td>
+                <td><button class="btn-sm mr-1"
+                        (click)="showDetailLocation(l)">Bewerken</button><button
+                        (click)="deleteLocation(l.id,l.name)" class="btn-sm mr-1">Verwijderen</button></td>
+            </tr>
+        </tbody>
+    </table>
 </div>

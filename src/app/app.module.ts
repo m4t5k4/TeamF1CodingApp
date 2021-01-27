@@ -14,6 +14,7 @@ import {  HttpClientModule } from '@angular/common/http';
 import { NavComponent } from './modules/nav/nav.component';
 import { FooterComponent } from './modules/footer/footer.component';
 import { AdminComponent } from './modules/admin/admin.component';
+
 @NgModule({
   declarations: [
     AppComponent,
