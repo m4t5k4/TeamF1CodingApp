@@ -1,10 +1,10 @@
-import { Component, OnInit, ViewChild  } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { LocationsService } from '../locations.service';
 import { Location } from '../../../shared/models/location.model'
 import { Router } from '@angular/router';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import {MatTableDataSource} from '@angular/material/table';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-locations',
@@ -13,21 +13,21 @@ import {MatTableDataSource} from '@angular/material/table';
 })
 
 export class LocationsComponent implements OnInit {
-  displayedColumns = ['name','address','description','btn'];
+  displayedColumns = ['name', 'address', 'description', 'btn'];
   dataSource = new MatTableDataSource<Location>();
   @ViewChild(MatPaginator) paginator: MatPaginator;
-
   constructor(private _locationService: LocationsService, private router: Router) {
     this._locationService.getLocations().subscribe(
       result => {
         this.dataSource = new MatTableDataSource<Location>(result);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
       }
     )
 
   }
 
   @ViewChild(MatSort) sort: MatSort;
-
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
@@ -40,8 +40,8 @@ export class LocationsComponent implements OnInit {
     this.dataSource.filter = filterValue;
   }
 
-  deleteLocation(locationId: number, naam : string) {
-    if (confirm("Wil je deze locatie: " + naam +" verwijderen?" )) {
+  deleteLocation(locationId: number, naam: string) {
+    if (confirm("Wil je deze locatie: " + naam + " verwijderen?")) {
       this._locationService.deleteLocation(locationId).subscribe();
       window.location.reload();
     }

@@ -1,30 +1,34 @@
-<button mat-raised-button class="ml-5" (click)="btnClickNew();">Voeg een nieuwe locatie toe</button>
-
-<div class="example-header" fxLayout="row">
-    <mat-form-field>
-        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-    </mat-form-field>
+<div class="row m-5">
+    <div class="col-sm-1"><button mat-raised-button (click)="btnClickNew();">Voeg een nieuwe locatie toe</button></div>
+    <div class="col-sm-11">
+        <div class="example-header" fxLayout="row">
+            <mat-form-field>
+                <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+            </mat-form-field>
+        </div>
+    </div>
 </div>
 
-<div class="example-container">
+<div class="col">
     <table mat-table [dataSource]="dataSource" matSort>
         <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> naam </th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Naam </th>
             <td mat-cell *matCellDef="let row" data-label="name"> {{row.name}}</td>
         </ng-container>
         <ng-container matColumnDef="address">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> adres </th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Adres </th>
             <td mat-cell *matCellDef="let row" data-label="address"> {{row.address}} </td>
         </ng-container>
         <ng-container matColumnDef="description">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> omschrijving </th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Omschrijving </th>
             <td mat-cell *matCellDef="let row" data-label="description"> {{row.description}}</td>
         </ng-container>
         <ng-container matColumnDef="btn">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> </th>
-            <td mat-cell *matCellDef="let row" data-label=""><button class="btn-sm mr-1"
-                    (click)="showDetailLocation(row)">Bewerken</button><button (click)="deleteLocation(row.id,row.name)"
-                    class="btn-sm mr-1">Verwijderen</button></td>
+            <td mat-cell *matCellDef="let row" data-label="">
+                <button class="btn-sm mr-1" (click)="showDetailLocation(row)">Bewerken</button>
+                <button (click)="deleteLocation(row.id,row.name)" class="btn-sm mr-1">Verwijderen</button>
+            </td>
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
