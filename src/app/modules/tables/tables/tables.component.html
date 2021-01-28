@@ -1,17 +1,17 @@
 <h2 class="text-center">Tafels</h2>
 <button mat-raised-button class="ml-5 btn btn-primary mb-2" (click)="addTable();">Voeg een nieuwe tafel toe</button>
 <div class="mx-5 d-flex justify-content-center">
-    <table class="table center" style="width: 1200px !important;" id="tableTables">
+    <table matSort (matSortChange)="sortData($event)" class="table center" style="width: 1200px !important;" id="tableTables">
         <thead>
             <tr class="row">
-                <th class="col-3" scope="col">Locatie</th>
-                <th class="col-3" scope="col">Zone</th>
-                <th class="col-3" scope="col">Naam</th>
-                <th class="col-3" scope="col"></th>
+                <th mat-sort-header="Locatie" class="col-3" scope="col">Locatie</th>
+                <th mat-sort-header="Zone" class="col-3" scope="col">Zone</th>
+                <th mat-sort-header="Naam" class="col-3" scope="col">Naam</th>
+                <th mat-sort-header="Test" class="col-3" scope="col"></th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let t of tables" class="row">
+            <tr *ngFor="let t of sortedData" class="row">
                 <td class="col-3">{{t.location.name}}</td>
                 <td class="col-3">{{t.zone}}</td>
                 <td class="col-3">{{t.name}}</td>

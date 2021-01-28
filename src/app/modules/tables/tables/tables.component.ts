@@ -3,7 +3,9 @@ import { TableLocation } from 'src/app/shared/models/table-location.model';
 import { TablesService } from '../tables.service';
 import { LocationsService } from '../../locations/locations.service';
 import { Router } from '@angular/router';
-import { toJSDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-calendar';
+import {Sort} from '@angular/material/sort';
+import { Location } from 'src/app/shared/models/location.model';
+import {MatSort} from '@angular/material/sort';
 
 @Component({
   selector: 'app-tables',
@@ -13,6 +15,7 @@ import { toJSDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-calendar';
 export class TablesComponent implements OnInit {
   
   tables: TableLocation[];
+  sortedData: TableLocation[];
 
   constructor(private _tablesService : TablesService,private _locationsService: LocationsService, private router: Router) {
   }
@@ -47,8 +50,31 @@ export class TablesComponent implements OnInit {
     this._tablesService.getTables().subscribe(
       result => {
       this.tables = result;
+      this.sortedData = result
       }
     )
+  }
+
+  sortData(sort: Sort) {
+    const data = this.tables.slice();
+    if (!sort.active || sort.direction === '') {
+      this.sortedData = data;
+      return;
+    }
+
+    this.sortedData = data.sort((a, b) => {
+      const isAsc = sort.direction === 'asc';
+      switch (sort.active) {
+        case 'Locatie': return this.compare(a.location, b.location, isAsc);
+        case 'Zone': return this.compare(a.zone, b.zone, isAsc);
+        case 'Naam': return this.compare(a.name, b.name, isAsc);
+        default: return 0;
+      }
+    });
+  }
+
+  compare(a: Location | string, b: Location | string, isAsc: boolean) {
+    return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
   }
 
 }
