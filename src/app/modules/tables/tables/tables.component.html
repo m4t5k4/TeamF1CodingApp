@@ -1,25 +1,39 @@
 <h2 class="text-center">Tafels</h2>
-<button mat-raised-button class="ml-5 btn btn-primary mb-2" (click)="addTable();">Voeg een nieuwe tafel toe</button>
-<div class="mx-5 d-flex justify-content-center">
-    <table matSort (matSortChange)="sortData($event)" class="table center" style="width: 1200px !important;" id="tableTables">
-        <thead>
-            <tr class="row">
-                <th mat-sort-header="Locatie" class="col-3" scope="col">Locatie</th>
-                <th mat-sort-header="Zone" class="col-3" scope="col">Zone</th>
-                <th mat-sort-header="Naam" class="col-3" scope="col">Naam</th>
-                <th mat-sort-header="Test" class="col-3" scope="col"></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let t of sortedData" class="row">
-                <td class="col-3">{{t.location.name}}</td>
-                <td class="col-3">{{t.zone}}</td>
-                <td class="col-3">{{t.name}}</td>
-                <td class="col-3"><button mat-raised-button class="btn btn-primary m-1" (click)="showDetailTable(t)">Bewerken</button><button mat-raised-button 
-                    class="btn btn-primary m-1" (click)="deleteTable(t.id)">Verwijderen</button></td>
-            </tr>
-        </tbody>
+<div class="row m-5">
+    <div class="col-sm-2"><button mat-raised-button (click)="addTable();">Voeg een nieuwe tafel toe</button></div>
+    <div class="col-sm-10">
+        <div class="example-header" fxLayout="row">
+            <mat-form-field>
+                <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+            </mat-form-field>
+        </div>
+    </div>
+</div>
+<div class="col">
+    <table mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="location.name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Locatie </th>
+            <td mat-cell *matCellDef="let row" data-label="location.name"> {{row.location.name}}</td>
+        </ng-container>
+        <ng-container matColumnDef="zone">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Zone </th>
+            <td mat-cell *matCellDef="let row" data-label="zone"> {{row.zone}} </td>
+        </ng-container>
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Tafel </th>
+            <td mat-cell *matCellDef="let row" data-label="name"> {{row.name}}</td>
+        </ng-container>
+        <ng-container matColumnDef="btn">
+            <th mat-header-cell *matHeaderCellDef mat-header> </th>
+            <td mat-cell *matCellDef="let row" data-label="">
+                <button class="btn-sm mr-1" (click)="showDetailTable(row)">Bewerken</button>
+                <button (click)="deleteTable(row.id)" class="btn-sm mr-1">Verwijderen</button>
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
 </div>
 
 

@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild  } from '@angular/core';
 import { TableLocation } from 'src/app/shared/models/table-location.model';
 import { TablesService } from '../tables.service';
 import { LocationsService } from '../../locations/locations.service';
 import { Router } from '@angular/router';
-import {Sort} from '@angular/material/sort';
 import { Location } from 'src/app/shared/models/location.model';
-import {MatSort} from '@angular/material/sort';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+
 
 @Component({
   selector: 'app-tables',
@@ -13,13 +15,30 @@ import {MatSort} from '@angular/material/sort';
   styleUrls: ['./tables.component.scss']
 })
 export class TablesComponent implements OnInit {
-  
-  tables: TableLocation[];
-  sortedData: TableLocation[];
-
+  displayedColumns = ["location.name", 'zone', 'name', 'btn'];
+  dataSource = new MatTableDataSource<TableLocation>();
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   constructor(private _tablesService : TablesService,private _locationsService: LocationsService, private router: Router) {
+    this._tablesService.getTables().subscribe(
+      result => {
+        this.dataSource = new MatTableDataSource<TableLocation>(result);
+        this.dataSource.sortingDataAccessor = (item, property) => {
+          switch(property) {
+            case 'location.name': return item.location.name;
+            default: return item[property];
+          }
+        };
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      }
+    )
   }
-    
+  
+  @ViewChild(MatSort) sort: MatSort;
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }   
 
   addTable() {
     var locations = this._locationsService.getLocations();
@@ -42,39 +61,22 @@ export class TablesComponent implements OnInit {
 
   ngOnInit(): void {
     this.getTables();
-    this.tables
-    this.router.navigate(['/tables']); 
+    //this.da
+    this.router.navigate(['/tables']);
+    
   }
 
   getTables(): void{
     this._tablesService.getTables().subscribe(
       result => {
-      this.tables = result;
-      this.sortedData = result
+      //this.tables = result;
       }
     )
   }
 
-  sortData(sort: Sort) {
-    const data = this.tables.slice();
-    if (!sort.active || sort.direction === '') {
-      this.sortedData = data;
-      return;
-    }
-
-    this.sortedData = data.sort((a, b) => {
-      const isAsc = sort.direction === 'asc';
-      switch (sort.active) {
-        case 'Locatie': return this.compare(a.location, b.location, isAsc);
-        case 'Zone': return this.compare(a.zone, b.zone, isAsc);
-        case 'Naam': return this.compare(a.name, b.name, isAsc);
-        default: return 0;
-      }
-    });
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
+    this.dataSource.filter = filterValue;
   }
-
-  compare(a: Location | string, b: Location | string, isAsc: boolean) {
-    return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
-  }
-
 }
