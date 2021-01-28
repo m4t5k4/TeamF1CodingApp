@@ -79,7 +79,7 @@ export class ReserveComponent implements OnInit {
     let start = LocalTime.parse(startHour);
     let end = LocalTime.parse(endHour);
 
-    let reservation = new Reservation(0,date,start,end,amountPersons,description, this.currentUser);
+    let reservation = new Reservation(0,date,start,end,amountPersons,description, this.currentUser,false);
     console.log(reservation);
     this._reservationService.postReservation(reservation).subscribe({
       next: () => {

@@ -5,6 +5,7 @@ import {formatDate} from '@angular/common';
 import { registerLocaleData } from '@angular/common';
 import localeNlbe from '@angular/common/locales/nl-BE';
 import localeNlBeExtra from '@angular/common/locales/extra/nl-BE';
+import {interval} from 'rxjs';
 
 registerLocaleData(localeNlbe,localeNlBeExtra);
 
