@@ -14,7 +14,9 @@ import {  HttpClientModule } from '@angular/common/http';
 import { NavComponent } from './modules/nav/nav.component';
 import { FooterComponent } from './modules/footer/footer.component';
 import { AdminComponent } from './modules/admin/admin.component';
-import { MatTableModule } from '@angular/material/table';
+import { HomeModule } from './modules/home/home.module';
+import {DashboardModule} from './modules/dashboard/dashboard.module';
+import {AdminDashboardModule}  from './modules/admin-dashboard/admin-dashboard.module'
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { MatTableModule } from '@angular/material/table';
     SecurityModule,
     LocationsModule,
     TablesModule,
-    MatTableModule
+    HomeModule,
+    DashboardModule,
+    AdminDashboardModule
   ],
   bootstrap: [AppComponent]
 })
