@@ -14,6 +14,8 @@ const httpOptions = {
 })
 export class AuthService {
 
+  roleAs: string;
+
   constructor(private http: HttpClient) { }
 
   login(credentials): Observable<any> {
@@ -38,6 +40,19 @@ export class AuthService {
     } else {
       return false;
     }
+  }
+
+  isLoggedInAsAdmin() {
+    if (sessionStorage.getItem("auth-user").includes("Admin")) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  getRole() {
+    this.roleAs = JSON.parse(sessionStorage.getItem("auth-user")).roles;
+    return this.roleAs;
   }
 
 }

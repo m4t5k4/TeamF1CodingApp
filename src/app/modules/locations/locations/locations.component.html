@@ -1,4 +1,39 @@
-<h1 class="text-center">Locaties</h1>
+<button mat-raised-button class="ml-5" (click)="btnClickNew();">Voeg een nieuwe locatie toe</button>
+
+<div class="example-header" fxLayout="row">
+    <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
+</div>
+
+<div class="example-container">
+    <table mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> naam </th>
+            <td mat-cell *matCellDef="let row" data-label="name"> {{row.name}}</td>
+        </ng-container>
+        <ng-container matColumnDef="address">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> adres </th>
+            <td mat-cell *matCellDef="let row" data-label="address"> {{row.address}} </td>
+        </ng-container>
+        <ng-container matColumnDef="description">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> omschrijving </th>
+            <td mat-cell *matCellDef="let row" data-label="description"> {{row.description}}</td>
+        </ng-container>
+        <ng-container matColumnDef="btn">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> </th>
+            <td mat-cell *matCellDef="let row" data-label=""><button class="btn-sm mr-1"
+                    (click)="showDetailLocation(row)">Bewerken</button><button (click)="deleteLocation(row.id,row.name)"
+                    class="btn-sm mr-1">Verwijderen</button></td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
+</div>
+
+<!-- <h1 class="text-center">Locaties</h1>
 <button mat-raised-button class="ml-5" (click)="btnClickNew();">Voeg een nieuwe locatie toe</button>
 <div class="table-responsive">
     <table class="table m-5">
@@ -21,4 +56,4 @@
             </tr>
         </tbody>
     </table>
-</div>
+</div> -->

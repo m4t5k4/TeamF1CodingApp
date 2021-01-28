@@ -9,8 +9,7 @@ import { environment } from 'src/environments/environment';
 })
 export class DashboardService {
   constructor(private http : HttpClient) { }
-  private iot = new Iot(0,0);
-
+  
   getIot(): Observable<Iot[]>
   {
     return this.http.get<Iot[]>(`${environment.baseUrl}iot`);

@@ -16,12 +16,10 @@ import { BrowserAnimationsModule } from  '@angular/platform-browser/animations';
         RouterModule,
         NgbModule,
         FlexLayoutModule,
-
-    FlexLayoutModule,
-
-
-    BrowserAnimationsModule,
-    BrowserModule
+        MaterialModule,
+        FlexLayoutModule,
+        BrowserAnimationsModule,
+        BrowserModule
     ],
     declarations: [],
     exports: [

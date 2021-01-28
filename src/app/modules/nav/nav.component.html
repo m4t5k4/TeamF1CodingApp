@@ -13,7 +13,7 @@
         <!-- Knoppen links -->
         <ul class="navbar-nav mr-auto">
             <li class="nav-item ">
-                <a *ngIf="authService.isLoggedIn()" class="nav-link" routerLink="/location"
+                <a *ngIf="authService.isLoggedIn() && authService.isLoggedInAsAdmin()" class="nav-link" routerLink="/location"
                     [routerLinkActive]="['active']">Locaties</a>
             </li>
             <li class="nav-item">
@@ -25,12 +25,16 @@
                     [routerLinkActive]="['active']">Mijn reservaties</a>
             </li>
             <li class="nav-item">
-                <a *ngIf="authService.isLoggedIn()" class="nav-link" routerLink="/tables"
+                <a *ngIf="authService.isLoggedIn()  && authService.isLoggedInAsAdmin()" class="nav-link" routerLink="/tables"
                     [routerLinkActive]="['active']">Tafels</a>
             </li>
             <li class="nav-item">
                 <a *ngIf="authService.isLoggedIn()" class="nav-link" routerLink="/dashboard"
                     [routerLinkActive]="['active']">Dashboard</a>
+            </li>
+            <li class="nav-item">
+                <a *ngIf="authService.isLoggedIn()" class="nav-link" routerLink="/admin-dashboard"
+                    [routerLinkActive]="['active']">Admin dashboard</a>
             </li>
         </ul>
 

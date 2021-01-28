@@ -11,5 +11,6 @@ export class Reservation {
         public amountPersons: number,
         public description: string,
         public user: User,
+        public confirmed: Boolean
     ){}
 }

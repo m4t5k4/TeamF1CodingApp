@@ -7,6 +7,9 @@ import { TokenStorageService } from '../services/token-storage.service';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
+  reloadPage(): void {
+    window.location.reload();
+  }
 
   currentUser: any;
 
@@ -14,6 +17,8 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentUser = this.token.getUser();
+    
   }
+
 
 }

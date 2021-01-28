@@ -5,8 +5,12 @@ h2 {
 img {
   border-radius: 15px;
   @media (max-width: 480px) {
-    width: 99%;
+    margin-left: 5%;
+    margin-right: 5%;
+    width: 90%;
   }
+  width: 40%;
+  margin-left: 1em;
 }
 
 button {
@@ -37,14 +41,9 @@ select {
   width: 100%;
 }
 
-:host ::ng-deep ngb-datepicker{
-    left: 0px !important;
-    top: 0px !important;
-    padding-top: 0px !important;
-    padding-right: 0px !important;
-    padding-bottom: 0px !important;
-    padding-left: 0px !important;
-    position: relative !important;
-    transform: translate(0px, 28px)!important;
-    background: white !important;
+form {
+  margin-left: 3em;
+  @media (max-width: 480px) {
+    margin-left: 5em;
+  }
 }
