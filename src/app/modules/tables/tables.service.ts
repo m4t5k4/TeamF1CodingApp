@@ -2,14 +2,18 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { TableLocation } from '../../shared/models/table-location.model';
+import { LocationsService } from '../locations/locations.service';
 import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class TablesService {
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private _locationService: LocationsService) {}
 
-  private table = new TableLocation(0,"EmptyTable","EmptyZone");
+  
+  private locations = this._locationService.getLocations()
+
+  private table = new TableLocation(0,"EmptyTable","EmptyZone",this.locations[0]);
 
   getTables() : Observable<TableLocation[]>
   {
