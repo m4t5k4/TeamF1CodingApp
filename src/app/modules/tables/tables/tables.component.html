@@ -1,21 +1,21 @@
 <h2 class="text-center">Tafels</h2>
 <button mat-raised-button class="ml-5 btn btn-primary mb-2" (click)="addTable();">Voeg een nieuwe tafel toe</button>
-<div class="mx-5">
-    <table datatable="ngFor" [dtOptions]="dtOptions" class="table" style="width: 1200px !important;" id="dataTableTables">
+<div class="mx-5 d-flex justify-content-center">
+    <table class="table center" style="width: 1200px !important;" id="tableTables">
         <thead>
-            <tr>
-                <th scope="col">Locatie</th>
-                <th scope="col">Zone</th>
-                <th scope="col">Naam</th>
-                <th scope="col"></th>
+            <tr class="row">
+                <th class="col-3" scope="col">Locatie</th>
+                <th class="col-3" scope="col">Zone</th>
+                <th class="col-3" scope="col">Naam</th>
+                <th class="col-3" scope="col"></th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let t of tables">
-                <td>{{t.location.name}}</td>
-                <td>{{t.zone}}</td>
-                <td>{{t.name}}</td>
-                <td><button mat-raised-button class="btn btn-primary m-1" (click)="showDetailTable(t)">Bewerken</button><button mat-raised-button 
+            <tr *ngFor="let t of tables" class="row">
+                <td class="col-3">{{t.location.name}}</td>
+                <td class="col-3">{{t.zone}}</td>
+                <td class="col-3">{{t.name}}</td>
+                <td class="col-3"><button mat-raised-button class="btn btn-primary m-1" (click)="showDetailTable(t)">Bewerken</button><button mat-raised-button 
                     class="btn btn-primary m-1" (click)="deleteTable(t.id)">Verwijderen</button></td>
             </tr>
         </tbody>

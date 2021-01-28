@@ -1,3 +1,5 @@
+import { Location } from "./location.model";
+
 export class TableLocation {
     constructor(
         public id: number,

@@ -13,20 +13,8 @@ import { toJSDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-calendar';
 export class TablesComponent implements OnInit {
   
   tables: TableLocation[];
-  dtOptions: DataTables.Settings = {pagingType: 'full_numbers'};
 
   constructor(private _tablesService : TablesService,private _locationsService: LocationsService, private router: Router) {
-    var table = $('#dataTableTables').DataTable({
-      "columns": [
-        { "searchable": false },
-        null,
-        null,
-        null,
-        null
-      ]
-    });
-    table.destroy();
-    //this.router.navigate(['/tables']); 
   }
     
 
@@ -51,8 +39,6 @@ export class TablesComponent implements OnInit {
 
   ngOnInit(): void {
     this.getTables();
-    var table = $('#dataTableTables').DataTable();
-    table.destroy();  
     this.tables
     this.router.navigate(['/tables']); 
   }

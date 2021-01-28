@@ -1,10 +1,12 @@
 import { Input } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { TableLocation } from 'src/app/shared/models/table-location.model';
+import { Location } from 'src/app/shared/models/location.model';
 import { TablesService } from '../tables.service';
 import { LocationsService } from '../../locations/locations.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { observable } from 'rxjs';
 
 @Component({
   selector: 'app-tables-detail',
@@ -13,17 +15,19 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 })
 export class TablesDetailComponent implements OnInit {
 
-  constructor(private _tablesService: TablesService,private _locationsService: LocationsService, private router: Router) { }
+  constructor(private _tablesService: TablesService,private _locationsService: LocationsService, private router: Router) {
+    this.getLocations();
+   }
 
-  locations = [];
-  
+  locations: Location[];
+  allLocations: Location[];
 
   tableForm = new FormGroup(
     {
       id: new FormControl(this._tablesService.getTable().id),
       name: new FormControl(this._tablesService.getTable().name, Validators.required),
       zone: new FormControl(this._tablesService.getTable().zone, Validators.required),
-      locationSelect: new FormControl(this._tablesService.getTable().location, Validators.required),
+      locationSelect: new FormControl(null, Validators.required),
     }
   )
 
@@ -55,20 +59,7 @@ export class TablesDetailComponent implements OnInit {
     this.router.navigate(["/tables"]);
   }
 
-  ngOnInit(): void {
-    console.log(this._tablesService.getTable().name+ "Test")
-    let Table = this._tablesService.getTable();
-    this.getLocations();
-    console.log(this.locations[0]+"123");
-    if(Table.name == "EmptyTable"){
-      this.tableForm.setValue({id:0,name:"",zone:"",locationSelect:""});
-    }
-    else{
-      let tableLocation = Table.location;
-      console.log(Table.location)
-      this.tableForm.setValue({id:Table.id,name:Table.name,zone:Table.zone,locationSelect: Table.location});
-    }
-  }
+
   getLocations(): void{
     this._locationsService.getLocations().subscribe(
       result => {
@@ -77,4 +68,24 @@ export class TablesDetailComponent implements OnInit {
     )
   }
 
+  ngOnInit(): void {
+    console.log(this._tablesService.getTable().name+ " Test1")
+    let Table = this._tablesService.getTable();
+    this.getLocations();
+
+    if(Table.name == "EmptyTable"){
+      this.tableForm.setValue({id:0,name:"",zone:"",locationSelect:""});
+    }
+    else{
+      this._locationsService.getLocations().subscribe(
+        result => {
+        this.allLocations = result;
+        console.log("Test 1 : "+this.tableForm.controls['locationSelect'].value);
+        var currentLocation: Location = this.allLocations[Table.location.id-1];
+        this.tableForm.setValue({id:Table.id,name:Table.name,zone:Table.zone,locationSelect: currentLocation});
+        console.log(this.tableForm.controls['locationSelect'].value) 
+        }
+      )      
+    }
+  }
 }
