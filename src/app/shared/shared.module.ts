@@ -15,6 +15,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         ReactiveFormsModule,
         RouterModule,
         NgbModule,
+        MaterialModule,
         FlexLayoutModule,
         BrowserAnimationsModule,
         BrowserModule

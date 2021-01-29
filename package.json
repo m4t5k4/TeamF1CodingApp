@@ -26,7 +26,6 @@
     "@js-joda/core": "^3.2.0",
     "@ng-bootstrap/ng-bootstrap": "^9.0.0",
     "@types/jquery": "^3.5.5",
-    "angular-datatables": "^11.1.0",
     "bootstrap": "^4.5.3",
     "datatables.net": "^1.10.23",
     "datatables.net-dt": "^1.10.23",

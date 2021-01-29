@@ -1,69 +1,93 @@
-<div class="container">
-  <h2 class="mb-5">Reserveer een tafel</h2>
-  <img src="../../../../assets/Grondplan Corda 1 +5.png" alt="">
+<h3 class="mb-5 ml-5">Reserveer een tafel</h3>
+<div fxLayout="row wrap" fxLayout.fxLayout.lt-sm="column" fxLayoutGap="32px"
+  fxLayoutAlign="flex-start">
 
-  <div class="formField">
-    <form [formGroup]="reservateForm" (ngSubmit)="onSubmit()">
-      <div class="form-row">
+  <ng-container>
+    <div class="con">
+      <img *ngIf="reservateForm.value.selectedLocation == 'Corda campus 1'" src="../../../../assets/CORDA-1v2.jpg" alt="">
+      <img *ngIf="reservateForm.value.selectedLocation == 'Corda campus 2'" src="../../../../assets/CORDA-2v2.jpg" alt="">
+      <!-- <button class="btn">pop up</button> -->
+    </div>
+  </ng-container>
 
-        <div class="form-group col">
-          <label for="zone">Zone</label>
-          <select name="zone" id="zone" formControlName="selectedZone" class="form-control">
-            <option *ngFor="let zone of zones" value="{{zone}}">{{zone}}</option>
-          </select>
+  <ng-container>
+    <div class="formField">
+      <form [formGroup]="reservateForm" (ngSubmit)="onSubmit()">
+
+        <div class="form-row">
+          <div class="form-group col">
+            <label for="location">Locatie</label>
+            <select name="location" id="location" formControlName="selectedLocation" class="form-control">
+              <option *ngFor="let loc of locations" value="{{loc}}">{{loc}}</option>
+            </select>
+          </div>
         </div>
 
-        <div class="form-group col">
-          <label for="table">Tafel</label>
-          <select name="table" id="table" formControlName="selectedTable" class="form-control">
-            <option *ngFor="let table of tables" value="{{table.name}}">{{table.name}}</option>
-          </select>
+        <div class="form-row">
+          <div class="form-group col" *ngIf="reservateForm.value.selectedLocation">
+            <label for="zone">Zone</label>
+            <select name="zone" id="zone" formControlName="selectedZone" class="form-control">
+              <option *ngFor="let zone of zones" value="{{zone}}">{{zone}}</option>
+            </select>
+          </div>
+
+          <div class="form-group col" *ngIf="reservateForm.value.selectedZone">
+            <label for="table">Tafel</label>
+            <select name="table" id="table" formControlName="selectedTable" class="form-control">
+              <option *ngFor="let table of tables" value="{{table.name}}">{{table.name}}</option>
+            </select>
+          </div>
+
         </div>
 
-      </div>
-
-      <div class="form-row">
-
-        <div class="form-group col">
-          <label for="from">van</label>
-          <input type="time" name="from" id="from" formControlName="from" class="form-control">
+        <div class="form-row" *ngIf="reservateForm.value.selectedLocation">
+          <div class="form-group col">
+            <label for="date">Datum</label>
+            <input type="date" id="date" name="date" formControlName="date" class="form-control">
+          </div>
         </div>
 
-        <div class="form-group col">
-          <label for="till">tot</label>
-          <input type="time" name="till" id="till" formControlName="till" class="form-control">
+        <div class="form-row" *ngIf="reservateForm.value.date">
+
+          <div class="form-group col">
+            <label for="from">van</label>
+            <input type="time" name="from" id="from" formControlName="from" class="form-control">
+          </div>
+
+          <div class="form-group col">
+            <label for="till">tot</label>
+            <input type="time" name="till" id="till" formControlName="till" class="form-control">
+          </div>
+
         </div>
 
-      </div>
-
-      <div class="form-row">
-        <div class="form-group col">
-          <label for="date">Datum</label>
-          <input type="date" id="date" name="date" formControlName="date" class="form-control">
-          <!-- <ngb-datepicker class="my-datepicker-1" formControlName="date" id="date" name="date"></ngb-datepicker> -->
+        <div class="form-row" *ngIf="reservateForm.value.selectedTable">
+          <div class="form-group col">
+            <label for="amountPersons">Aantal personen</label>
+            <input type="number" id="amountPersons" name="amountPersons" formControlName="amountPersons"
+              class="form-control">
+          </div>
         </div>
-      </div>
 
-      <div class="form-row">
-        <div class="form-group col">
-          <label for="amountPersons">Aantal personen</label>
-          <input type="number" id="amountPersons" name="amountPersons" formControlName="amountPersons" class="form-control">
+        <div class="form-row" *ngIf="reservateForm.value.selectedTable">
+          <div class="form-group col">
+            <label for="description">Beschrijving</label>
+            <input type="text" id="description" name="description" formControlName="description" class="form-control">
+          </div>
         </div>
-      </div>
 
-      <div class="form-row">
-        <div class="form-group col">
-          <label for="description">Beschrijving</label>
-          <input type="text" id="description" name="description" formControlName="description" class="form-control">
-        </div>
-      </div>
+        <button type="submit" [disabled]="!reservateForm.valid || submitted" class="btn">
+          <span *ngIf="submitted" class="spinner-border spinner-border-sm mr-1"></span>
+          Reserveren
+        </button>
+      </form>
+    </div>
+  </ng-container>
 
-      {{reservateForm.value | json }}
-      <button type="submit" [disabled]="!reservateForm.valid || submitted" class="btn btn-primary">
-        <span *ngIf="submitted" class="spinner-border spinner-border-sm mr-1"></span>
-        Reserveren
-      </button>
-    </form>
-  </div>
+  <ng-container>
+    <div class="timesheet">
+      <app-reservation-timesheet></app-reservation-timesheet>
+    </div>
+  </ng-container>
 
 </div>

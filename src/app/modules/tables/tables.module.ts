@@ -4,7 +4,9 @@ import { TablesComponent } from './tables/tables.component';
 import { TablesService } from './tables.service';
 import { ReactiveFormsModule} from '@angular/forms'
 import { TablesDetailComponent } from './tables-detail/tables-detail.component';
-import { DataTablesModule } from 'angular-datatables';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
@@ -14,8 +16,10 @@ import { DataTablesModule } from 'angular-datatables';
   ],
   imports: [
     CommonModule,
-    ReactiveFormsModule,
-    DataTablesModule
+    ReactiveFormsModule, 
+    MatFormFieldModule,
+    MatButtonModule,
+    SharedModule
   ],
   providers : [
     TablesService

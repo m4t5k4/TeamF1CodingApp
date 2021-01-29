@@ -10,3 +10,12 @@ button {
   {
       opacity: 0.4;
   }
+
+  table {
+    width: 100%;
+  }
+  
+  .mat-table .mat-cell {
+    border-bottom: 1px solid white;
+  }
+

@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   baseUrl: 'http://localhost:8080/',
-  azureUrl: 'https://f1coding.azurewebsites.net/'
+  //baseUrl: 'https://f1coding.azurewebsites.net/'
 };
 
 /*

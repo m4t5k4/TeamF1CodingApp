@@ -1,8 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild  } from '@angular/core';
 import { TableLocation } from 'src/app/shared/models/table-location.model';
 import { TablesService } from '../tables.service';
+import { LocationsService } from '../../locations/locations.service';
 import { Router } from '@angular/router';
-import { toJSDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-calendar';
+import { Location } from 'src/app/shared/models/location.model';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+
 
 @Component({
   selector: 'app-tables',
@@ -10,18 +15,34 @@ import { toJSDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-calendar';
   styleUrls: ['./tables.component.scss']
 })
 export class TablesComponent implements OnInit {
-  
-  tables: TableLocation[];
-
-  constructor(private _tablesService : TablesService, private router: Router) {
-    var table = $('#dataTableTables').DataTable();
-    table.destroy();
-    //this.router.navigate(['/tables']); 
+  displayedColumns = ["location.name", 'zone', 'name', 'btn'];
+  dataSource = new MatTableDataSource<TableLocation>();
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  constructor(private _tablesService : TablesService,private _locationsService: LocationsService, private router: Router) {
+    this._tablesService.getTables().subscribe(
+      result => {
+        this.dataSource = new MatTableDataSource<TableLocation>(result);
+        this.dataSource.sortingDataAccessor = (item, property) => {
+          switch(property) {
+            case 'location.name': return item.location.name;
+            default: return item[property];
+          }
+        };
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      }
+    )
   }
-    
+  
+  @ViewChild(MatSort) sort: MatSort;
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }   
 
   addTable() {
-    var table = new TableLocation(0,"EmptyTable","EmptyZone");
+    var locations = this._locationsService.getLocations();
+    var table = new TableLocation(0,"EmptyTable","EmptyZone",locations[0]);
     this._tablesService.setEditTable(table)
     this.router.navigate(['/tables/edit']);
   }
@@ -40,18 +61,22 @@ export class TablesComponent implements OnInit {
 
   ngOnInit(): void {
     this.getTables();
-    var table = $('#dataTableTables').DataTable();
-    table.destroy();  
-    this.tables
-    this.router.navigate(['/tables']); 
+    //this.da
+    this.router.navigate(['/tables']);
+    
   }
 
   getTables(): void{
     this._tablesService.getTables().subscribe(
       result => {
-      this.tables = result;
+      //this.tables = result;
       }
     )
   }
 
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
+    this.dataSource.filter = filterValue;
+  }
 }

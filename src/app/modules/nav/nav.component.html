@@ -34,6 +34,9 @@
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" routerLink="/admin/users">Gebruikers</a>
                 </div>
+            <li class="nav-item">
+                <a *ngIf="authService.isLoggedIn()" class="nav-link" routerLink="/admin-dashboard"
+                    [routerLinkActive]="['active']">Admin dashboard</a>
             </li>
         </ul>
 
