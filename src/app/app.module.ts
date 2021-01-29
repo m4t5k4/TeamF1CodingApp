@@ -16,14 +16,16 @@ import { FooterComponent } from './modules/footer/footer.component';
 import { AdminComponent } from './modules/admin/admin.component';
 import { HomeModule } from './modules/home/home.module';
 import {DashboardModule} from './modules/dashboard/dashboard.module';
-import {AdminDashboardModule}  from './modules/admin-dashboard/admin-dashboard.module'
+import {AdminDashboardModule}  from './modules/admin-dashboard/admin-dashboard.module';
+import { PlacesComponent } from './modules/places/places.component'
 
 @NgModule({
   declarations: [
     AppComponent,
     NavComponent,
     FooterComponent,
-    AdminComponent
+    AdminComponent,
+    PlacesComponent
   ],
   imports: [
     SharedModule,
