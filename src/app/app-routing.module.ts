@@ -26,7 +26,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent},
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
-  { path: 'location', component: LocationsComponent, canActivate: [AuthGuard], data: { role: 'Admin' } },
+  { path: 'locations', component: LocationsComponent, canActivate: [AuthGuard], data: { role: 'Admin' } },
   { path: 'location/add', component: LocationFormComponent, canActivate: [AuthGuard] },
   { path: 'location/edit', component: LocationDetailComponent, canActivate: [AuthGuard] },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },

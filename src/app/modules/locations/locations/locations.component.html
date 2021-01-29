@@ -1,11 +1,9 @@
-<div class="row m-5">
-    <div class="col-sm-1"><button mat-raised-button (click)="btnClickNew();">Voeg een nieuwe locatie toe</button></div>
-    <div class="col-sm-11">
-        <div class="example-header" fxLayout="row">
-            <mat-form-field>
-                <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-            </mat-form-field>
-        </div>
+<div class="m-5">
+    <button mat-raised-button (click)="btnClickNew();">Voeg een nieuwe locatie toe</button>
+    <div class="example-header mt-4">
+        <mat-form-field>
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+        </mat-form-field>
     </div>
 </div>
 <div class="col">

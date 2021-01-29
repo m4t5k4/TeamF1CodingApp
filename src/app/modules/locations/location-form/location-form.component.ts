@@ -34,12 +34,12 @@ export class LocationFormComponent implements OnInit {
     this.submitted = true;
     this._locationService.addLocation(this.locationForm.value).subscribe();
     setTimeout(()=>{                          
-      this.router.navigate(["/location"]);
+      this.router.navigate(["/locations"]);
     }, 1000); 
   }
 
   btnReturn()
   {
-    this.router.navigate(["/location"]);
+    this.router.navigate(["/locations"]);
   }
 }

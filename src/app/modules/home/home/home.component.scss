@@ -6,8 +6,8 @@ button
 }
 
 button:hover{
-    background: black;
-    color: white;
+    background: white;
+    color: black;
 }
 
 a{
@@ -19,4 +19,10 @@ a:hover{
     background-color: white;
     border-color: black;
     color: black;
+}
+
+.color 
+{
+    background-color: #D40000;
+    color: white;
 }
