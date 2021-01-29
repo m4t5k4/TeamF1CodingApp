@@ -22,6 +22,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
+import { MatTreeModule } from '@angular/material/tree';
 
 @NgModule({
     declarations: [],
@@ -48,6 +49,7 @@ import { MatSortModule } from '@angular/material/sort';
         MatPaginatorModule,
         MatTableModule,
         MatSortModule,
+        MatTreeModule,
     ],
     exports: [
         MatButtonModule,
@@ -72,6 +74,7 @@ import { MatSortModule } from '@angular/material/sort';
         MatPaginatorModule,
         MatTableModule,
         MatSortModule,
+        MatTreeModule,
     ]
 })
 export class MaterialModule { }

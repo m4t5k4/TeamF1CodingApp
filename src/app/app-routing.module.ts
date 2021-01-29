@@ -21,8 +21,8 @@ import {HomeComponent} from './modules/home/home/home.component';
 
 const routes: Routes = [
   { path: 'employee', component: ReserveComponent, canActivate: [AuthGuard] },
-  { path: 'reservations', component: ReservationsComponent, canActivate: [AuthGuard] },
-  { path: 'reservations2', component: ReservationsTableComponent, canActivate: [AuthGuard] },
+  { path: 'reservations2', component: ReservationsComponent, canActivate: [AuthGuard] },
+  { path: 'reservations', component: ReservationsTableComponent, canActivate: [AuthGuard] },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent},
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },

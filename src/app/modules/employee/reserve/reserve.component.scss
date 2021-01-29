@@ -9,12 +9,12 @@ img {
     margin-right: 5%;
     width: 90%;
   }
-  width: 40%;
+  width: 100%;
   margin-left: 1em;
 }
 
 button {
-  background: #8716F9;
+  background:#e20000;
   border: none;
   border-radius: 2em;
   color: white;
@@ -42,8 +42,58 @@ select {
 }
 
 form {
-  margin-left: 3em;
+  margin-left: 0;
   @media (max-width: 480px) {
-    margin-left: 5em;
+    margin-left: 0;
+  }
+}
+
+.con {
+  position: relative;
+  margin: 0!important;
+  width: 40%;
+  @media (max-width: 480px) {
+    margin-left: 5%;
+    margin-right: 5%;
+    width: 100%;
+  }
+}
+
+.con .btn {
+  position: absolute;
+  top: 1%;
+  left: 80%;
+  background:#e20000;
+  color: white;
+  font-size: 16px;
+  padding: 12px 24px;
+  border: none;
+  cursor: pointer;
+  border-radius: 2em;
+
+}
+
+.formField {
+  width: 20%;
+  margin-left: 6%;
+  margin-right: 6%;
+  @media (max-width: 480px) {
+    margin-left: 6%;
+    margin-right: 6%;
+    width: 100%;
+  }
+}
+
+.timesheet {
+  width: 20%;
+  margin-left: 6%;
+  margin-right: 6%;
+  @media (max-width: 480px) {
+    margin-left: 6%;
+    margin-right: 6%;
+    width: 100%;
+  }
+  @media (min-width: 1280px) {
+    margin-top: 2em;
   }
 }

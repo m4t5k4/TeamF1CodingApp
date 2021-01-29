@@ -1,35 +1,38 @@
-<div class="example-header" fxLayout="row">
+<h2 class="text-center">Reservaties</h2>
+
+<div class="col" fxLayout="row">
   <mat-form-field>
     <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
   </mat-form-field>
 </div>
 
-<div class="example-container">
+<div class="col">
 
   <table mat-table [dataSource]="dataSource" matSort>
 
-    <!-- ID Column -->
-    <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
-      <td mat-cell *matCellDef="let row" data-label="id"> {{row.cnt}} </td>
+    <ng-container matColumnDef="amountPersons">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Aantal pers. </th>
+      <td mat-cell *matCellDef="let row" data-label="amountPersons"> {{row.amountPersons}} </td>
     </ng-container>
 
-    <!-- Progress Column -->
-    <ng-container matColumnDef="progress">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Progress </th>
-      <td mat-cell *matCellDef="let row" data-label="progress"> {{row.progress}}% </td>
+    <ng-container matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> datum </th>
+      <td mat-cell *matCellDef="let row" data-label="date"> {{row.date}} </td>
     </ng-container>
 
-    <!-- Name Column -->
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
-      <td mat-cell *matCellDef="let row" data-label="name"> {{row.name}} </td>
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> beschr. </th>
+      <td mat-cell *matCellDef="let row" data-label="description"> {{row.description}} </td>
     </ng-container>
 
-    <!-- Color Column -->
-    <ng-container matColumnDef="color">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Color </th>
-      <td mat-cell *matCellDef="let row" [style.color]="row.color" data-label="color"> {{row.color}} </td>
+    <ng-container matColumnDef="startHour">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> van </th>
+      <td mat-cell *matCellDef="let row" data-label="startHour"> {{row.startHour}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="endHour">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> tot </th>
+      <td mat-cell *matCellDef="let row" data-label="endHour"> {{row.endHour}} </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

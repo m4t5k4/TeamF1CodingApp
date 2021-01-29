@@ -2,6 +2,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
+import { Reservation } from 'src/app/shared/models/reservation.model';
+import { ReservationService } from '../reservation.service';
+import { TokenStorageService } from '../../../../security/services/token-storage.service';
 
 @Component({
   selector: 'app-reservations-table',
@@ -10,22 +13,21 @@ import {MatTableDataSource} from '@angular/material/table';
 })
 export class ReservationsTableComponent implements OnInit {
 
-  displayedColumns = ['id', 'name', 'progress', 'color'];
-  dataSource = new MatTableDataSource<UserData>();
+  displayedColumns = ['amountPersons', 'date', 'description', 'startHour', 'endHour'];
+  dataSource = new MatTableDataSource<Reservation>();
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+  constructor(private _reservationService: ReservationService,
+    private _token: TokenStorageService) {
+      this._reservationService.getReservationsById(_token.getUser().id).subscribe(
+        result => {
+          this.dataSource = new MatTableDataSource<Reservation>(result);
+          console.log(this.dataSource);
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
 
-  constructor() {
-      // Create 100 users
-    const users: UserData[] = [];
-    var users1=[];
-    for (let i = 1; i <= 100; i++) { /*users.push(createNewUser(i));*/
-
-      users1.push({"cnt" : i,"name":"batr"+i});
-
-     }
-     console.log(users1);
-    // Assign the data to the data source for the table to render
-    this.dataSource = new MatTableDataSource<UserData>(users1);
+      }
+    )
   }
 
   ngAfterViewInit() {
@@ -37,19 +39,9 @@ export class ReservationsTableComponent implements OnInit {
   }
 
 
-
-  @ViewChild(MatSort) sort: MatSort;
-
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
     this.dataSource.filter = filterValue;
   }
-}
-
-export interface UserData {
-  id: string;
-  name: string;
-  progress: string;
-  color: string;
 }
