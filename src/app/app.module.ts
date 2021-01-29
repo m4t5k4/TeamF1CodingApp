@@ -23,11 +23,7 @@ import { AdminComponent } from './modules/admin/admin/admin.component';
 import { HomeModule } from './modules/home/home.module';
 import {DashboardModule} from './modules/dashboard/dashboard.module';
 import {AdminDashboardModule}  from './modules/admin-dashboard/admin-dashboard.module';
-<<<<<<< HEAD
 import {​​​​​ PlacesComponent }​​​​​ from './modules/places/places/places.component';
-=======
-import { PlacesComponent } from './modules/places/places/places.component'
->>>>>>> 0609e11688ae540237a226fc41ac23b58bea49a2
 
 @NgModule({
   declarations: [

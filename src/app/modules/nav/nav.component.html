@@ -8,13 +8,8 @@
         <!-- Knoppen links -->
         <ul class="navbar-nav mr-auto">
             <li class="nav-item ">
-<<<<<<< HEAD
                 <a *ngIf="authService.isLoggedIn() && authService.isLoggedInAsAdmin()" class="nav-link" routerLink="/locations"
                     [routerLinkActive]="['active']">Locaties</a>
-=======
-                <a *ngIf="authService.isLoggedIn() && authService.isLoggedInAsAdmin()" class="nav-link"
-                    routerLink="/location" [routerLinkActive]="['active']">Locaties</a>
->>>>>>> 0609e11688ae540237a226fc41ac23b58bea49a2
             </li>
             <li class="nav-item">
                 <a *ngIf="authService.isLoggedIn()" class="nav-link" routerLink="/employee"
