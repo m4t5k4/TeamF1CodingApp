@@ -6,7 +6,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MaterialModule } from './material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from  '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
     imports: [
@@ -16,12 +16,8 @@ import { BrowserAnimationsModule } from  '@angular/platform-browser/animations';
         RouterModule,
         NgbModule,
         FlexLayoutModule,
-
-    FlexLayoutModule,
-
-
-    BrowserAnimationsModule,
-    BrowserModule
+        BrowserAnimationsModule,
+        BrowserModule
     ],
     declarations: [],
     exports: [
@@ -34,8 +30,8 @@ import { BrowserAnimationsModule } from  '@angular/platform-browser/animations';
         FlexLayoutModule,
         NgbModule,
 
-      BrowserAnimationsModule,
-      BrowserModule
+        BrowserAnimationsModule,
+        BrowserModule
     ]
 })
 export class SharedModule { }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { UserService } from 'src/app/security/services/user.service';
 
 @Component({
@@ -10,7 +11,7 @@ export class AdminComponent implements OnInit {
 
   content: string;
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit(): void {
     this.userService.getAdminBoard().subscribe(
@@ -21,6 +22,10 @@ export class AdminComponent implements OnInit {
         this.content = JSON.parse(err.error).message;
       }
     );
+  }
+
+  btnEmployees(): void {
+    this.router.navigate(['admin/users']);
   }
 
 }

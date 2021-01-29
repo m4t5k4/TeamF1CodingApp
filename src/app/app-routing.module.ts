@@ -13,8 +13,10 @@ import { TablesComponent } from './modules/tables/tables/tables.component';
 import { TablesDetailComponent } from './modules/tables/tables-detail/tables-detail.component';
 import { LogoutComponent } from './security/logout/logout.component';
 import { AuthGuard } from './security/guard/auth.guard';
-import { AdminComponent } from './modules/admin/admin.component';
+import { AdminComponent } from './modules/admin/admin/admin.component';
+import { AdminUsersComponent } from './modules/admin/admin-users/admin-users.component';
 import {DashboardComponent} from './modules/dashboard/dashboard/dashboard.component';
+import { AdminEditUserComponent } from './modules/admin/admin-edit-user/admin-edit-user.component';
 
 const routes: Routes = [
   { path: 'employee', component: ReserveComponent, canActivate: [AuthGuard] },
@@ -30,7 +32,9 @@ const routes: Routes = [
   { path: 'logout', component: LogoutComponent },
   { path: 'tables', component: TablesComponent},
   { path: 'tables/edit', component: TablesDetailComponent},
-  { path: 'admin', component: AdminComponent }
+  { path: 'admin', component: AdminComponent },
+  { path: 'admin/users', component: AdminUsersComponent },
+  { path: 'admin/user/edit', component: AdminEditUserComponent }
 ];
 
 @NgModule({
