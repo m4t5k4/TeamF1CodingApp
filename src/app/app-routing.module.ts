@@ -20,6 +20,9 @@ import {DashboardComponent} from './modules/dashboard/dashboard/dashboard.compon
 import { AdminEditUserComponent } from './modules/admin/admin-edit-user/admin-edit-user.component';
 import {AdminDashboardComponent} from './modules/admin-dashboard/admin-dashboard/admin-dashboard.component';
 import {HomeComponent} from './modules/home/home/home.component';
+import { PlacesComponent } from './modules/places/places/places.component';
+import { PlacesDetailComponent } from './modules/places/places-detail/places-detail.component';
+
 
 const routes: Routes = [
   { path: 'employee', component: ReserveComponent, canActivate: [AuthGuard] },
@@ -41,6 +44,8 @@ const routes: Routes = [
   { path: 'admin/user/edit', component: AdminEditUserComponent },
   { path: 'admin-dashboard', component : AdminDashboardComponent, canActivate: [AuthGuard]},
   { path: '', component: HomeComponent, canActivate: [AuthGuard] }
+  { path: 'places', component: PlacesComponent, canActivate: [AuthGuard]},
+  { path: 'places/edit', component: PlacesDetailComponent, canActivate: [AuthGuard]},
 ];
 
 @NgModule({

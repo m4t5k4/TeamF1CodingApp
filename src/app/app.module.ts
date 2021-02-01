@@ -21,15 +21,16 @@ import { NavComponent } from './modules/nav/nav.component';
 import { FooterComponent } from './modules/footer/footer.component';
 import { AdminComponent } from './modules/admin/admin/admin.component';
 import { HomeModule } from './modules/home/home.module';
-import {DashboardModule} from './modules/dashboard/dashboard.module';
-import {AdminDashboardModule}  from './modules/admin-dashboard/admin-dashboard.module';
-import {​​​​​ PlacesComponent }​​​​​ from './modules/places/places/places.component';
+import { DashboardModule } from './modules/dashboard/dashboard.module';
+import { AdminDashboardModule }  from './modules/admin-dashboard/admin-dashboard.module';
+import { PlacesModule } from './modules/places/places.module'
 
 @NgModule({
   declarations: [
     AppComponent,
     NavComponent,
     FooterComponent,
+    AdminComponent,
     PlacesComponent
   ],
   imports: [
@@ -50,7 +51,8 @@ import {​​​​​ PlacesComponent }​​​​​ from './modules/places/
     MatProgressSpinnerModule,
     HomeModule,
     DashboardModule,
-    AdminDashboardModule
+    AdminDashboardModule,
+    PlacesModule,
   ],
   bootstrap: [AppComponent]
 })
