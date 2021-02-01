@@ -3,10 +3,12 @@ import { Component, OnInit } from '@angular/core';
 import { TableLocation } from 'src/app/shared/models/table-location.model';
 import { Location } from 'src/app/shared/models/location.model';
 import { TablesService } from '../../tables/tables.service';
+import { PlacesService } from '../places.service';
 import { LocationsService } from '../../locations/locations.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { observable } from 'rxjs';
+import { Place } from 'src/app/shared/models/place.model';
 
 @Component({
   selector: 'app-places-detail',
@@ -15,17 +17,20 @@ import { observable } from 'rxjs';
 })
 export class PlacesDetailComponent implements OnInit {
 
-  constructor(private _tablesService: TablesService,private _locationsService: LocationsService, private router: Router) { }
+  constructor(private _tablesService: TablesService,private _locationsService: LocationsService,private _placesService: PlacesService, private router: Router) { }
 
   locations: Location[];
   allLocations: Location[];
+  allTables: TableLocation[];
+  zones = [];
 
-  tableForm = new FormGroup(
+  placeForm = new FormGroup(
     {
-      id: new FormControl(this._tablesService.getTable().id),
-      name: new FormControl(this._tablesService.getTable().name, Validators.required),
-      zone: new FormControl(this._tablesService.getTable().zone, Validators.required),
-      locationSelect: new FormControl(null, Validators.required),
+      id: new FormControl(this._placesService.getPlace().id),
+      name: new FormControl(this._placesService.getPlace().name, Validators.required),
+      table: new FormControl(this._placesService.getPlace().tableLocation, Validators.required),
+      selectedLocation: new FormControl(this._placesService.getPlace().tableLocation.location, Validators.required),
+      selectedZone: new FormControl("",Validators.required)
     }
   )
 
@@ -33,10 +38,10 @@ export class PlacesDetailComponent implements OnInit {
 
   saveTable() {
     let Table = this._tablesService.getTable();
-    let TableToUpdate = new TableLocation(this.tableForm.get("id").value,
-    this.tableForm.get("name").value,
-    this.tableForm.get("zone").value,
-    this.tableForm.get("locationSelect").value);
+    let TableToUpdate = new TableLocation(this.placeForm.get("id").value,
+    this.placeForm.get("name").value,
+    this.placeForm.get("table").value,
+    this.placeForm.get("locationSelect").value);
     
     this.submitted = true;
     console.log(TableToUpdate);
@@ -49,12 +54,12 @@ export class PlacesDetailComponent implements OnInit {
     }
 
     setTimeout(()=>{                          
-      this.router.navigate(["/tables"]);
+      this.router.navigate(["/places"]);
     }, 1000); 
   }
 
   btnReturn() {
-    this.router.navigate(["/tables"]);
+    this.router.navigate(["/places"]);
   }
 
 
@@ -66,25 +71,31 @@ export class PlacesDetailComponent implements OnInit {
     )
   }
 
+
   ngOnInit(): void {
-    console.log(this._tablesService.getTable().name+ " Test1")
-    let Table = this._tablesService.getTable();
+    let place = this._placesService.getPlace();
+    console.log("Test 1 : "+this.placeForm.controls['selectedLocation'].value.name);
+    console.log("Test 2 : "+this.placeForm.controls['table'].value.name);
     this.getLocations();
-
-    if(Table.name == "EmptyTable"){
-      this.tableForm.setValue({id:0,name:"",zone:"",locationSelect:""});
-    }
-    else{
-      this._locationsService.getLocations().subscribe(
+    this._locationsService.getLocations().subscribe(
+      result => {
+      this.locations = result;
+      this._tablesService.getTables().subscribe(
         result => {
-        this.allLocations = result;
-        console.log("Test 1 : "+this.tableForm.controls['locationSelect'].value);
-        var currentLocation: Location = this.allLocations[Table.location.id-1];
-        this.tableForm.setValue({id:Table.id,name:Table.name,zone:Table.zone,locationSelect: currentLocation});
-        console.log(this.tableForm.controls['locationSelect'].value) 
-        }
-      )      
-    }
-  }
+        this.allTables = result;
+  
+        this.placeForm.get('selectedLocation').valueChanges.subscribe(location => {
+          console.log(location);
+          this.allTables = this.allTables.filter(table => table.location.name == location.name);
+          this.zones = [... new Set(this.allTables.map(table => table.zone))];
+          console.log(this.allTables);
+        });
+      }
+      )
+      }
+    )
 
+
+
+  }
 }
