@@ -21,6 +21,7 @@ export class TablesDetailComponent implements OnInit {
 
   locations: Location[];
   allLocations: Location[];
+  Table:TableLocation;
 
   tableForm = new FormGroup(
     {
@@ -70,10 +71,10 @@ export class TablesDetailComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this._tablesService.getTable().name+ " Test1")
-    let Table = this._tablesService.getTable();
+    this.Table = this._tablesService.getTable();
     this.getLocations();
 
-    if(Table.name == "EmptyTable"){
+    if(this.Table.name == "EmptyTable"){
       this.tableForm.setValue({id:0,name:"",zone:"",locationSelect:""});
     }
     else{
@@ -81,8 +82,8 @@ export class TablesDetailComponent implements OnInit {
         result => {
         this.allLocations = result;
         console.log("Test 1 : "+this.tableForm.controls['locationSelect'].value);
-        var currentLocation: Location = this.allLocations[Table.location.id-1];
-        this.tableForm.setValue({id:Table.id,name:Table.name,zone:Table.zone,locationSelect: currentLocation});
+        let currentLocation: Location = this.allLocations[this.Table.location.id-1];
+        this.tableForm.setValue({id:this.Table.id,name:this.Table.name,zone:this.Table.zone,locationSelect: (this.Table).location});
         console.log(this.tableForm.controls['locationSelect'].value) 
         }
       )      
