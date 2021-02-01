@@ -6,8 +6,6 @@ import { registerLocaleData } from '@angular/common';
 import localeNlbe from '@angular/common/locales/nl-BE';
 import localeNlBeExtra from '@angular/common/locales/extra/nl-BE';
 
-import { interval } from 'rxjs';
-
 registerLocaleData(localeNlbe, localeNlBeExtra);
 
 @Component({
@@ -25,14 +23,14 @@ export class DashboardComponent implements OnInit {
   public iot_output = new Iot(0, 4, new Date());
   public last_update = "";
   public date = new Date;
-
+  public path = ""
   constructor(private _dashboardService: DashboardService) {
     this._dashboardService.getIot().subscribe(
       result => {
         this.iots = result;
         this.iot_output = this.iots[this.iots.length - 1];
         this.date = new Date(this.iot_output.timeStamp);
-        this.last_update = formatDate(this.date.setHours(this.date.getHours() - 1), 'dd/MM/yyyy HH:mm', 'en-UK');
+        this.last_update = formatDate(this.date, 'dd/MM/yyyy HH:mm', 'en-UK');
       }
     );
   }
@@ -41,6 +39,8 @@ export class DashboardComponent implements OnInit {
     setInterval(() => {
       const date = new Date();
       this.updateClock(date);
+    }, 1000)
+    setInterval(() => {
       this._dashboardService.getIot().subscribe(
         result => {
           this.iots = result;
@@ -49,7 +49,7 @@ export class DashboardComponent implements OnInit {
           this.last_update = formatDate(this.date, 'dd/MM/yyyy HH:mm', 'en-UK');
         }
       );
-    }, 1000)
+    }, 10000)
   }
 
   updateClock(date) {
@@ -64,5 +64,4 @@ export class DashboardComponent implements OnInit {
   refresh(): void {
     window.location.reload();
   }
-
 }
