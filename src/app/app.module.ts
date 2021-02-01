@@ -30,8 +30,7 @@ import { PlacesModule } from './modules/places/places.module'
     AppComponent,
     NavComponent,
     FooterComponent,
-    AdminComponent,
-    PlacesComponent
+    //AdminComponent,
   ],
   imports: [
     SharedModule,

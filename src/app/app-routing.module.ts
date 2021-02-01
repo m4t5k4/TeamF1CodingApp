@@ -16,10 +16,10 @@ import { LogoutComponent } from './security/logout/logout.component';
 import { AuthGuard } from './security/guard/auth.guard';
 import { AdminComponent } from './modules/admin/admin/admin.component';
 import { AdminUsersComponent } from './modules/admin/admin-users/admin-users.component';
-import {DashboardComponent} from './modules/dashboard/dashboard/dashboard.component';
+import { DashboardComponent } from './modules/dashboard/dashboard/dashboard.component';
 import { AdminEditUserComponent } from './modules/admin/admin-edit-user/admin-edit-user.component';
-import {AdminDashboardComponent} from './modules/admin-dashboard/admin-dashboard/admin-dashboard.component';
-import {HomeComponent} from './modules/home/home/home.component';
+import { AdminDashboardComponent } from './modules/admin-dashboard/admin-dashboard/admin-dashboard.component';
+import { HomeComponent } from './modules/home/home/home.component';
 import { PlacesComponent } from './modules/places/places/places.component';
 import { PlacesDetailComponent } from './modules/places/places-detail/places-detail.component';
 
@@ -43,7 +43,7 @@ const routes: Routes = [
   { path: 'admin/users', component: AdminUsersComponent },
   { path: 'admin/user/edit', component: AdminEditUserComponent },
   { path: 'admin-dashboard', component : AdminDashboardComponent, canActivate: [AuthGuard]},
-  { path: '', component: HomeComponent, canActivate: [AuthGuard] }
+  { path: '', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'places', component: PlacesComponent, canActivate: [AuthGuard]},
   { path: 'places/edit', component: PlacesDetailComponent, canActivate: [AuthGuard]},
 ];
