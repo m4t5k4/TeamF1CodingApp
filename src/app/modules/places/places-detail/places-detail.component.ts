@@ -23,13 +23,16 @@ export class PlacesDetailComponent implements OnInit {
   allLocations: Location[];
   allTables: TableLocation[];
   zones = [];
+  filteredTables : TableLocation[];
+  filteredTables2 : TableLocation[];
+  place: Place;
 
   placeForm = new FormGroup(
     {
       id: new FormControl(this._placesService.getPlace().id),
       name: new FormControl(this._placesService.getPlace().name, Validators.required),
       table: new FormControl(this._placesService.getPlace().tableLocation, Validators.required),
-      selectedLocation: new FormControl(this._placesService.getPlace().tableLocation.location, Validators.required),
+      selectedLocation: new FormControl("", Validators.required),
       selectedZone: new FormControl("",Validators.required)
     }
   )
@@ -70,12 +73,7 @@ export class PlacesDetailComponent implements OnInit {
       }
     )
   }
-
-
-  ngOnInit(): void {
-    let place = this._placesService.getPlace();
-    console.log("Test 1 : "+this.placeForm.controls['selectedLocation'].value.name);
-    console.log("Test 2 : "+this.placeForm.controls['table'].value.name);
+  initfunc(): void{
     this.getLocations();
     this._locationsService.getLocations().subscribe(
       result => {
@@ -83,19 +81,26 @@ export class PlacesDetailComponent implements OnInit {
       this._tablesService.getTables().subscribe(
         result => {
         this.allTables = result;
-  
+    
         this.placeForm.get('selectedLocation').valueChanges.subscribe(location => {
-          console.log(location);
-          this.allTables = this.allTables.filter(table => table.location.name == location.name);
-          this.zones = [... new Set(this.allTables.map(table => table.zone))];
-          console.log(this.allTables);
+          this.filteredTables = this.allTables.filter(table => table.location.name == location.name);
+          this.zones = [... new Set(this.filteredTables.map(table => table.zone))];
+            
         });
-      }
-      )
-      }
-    )
+        this.placeForm.get('selectedZone').valueChanges.subscribe(zone => {
+          console.log(zone);
+          this.filteredTables2 = this.filteredTables.filter(table => table.zone == zone);
+        });
+      })
+    })
+  }
 
 
-
+  ngOnInit(): void {
+    this.place = this._placesService.getPlace();
+    this.placeForm.setValue({id: (this.place).id,name:(this.place).name,table:(this.place).tableLocation,selectedLocation: ((this.place).tableLocation).location,selectedZone:((this.place).tableLocation).zone})
+    console.log("Test 1 : "+this.placeForm.controls['selectedLocation'].value.name);
+    console.log("Test 2 : "+this.placeForm.controls['table'].value.name);
+    this.initfunc();
   }
 }

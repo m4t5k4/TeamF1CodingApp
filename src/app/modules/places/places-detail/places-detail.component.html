@@ -2,7 +2,7 @@
     <input type="hidden" id="Id" name="Id" formControlName="id">
     <p>Locatie:
         <select formControlName="selectedLocation" class="form-control">
-            <option *ngFor="let location of locations" [ngValue]="location">{{location.name}}</option>
+            <option *ngFor="let location of locations" [ngValue]="location" [selected]="location.id === place.tableLocation.location.id">{{location.name}}</option>
         </select>
     </p>
     <div class="form-group col" *ngIf="placeForm.value.selectedLocation">
@@ -13,7 +13,7 @@
     </div>
     <p>Tafel:
         <select formControlName="table" class="form-control">
-            <option *ngFor="let table of allTables" [ngValue]="table">{{table.name}}</option>
+            <option *ngFor="let table of filteredTables2" [ngValue]="table">{{table.name}}</option>
         </select>
     </p>
     <p>Naam:

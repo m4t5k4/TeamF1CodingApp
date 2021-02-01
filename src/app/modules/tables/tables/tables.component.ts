@@ -43,8 +43,8 @@ export class TablesComponent implements OnInit {
   }   
 
   addTable() {
-    var locations = this._locationsService.getLocations();
-    var table = new TableLocation(0,"EmptyTable","EmptyZone",locations[0]);
+    let locations = this._locationsService.getLocations();
+    let table = new TableLocation(0,"EmptyTable","EmptyZone",locations[0]);
     this._tablesService.setEditTable(table)
     this.router.navigate(['/tables/edit']);
   }
