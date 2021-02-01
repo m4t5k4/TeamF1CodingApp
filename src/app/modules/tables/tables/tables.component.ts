@@ -15,9 +15,11 @@ import { MatPaginator } from '@angular/material/paginator';
   styleUrls: ['./tables.component.scss']
 })
 export class TablesComponent implements OnInit {
+
   displayedColumns = ["location.name", 'zone', 'name', 'btn'];
   dataSource = new MatTableDataSource<TableLocation>();
   @ViewChild(MatPaginator) paginator: MatPaginator;
+
   constructor(private _tablesService : TablesService,private _locationsService: LocationsService, private router: Router) {
     this._tablesService.getTables().subscribe(
       result => {
@@ -59,19 +61,7 @@ export class TablesComponent implements OnInit {
     this.router.navigate(['/tables/edit']);
   }
 
-  ngOnInit(): void {
-    this.getTables();
-    //this.da
-    this.router.navigate(['/tables']);
-    
-  }
-
-  getTables(): void{
-    this._tablesService.getTables().subscribe(
-      result => {
-      //this.tables = result;
-      }
-    )
+  ngOnInit(): void {    
   }
 
   applyFilter(filterValue: string) {

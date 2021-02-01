@@ -18,6 +18,9 @@ import { AdminComponent } from './modules/admin/admin.component';
 import {DashboardComponent} from './modules/dashboard/dashboard/dashboard.component';
 import {AdminDashboardComponent} from './modules/admin-dashboard/admin-dashboard/admin-dashboard.component';
 import {HomeComponent} from './modules/home/home/home.component';
+import { PlacesComponent } from './modules/places/places/places.component';
+import { PlacesDetailComponent } from './modules/places/places-detail/places-detail.component';
+
 
 const routes: Routes = [
   { path: 'employee', component: ReserveComponent, canActivate: [AuthGuard] },
@@ -32,11 +35,13 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'tables', component: TablesComponent, canActivate: [AuthGuard] },
   { path: 'logout', component: LogoutComponent },
-  { path: 'tables', component: TablesComponent},
-  { path: 'tables/edit', component: TablesDetailComponent},
+  { path: 'tables', component: TablesComponent, canActivate: [AuthGuard]},
+  { path: 'tables/edit', component: TablesDetailComponent, canActivate: [AuthGuard]},
   { path: 'admin-dashboard', component : AdminDashboardComponent, canActivate: [AuthGuard]},
   { path: 'admin', component: AdminComponent },
-  { path: '', component: HomeComponent, canActivate: [AuthGuard] }
+  { path: '', component: HomeComponent, canActivate: [AuthGuard] },
+  { path: 'places', component: PlacesComponent, canActivate: [AuthGuard]},
+  { path: 'places/edit', component: PlacesDetailComponent, canActivate: [AuthGuard]},
 ];
 
 @NgModule({

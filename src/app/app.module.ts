@@ -7,17 +7,17 @@ import { SharedModule } from './shared/shared.module';
 
 import { EmployeeModule } from './modules/employee/employee.module';
 import { SecurityModule } from './security/security.module';
-import {LocationsModule} from './modules/locations/locations.module'
-import {TablesModule} from './modules/tables/tables.module'
+import { LocationsModule } from './modules/locations/locations.module'
+import { TablesModule } from './modules/tables/tables.module'
 
 import {  HttpClientModule } from '@angular/common/http';
 import { NavComponent } from './modules/nav/nav.component';
 import { FooterComponent } from './modules/footer/footer.component';
 import { AdminComponent } from './modules/admin/admin.component';
 import { HomeModule } from './modules/home/home.module';
-import {DashboardModule} from './modules/dashboard/dashboard.module';
-import {AdminDashboardModule}  from './modules/admin-dashboard/admin-dashboard.module';
-import { PlacesComponent } from './modules/places/places.component'
+import { DashboardModule } from './modules/dashboard/dashboard.module';
+import { AdminDashboardModule }  from './modules/admin-dashboard/admin-dashboard.module';
+import { PlacesModule } from './modules/places/places.module'
 
 @NgModule({
   declarations: [
@@ -25,7 +25,6 @@ import { PlacesComponent } from './modules/places/places.component'
     NavComponent,
     FooterComponent,
     AdminComponent,
-    PlacesComponent
   ],
   imports: [
     SharedModule,
@@ -38,7 +37,8 @@ import { PlacesComponent } from './modules/places/places.component'
     TablesModule,
     HomeModule,
     DashboardModule,
-    AdminDashboardModule
+    AdminDashboardModule,
+    PlacesModule,
   ],
   bootstrap: [AppComponent]
 })
