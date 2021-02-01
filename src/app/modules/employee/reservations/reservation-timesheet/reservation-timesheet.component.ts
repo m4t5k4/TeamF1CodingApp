@@ -1,39 +1,14 @@
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { Component, OnInit } from '@angular/core';
 import { MatTreeFlattener, MatTreeFlatDataSource } from '@angular/material/tree';
+import { TablesService } from 'src/app/modules/tables/tables.service';
+import { ReservationService } from '../../reservations/reservation.service';
+import { PlacesService } from '../../../places/places.service';
 
-interface FoodNode {
+interface Node {
   name: string;
-  children?: FoodNode[];
+  children?: Node[];
 }
-
-const TREE_DATA: FoodNode[] = [
-  {
-    name: 'Fruit',
-    children: [
-      {name: 'Apple'},
-      {name: 'Banana'},
-      {name: 'Fruit loops'},
-    ]
-  }, {
-    name: 'Vegetables',
-    children: [
-      {
-        name: 'Green',
-        children: [
-          {name: 'Broccoli'},
-          {name: 'Brussels sprouts'},
-        ]
-      }, {
-        name: 'Orange',
-        children: [
-          {name: 'Pumpkins'},
-          {name: 'Carrots'},
-        ]
-      },
-    ]
-  },
-];
 
 /** Flat node with expandable and level information */
 interface ExampleFlatNode {
@@ -49,7 +24,7 @@ interface ExampleFlatNode {
 })
 export class ReservationTimesheetComponent implements OnInit {
 
-  private _transformer = (node: FoodNode, level: number) => {
+  private _transformer = (node: Node, level: number) => {
     return {
       expandable: !!node.children && node.children.length > 0,
       name: node.name,
@@ -65,14 +40,30 @@ export class ReservationTimesheetComponent implements OnInit {
 
   dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
-  constructor() {
-    this.dataSource.data = TREE_DATA;
+  constructor(
+    private _reservationService: ReservationService,
+    private _tablesService: TablesService,
+    private _placesService: PlacesService,
+  ) {
+    //this.dataSource.data = TREE_DATA;
   }
 
   hasChild = (_: number, node: ExampleFlatNode) => node.expandable;
 
   ngOnInit(): void {
-    let data: FoodNode[] = [
+
+    this._tablesService.getTables().subscribe(tables => {
+      console.log(tables);
+      var corda1 = tables.filter(table => table.location.name == 'Corda campus 1');
+      var zoneA = corda1.filter(table => table.zone == 'A');
+      console.log(zoneA);
+    });
+
+    this._reservationService.getReservations().subscribe(reservations => {
+      console.log(reservations);
+    });
+
+    let data: Node[] = [
       {
         name: 'Zone A',
         children: [

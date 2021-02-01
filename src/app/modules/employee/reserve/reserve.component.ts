@@ -50,7 +50,7 @@ export class ReserveComponent implements OnInit {
 
     this._tablesService.getTables().subscribe(tables => {
       console.log(tables);
-      this.locations = [... new Set(tables.map(table => table.location.name))]
+      this.locations = [... new Set(tables.map(table => table.location.name))];
 
 
       console.log(this.zones);
@@ -79,7 +79,7 @@ export class ReserveComponent implements OnInit {
       console.log(this.reservateForm.value.selectedLocation);
       console.log(this.locations);
 
-    })
+    });
   }
 
 
