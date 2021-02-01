@@ -1,3 +1,4 @@
+<h1 class="text-center">Locaties</h1>
 <div class="m-5">
     <button mat-raised-button (click)="btnClickNew();">Voeg een nieuwe locatie toe</button>
     <div class="example-header mt-4">
@@ -6,7 +7,7 @@
         </mat-form-field>
     </div>
 </div>
-<div class="col">
+<div class="col mb-5">
     <table mat-table [dataSource]="dataSource" matSort>
         <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Naam </th>

@@ -46,7 +46,7 @@ export class DashboardComponent implements OnInit {
           this.iots = result;
           this.iot_output = this.iots[this.iots.length - 1];
           this.date = new Date(this.iot_output.timeStamp);
-          this.last_update = formatDate(this.date.setHours(this.date.getHours() - 1), 'dd/MM/yyyy HH:mm', 'en-UK');
+          this.last_update = formatDate(this.date, 'dd/MM/yyyy HH:mm', 'en-UK');
         }
       );
     }, 1000)

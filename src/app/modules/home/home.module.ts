@@ -4,14 +4,15 @@ import { HomeComponent } from './home/home.component';
 import { RouterModule } from '@angular/router';
 import {HomeService} from './home.service';
 import {ClipboardModule} from '@angular/cdk/clipboard';
-
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [HomeComponent],
   imports: [
     CommonModule,
     RouterModule,
-    ClipboardModule
+    ClipboardModule,
+    MatTooltipModule
   ],
   exports:[
     HomeComponent
