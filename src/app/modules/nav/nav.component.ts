@@ -15,7 +15,7 @@ export class NavComponent implements OnInit {
   currentUser: any;
   token: any;
 
-  constructor(private tokenStorage: TokenStorageService,public authService: AuthService, public authGuard: AuthGuard) { }
+  constructor(private tokenStorage: TokenStorageService, public authService: AuthService, public authGuard: AuthGuard) { }
 
   ngOnInit(): void {
     this.currentUser = this.tokenStorage.getUser();

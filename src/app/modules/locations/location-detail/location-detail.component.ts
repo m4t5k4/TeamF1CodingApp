@@ -37,11 +37,11 @@ export class LocationDetailComponent implements OnInit {
     console.log(locationToUpdate);
     this._locationService.putLocation(locationToUpdate).subscribe();
     setTimeout(()=>{                          
-      this.router.navigate(["/location"]);
+      this.router.navigate(["/locations"]);
     }, 1000); 
   }
 
   btnReturn() {
-    this.router.navigate(["/location"]);
+    this.router.navigate(["/locations"]);
   }
 }

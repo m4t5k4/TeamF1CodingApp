@@ -1,8 +1,3 @@
-<!-- <header class="mdl-layout__header mdl-layout__header--scroll mdl-color--primary">
-    <div class="mdl-layout__header-row">
-        <h3>TeamF1CodingAPP</h3>
-    </div>
-</header> -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" routerLink="/"><img src="../../../assets/f1logo.png" alt="" height="50px"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler"
@@ -13,7 +8,7 @@
         <!-- Knoppen links -->
         <ul class="navbar-nav mr-auto">
             <li class="nav-item ">
-                <a *ngIf="authService.isLoggedIn() && authService.isLoggedInAsAdmin()" class="nav-link" routerLink="/location"
+                <a *ngIf="authService.isLoggedIn() && authService.isLoggedInAsAdmin()" class="nav-link" routerLink="/locations"
                     [routerLinkActive]="['active']">Locaties</a>
             </li>
             <li class="nav-item">
@@ -25,15 +20,22 @@
                     [routerLinkActive]="['active']">Mijn reservaties</a>
             </li>
             <li class="nav-item">
-                <a *ngIf="authService.isLoggedIn()  && authService.isLoggedInAsAdmin()" class="nav-link" routerLink="/tables"
-                    [routerLinkActive]="['active']">Tafels</a>
+                <a *ngIf="authService.isLoggedIn()  && authService.isLoggedInAsAdmin()" class="nav-link"
+                    routerLink="/tables" [routerLinkActive]="['active']">Tafels</a>
             </li>
             <li class="nav-item">
                 <a *ngIf="authService.isLoggedIn()" class="nav-link" routerLink="/dashboard"
                     [routerLinkActive]="['active']">Dashboard</a>
             </li>
+            <li class="nav-item dropdown" [routerLinkActive]="['active']">
+                <a *ngIf="authService.isLoggedIn() && authService.isLoggedInAsAdmin()" class="nav-link dropdown-toggle"
+                    id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">Admin</a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" routerLink="/admin/users">Gebruikers</a>
+                </div>
             <li class="nav-item">
-                <a *ngIf="authService.isLoggedIn()" class="nav-link" routerLink="/admin-dashboard"
+                <a *ngIf="authService.isLoggedIn() && authService.isLoggedInAsAdmin()" class="nav-link" routerLink="/admin-dashboard"
                     [routerLinkActive]="['active']">Admin dashboard</a>
             </li>
         </ul>

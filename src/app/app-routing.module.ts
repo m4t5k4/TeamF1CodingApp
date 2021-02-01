@@ -14,8 +14,10 @@ import { TablesComponent } from './modules/tables/tables/tables.component';
 import { TablesDetailComponent } from './modules/tables/tables-detail/tables-detail.component';
 import { LogoutComponent } from './security/logout/logout.component';
 import { AuthGuard } from './security/guard/auth.guard';
-import { AdminComponent } from './modules/admin/admin.component';
+import { AdminComponent } from './modules/admin/admin/admin.component';
+import { AdminUsersComponent } from './modules/admin/admin-users/admin-users.component';
 import {DashboardComponent} from './modules/dashboard/dashboard/dashboard.component';
+import { AdminEditUserComponent } from './modules/admin/admin-edit-user/admin-edit-user.component';
 import {AdminDashboardComponent} from './modules/admin-dashboard/admin-dashboard/admin-dashboard.component';
 import {HomeComponent} from './modules/home/home/home.component';
 import { PlacesComponent } from './modules/places/places/places.component';
@@ -29,17 +31,19 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent},
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
-  { path: 'location', component: LocationsComponent, canActivate: [AuthGuard], data: { role: 'Admin' } },
+  { path: 'locations', component: LocationsComponent, canActivate: [AuthGuard], data: { role: 'Admin' } },
   { path: 'location/add', component: LocationFormComponent, canActivate: [AuthGuard] },
   { path: 'location/edit', component: LocationDetailComponent, canActivate: [AuthGuard] },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'tables', component: TablesComponent, canActivate: [AuthGuard] },
   { path: 'logout', component: LogoutComponent },
-  { path: 'tables', component: TablesComponent, canActivate: [AuthGuard]},
-  { path: 'tables/edit', component: TablesDetailComponent, canActivate: [AuthGuard]},
-  { path: 'admin-dashboard', component : AdminDashboardComponent, canActivate: [AuthGuard]},
+  { path: 'tables', component: TablesComponent},
+  { path: 'tables/edit', component: TablesDetailComponent},
   { path: 'admin', component: AdminComponent },
-  { path: '', component: HomeComponent, canActivate: [AuthGuard] },
+  { path: 'admin/users', component: AdminUsersComponent },
+  { path: 'admin/user/edit', component: AdminEditUserComponent },
+  { path: 'admin-dashboard', component : AdminDashboardComponent, canActivate: [AuthGuard]},
+  { path: '', component: HomeComponent, canActivate: [AuthGuard] }
   { path: 'places', component: PlacesComponent, canActivate: [AuthGuard]},
   { path: 'places/edit', component: PlacesDetailComponent, canActivate: [AuthGuard]},
 ];

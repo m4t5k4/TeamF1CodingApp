@@ -4,6 +4,7 @@ export class User {
         public firstname: String,
         public lastname: String,
         public username: String,
-        public password: String
+        public password: String,
+        public roles: String
     ){}
 }
