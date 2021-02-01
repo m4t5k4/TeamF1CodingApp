@@ -83,7 +83,7 @@ export class TablesDetailComponent implements OnInit {
         this.allLocations = result;
         console.log("Test 1 : "+this.tableForm.controls['locationSelect'].value);
         let currentLocation: Location = this.allLocations[this.Table.location.id-1];
-        this.tableForm.setValue({id:this.Table.id,name:this.Table.name,zone:this.Table.zone,locationSelect: (this.Table.location});
+        this.tableForm.setValue({id:this.Table.id,name:this.Table.name,zone:this.Table.zone,locationSelect: (this.Table).location});
         console.log(this.tableForm.controls['locationSelect'].value) 
         }
       )      
