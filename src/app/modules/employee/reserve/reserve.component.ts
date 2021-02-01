@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { Reservation } from '../../../shared/models/reservation.model';
 
@@ -8,6 +8,7 @@ import { ReservationService } from '../reservations/reservation.service';
 import { TokenStorageService } from '../../../security/services/token-storage.service';
 import { LocalDate, LocalTime } from '@js-joda/core';
 import { Router } from '@angular/router';
+import { Place } from 'src/app/shared/models/place.model';
 
 @Component({
   selector: 'app-reserve',
@@ -15,6 +16,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./reserve.component.scss']
 })
 export class ReserveComponent implements OnInit {
+
 
   reservateForm = this.formBuilder.group({
     selectedLocation: ['Corda campus 1',Validators.required],
@@ -24,7 +26,10 @@ export class ReserveComponent implements OnInit {
     till: ['',Validators.required],
     date: [LocalDate.now,Validators.required],
     amountPersons: [1,Validators.required],
-    description: ['',Validators.required]
+    description: ['',Validators.required],
+    places: this.formBuilder.array([
+      this.formBuilder.control(null)
+    ])
   });
 
   locations = [];
@@ -96,7 +101,7 @@ export class ReserveComponent implements OnInit {
     let user = this.currentUser;
     user.roles = [];
 
-    let reservation = new Reservation(0,date,start,end,amountPersons,description, user,false);
+    let reservation = new Reservation(0,date,start,end,amountPersons,description, user,false,[new Place(0,'',null)]);
     console.log(reservation);
     this._reservationService.addReservation(reservation).subscribe({
       next: () => {
@@ -108,6 +113,18 @@ export class ReserveComponent implements OnInit {
         console.log(error);
       }
     });
+  }
+
+  addPlace() {
+    (this.reservateForm.get('places') as FormArray).push(this.formBuilder.control(null));
+  }
+
+  removePlace() {
+    (this.reservateForm.get('places') as FormArray).removeAt((this.reservateForm.get('places') as FormArray).length - 1);
+  }
+
+  getPlacesFormControls() {
+    return (<FormArray> this.reservateForm.get('places')).controls;
   }
 
 }
