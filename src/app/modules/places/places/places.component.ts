@@ -37,6 +37,11 @@ export class PlacesComponent implements OnInit {
               default: return item[property];
           }
         }
+        this.dataSource.filterPredicate = (data: Place, filter: string) => {
+          return data.name.toLocaleLowerCase().includes(filter) ||
+          data.tableLocation.name.toLocaleLowerCase().includes(filter) ||
+          data.tableLocation.location.name.toLocaleLowerCase().includes(filter);
+        }
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
         console.log(this.dataSource);  
