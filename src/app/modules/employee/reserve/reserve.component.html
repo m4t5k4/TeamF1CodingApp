@@ -71,17 +71,17 @@
 
         <div class="form-row">
 
-          <div class="form-group col">
+          <div class="form-group col" *ngIf="reservateForm.value.selectedTable">
             <div *ngFor="let place of getPlacesFormControls()">
               <label>Plaats: </label>
               <select name="place" id="place" [formControl]="place" class="form-control">
-                <option *ngFor="let table of tables" value="{{table.name}}">{{table.name}}</option>
+                <option *ngFor="let place of this.places" value="{{place.name}}">{{place.name}}</option>
               </select>
             </div>
           </div>
 
-          <div class="from-group col">
-            <button type="button" (click)="addPlace()">Meer plaatsen</button>
+          <div class="from-group col" *ngIf="reservateForm.value.selectedTable">
+            <button type="button" class="btn" (click)="addPlace()" [disabled]="reservateForm.controls.places.value.length == this.places.length">Meer plaatsen</button>
             <button type="button" class="btn" (click)="removePlace()" [disabled]="reservateForm.controls.places.value.length == 1">Minder plaatsen</button>
           </div>
         </div>
