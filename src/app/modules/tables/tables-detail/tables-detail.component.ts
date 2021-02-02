@@ -14,21 +14,22 @@ import { observable } from 'rxjs';
   styleUrls: ['./tables-detail.component.scss']
 })
 export class TablesDetailComponent implements OnInit {
+  
+  locations: Location[];
+  Table:TableLocation;
 
   constructor(private _tablesService: TablesService,private _locationsService: LocationsService, private router: Router) {
     this.getLocations();
-   }
+  }
 
-  locations: Location[];
-  allLocations: Location[];
-  Table:TableLocation;
+
 
   tableForm = new FormGroup(
     {
-      id: new FormControl(this._tablesService.getTable().id),
-      name: new FormControl(this._tablesService.getTable().name, Validators.required),
-      zone: new FormControl(this._tablesService.getTable().zone, Validators.required),
-      locationSelect: new FormControl(null, Validators.required),
+      id: new FormControl(""),
+      name: new FormControl("", Validators.required),
+      zone: new FormControl("", Validators.required),
+      locationSelect: new FormControl("", Validators.required),
     }
   )
 
@@ -70,23 +71,22 @@ export class TablesDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this._tablesService.getTable().name+ " Test1")
+    this._locationsService.getLocations().subscribe(
+      result => {
+      this.locations = result;
+      }
+    )
     this.Table = this._tablesService.getTable();
-    this.getLocations();
+    //console.log(this.Table.name)
+
 
     if(this.Table.name == "EmptyTable"){
-      this.tableForm.setValue({id:0,name:"",zone:"",locationSelect:""});
+      this.tableForm.setValue({id:0,name:"Nieuwe Tafel",zone:"A",locationSelect:(this.Table).location});
     }
     else{
-      this._locationsService.getLocations().subscribe(
-        result => {
-        this.allLocations = result;
-        console.log("Test 1 : "+this.tableForm.controls['locationSelect'].value);
-        let currentLocation: Location = this.allLocations[this.Table.location.id-1];
-        this.tableForm.setValue({id:this.Table.id,name:this.Table.name,zone:this.Table.zone,locationSelect: (this.Table).location});
-        console.log(this.tableForm.controls['locationSelect'].value) 
-        }
-      )      
+      console.log("Test 1 : "+this.tableForm.controls['locationSelect'].value);
+      this.tableForm.setValue({id:this.Table.id,name:this.Table.name,zone:this.Table.zone,locationSelect: (this.Table).location});
+      console.log("Test 2 : "+this.tableForm.controls['locationSelect'].value.name)       
     }
   }
 }
