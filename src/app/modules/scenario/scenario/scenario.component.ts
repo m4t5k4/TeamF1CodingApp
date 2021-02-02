@@ -17,8 +17,8 @@ export class ScenarioComponent implements OnInit {
   submitted: boolean = false;
   scenarios = ['Groen', 'Geel', 'Oranje', 'Rood', 'Zwart'];
   constructor(private fb: FormBuilder, private _scenarioService: ScenarioService, private router: Router) { }
-  places: Place[];
-  placesTotal: Place[];
+  places: number;
+  placesTotal: number;
   hideForm: boolean = true;
   code: String = "";
 
@@ -36,40 +36,40 @@ export class ScenarioComponent implements OnInit {
   onSubmit(): void {
     this.submitted = true;
     this._scenarioService.getAllPlaces().subscribe(
-      result => this.placesTotal = result);
+      result => this.placesTotal = result.length);
     if (this.scenarioForm.controls['scenarioControl'].value == "Rood") {
       this.code = "Rood";
       var scenario = new Scenario(1,this.code);
       this._scenarioService.setandgetPlacesCodeRood().subscribe(result =>
-        this.places = result);
+        this.places = result.length);
       this._scenarioService.putScenario(scenario).subscribe();
     }
     else if (this.scenarioForm.controls['scenarioControl'].value == "Groen") {
       this.code = "Groen";
       var scenario = new Scenario(1,this.code);
       this._scenarioService.setandgetPlacesCodeGroen().subscribe(result =>
-        this.places = result);
+        this.places = result.length);
       this._scenarioService.putScenario(scenario).subscribe();
     }
     else if (this.scenarioForm.controls['scenarioControl'].value == "Geel") {
       this.code = "Geel";
       var scenario = new Scenario(1,this.code);
       this._scenarioService.setandgetPlacesCodeGeel().subscribe(result =>
-        this.places = result);
+        this.places = result.length);
       this._scenarioService.putScenario(scenario).subscribe();
     }
     else if (this.scenarioForm.controls['scenarioControl'].value == "Oranje") {
       this.code = "Oranje";
       var scenario = new Scenario(1,this.code);
       this._scenarioService.setandgetPlacesCodeOranje().subscribe(result =>
-        this.places = result);
+        this.places = result.length);
       this._scenarioService.putScenario(scenario).subscribe();  
     }
     else if (this.scenarioForm.controls['scenarioControl'].value == "Zwart") {
       this.code = "Zwart";
       var scenario = new Scenario(1,this.code);
       this._scenarioService.setandgetPlacesCodeZwart().subscribe(result =>
-        this.places = result);
+        this.places = result.length);
       this._scenarioService.putScenario(scenario).subscribe();
     }
     setTimeout(() => {

@@ -1,8 +1,8 @@
 <h2 class="text-center">Plaatsen</h2>
-<div class="row m-5">
-    <div class="col-sm-2"><button mat-raised-button (click)="addPlace();">Voeg een nieuwe plaats toe</button></div>
-    <div class="col-sm-3">
-        <div class="example-header" fxLayout="row">
+<div class="m-5">
+    <div><button mat-raised-button (click)="addPlace();">Voeg een nieuwe plaats toe</button></div>
+    <div>
+        <div class="example-header mt-4" fxLayout="row">
             <mat-form-field>
                 <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
             </mat-form-field>
