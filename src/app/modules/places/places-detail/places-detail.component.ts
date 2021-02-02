@@ -45,7 +45,8 @@ export class PlacesDetailComponent implements OnInit {
     let place = this._placesService.getPlace();
     let placeToUpdate = new Place(this.placeForm.get("id").value,
     this.placeForm.get("name").value,
-    this.placeForm.get("table").value);
+    this.placeForm.get("table").value,
+    this.place.active);
     
     this.submitted = true;
     console.log(placeToUpdate);
@@ -95,14 +96,14 @@ export class PlacesDetailComponent implements OnInit {
     this.placeForm.get('selectedLocation').valueChanges.subscribe(location => {
       this.filteredTables = this.allTables.filter(table => table.location.name == location.name);
       this.zones = [... new Set(this.filteredTables.map(table => table.zone))];
-      console.log(this.allTables)
+/*       console.log(this.allTables)
       console.log(this.filteredTables)
       console.log(this.zones)
-      console.log(typeof this.placeForm.get('selectedLocation').value)
+      console.log(typeof this.placeForm.get('selectedLocation').value) */
             
     });
     this.placeForm.get('selectedZone').valueChanges.subscribe(zone => {
-      console.log(zone);
+      //console.log(zone);
       this.filteredTables2 = this.filteredTables.filter(table => table.zone == zone);
     });
   }
@@ -120,26 +121,26 @@ export class PlacesDetailComponent implements OnInit {
       result => {
       this.allTables = result;
       this.filteredTables = this.allTables.filter(table => table.location.name == ((this.place).tableLocation).location.name);
-      console.log(this.filteredTables)
+      //console.log(this.filteredTables)
       this.zones = [... new Set(this.filteredTables.map(table => table.zone))];
       this.filteredTables2 = this.filteredTables.filter(table => table.zone == ((this.place).tableLocation).zone);
-      console.log(this.filteredTables2)
+      //console.log(this.filteredTables2)
       }
     )
 
     if (this.place.name != "EmptyPlace") {
-      console.log(this.placeForm.get('selectedLocation').value.name)
+      //console.log(this.placeForm.get('selectedLocation').value.name)
       this.placeForm.setValue({id: (this.place).id,name:(this.place).name,table:(this.place).tableLocation,selectedLocation: ((this.place).tableLocation).location,selectedZone:((this.place).tableLocation).zone})
       
     }
     else{
       this.place = this._placesService.getPlace();
       this.placeForm.setValue({id: (this.place).id,name:"Nieuwe Plaats",table:(this.place).tableLocation,selectedLocation: ((this.place).tableLocation).location,selectedZone:((this.place).tableLocation).zone})
-      console.log(this.place)
+      //console.log(this.place)
 
     }
     //console.log("Test 1 : "+this.placeForm.controls['selectedLocation'].value.name);
-    console.log("Test 2 : "+this.placeForm.controls['id'].value);
+    //console.log("Test 2 : "+this.placeForm.controls['id'].value);
     this.initfunc();
     
   }
