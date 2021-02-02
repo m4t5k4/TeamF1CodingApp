@@ -4,6 +4,7 @@ export class Place {
     constructor(
         public id: number,
         public name: String,
-        public tableLocation : TableLocation
+        public tableLocation : TableLocation,
+        public active : Boolean
     ){}
 }

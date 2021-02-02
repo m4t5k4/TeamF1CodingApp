@@ -1,5 +1,5 @@
 button {
-    background: #D40000;
+    background:#D40000 !important;
     border: none;
     border-radius: 2em;
     color: white;
@@ -11,9 +11,6 @@ button {
       opacity: 0.4;
   }
 
-  table {
-    width: 100%;
-  }
   
   .mat-table .mat-cell {
     border-bottom: 1px solid white;

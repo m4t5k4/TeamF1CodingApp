@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { ReserveComponent } from './modules/employee/reserve/reserve.component';
 import { ReservationsComponent } from './modules/employee/reservations/reservations.component'
 import { ReservationsTableComponent } from './modules/employee/reservations/reservations-table/reservations-table.component';
+import { ReservationDetailComponent } from './modules/employee/reservations/reservation-detail/reservation-detail.component';
 import { LocationDetailComponent } from './modules/locations/location-detail/location-detail.component';
 import { LocationFormComponent } from './modules/locations/location-form/location-form.component';
 import { LocationsComponent } from './modules/locations/locations/locations.component';
@@ -22,10 +23,12 @@ import { AdminDashboardComponent } from './modules/admin-dashboard/admin-dashboa
 import { HomeComponent } from './modules/home/home/home.component';
 import { PlacesComponent } from './modules/places/places/places.component';
 import { PlacesDetailComponent } from './modules/places/places-detail/places-detail.component';
+import { ScenarioComponent } from './modules/scenario/scenario/scenario.component';
 
 
 const routes: Routes = [
   { path: 'employee', component: ReserveComponent, canActivate: [AuthGuard] },
+  { path: 'reservation/edit', component: ReservationDetailComponent, canActivate: [AuthGuard] },
   { path: 'reservations2', component: ReservationsComponent, canActivate: [AuthGuard] },
   { path: 'reservations', component: ReservationsTableComponent, canActivate: [AuthGuard] },
   { path: 'register', component: RegisterComponent },
@@ -46,6 +49,7 @@ const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'places', component: PlacesComponent, canActivate: [AuthGuard]},
   { path: 'places/edit', component: PlacesDetailComponent, canActivate: [AuthGuard]},
+  {path: 'scenario', component: ScenarioComponent, canActivate:[AuthGuard]}
 ];
 
 @NgModule({
