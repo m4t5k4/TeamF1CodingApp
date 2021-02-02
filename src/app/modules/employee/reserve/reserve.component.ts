@@ -101,7 +101,7 @@ export class ReserveComponent implements OnInit {
     let user = this.currentUser;
     user.roles = [];
 
-    let reservation = new Reservation(0,date,start,end,amountPersons,description, user,false,[new Place(0,'',null)]);
+    let reservation = new Reservation(0,date,start,end,amountPersons,description, user,false,[new Place(0,'',null,false)]);
     console.log(reservation);
     this._reservationService.addReservation(reservation).subscribe({
       next: () => {

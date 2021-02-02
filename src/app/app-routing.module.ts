@@ -23,6 +23,7 @@ import { AdminDashboardComponent } from './modules/admin-dashboard/admin-dashboa
 import { HomeComponent } from './modules/home/home/home.component';
 import { PlacesComponent } from './modules/places/places/places.component';
 import { PlacesDetailComponent } from './modules/places/places-detail/places-detail.component';
+import { ScenarioComponent } from './modules/scenario/scenario/scenario.component';
 
 
 const routes: Routes = [
@@ -48,6 +49,7 @@ const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'places', component: PlacesComponent, canActivate: [AuthGuard]},
   { path: 'places/edit', component: PlacesDetailComponent, canActivate: [AuthGuard]},
+  {path: 'scenario', component: ScenarioComponent, canActivate:[AuthGuard]}
 ];
 
 @NgModule({

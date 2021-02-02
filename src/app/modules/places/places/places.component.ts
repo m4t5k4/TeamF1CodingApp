@@ -65,7 +65,7 @@ export class PlacesComponent implements OnInit {
 
   addPlace() {
     let tables = this._tablesService.getTables();
-    let place = new Place(0,"EmptyPlace",null);
+    let place = new Place(0,"EmptyPlace",null,false);
     this._placesService.setEditPlace(place)
     this.router.navigate(['/places/edit']);
   }
