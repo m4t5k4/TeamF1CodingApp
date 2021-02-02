@@ -8,12 +8,6 @@
             </mat-form-field>
         </div>
     </div>
-    <div class="col-sm-3">
-        <select name="location" id="location" class="form-control">
-            <option value="1">Selecteer een locatie</option>
-            <option *ngFor="let loc of locations" value="{{loc.name}}">{{loc.name}}</option>
-        </select>
-    </div>
 </div>
 <div class="col">
     <table mat-table [dataSource]="dataSource" matSort>
