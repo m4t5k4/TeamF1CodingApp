@@ -20,6 +20,7 @@ export class PlacesComponent implements OnInit {
 
   locations: Location[];
   test: Place[];
+  tables: TableLocation[];
 
   displayedColumns = ["table.location.name","table.name","name", 'btn'];
   dataSource = new MatTableDataSource<Place>();
@@ -61,12 +62,17 @@ export class PlacesComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this._tablesService.getTables().subscribe(
+      result => {
+      this.tables = result;
+    })
   }
 
   addPlace() {
-    let tables = this._tablesService.getTables();
-    let place = new Place(0,"EmptyPlace",null,false);
+    let place = new Place(0,"EmptyPlace",this.tables[0],false);
+    
     this._placesService.setEditPlace(place)
+    console.log(this._placesService.getPlace().id + ": "+ this._placesService.getPlace().name+","+this._placesService.getPlace().tableLocation.name)
     this.router.navigate(['/places/edit']);
   }
 
