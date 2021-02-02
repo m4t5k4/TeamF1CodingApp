@@ -17,10 +17,12 @@ import { Place } from 'src/app/shared/models/place.model';
 })
 export class PlacesDetailComponent implements OnInit {
 
-  constructor(private _tablesService: TablesService,private _locationsService: LocationsService,private _placesService: PlacesService, private router: Router) { }
+  constructor(private _tablesService: TablesService,private _locationsService: LocationsService,private _placesService: PlacesService, private router: Router) {
+    this.getLocations();
+    this.getTables();
+   }
 
   locations: Location[];
-  allLocations: Location[];
   allTables: TableLocation[];
   zones = [];
   filteredTables : TableLocation[];
@@ -29,9 +31,9 @@ export class PlacesDetailComponent implements OnInit {
 
   placeForm = new FormGroup(
     {
-      id: new FormControl(this._placesService.getPlace().id),
-      name: new FormControl(this._placesService.getPlace().name, Validators.required),
-      table: new FormControl(this._placesService.getPlace().tableLocation, Validators.required),
+      id: new FormControl(""),
+      name: new FormControl("", Validators.required),
+      table: new FormControl("", Validators.required),
       selectedLocation: new FormControl("", Validators.required),
       selectedZone: new FormControl("",Validators.required)
     }
@@ -39,21 +41,20 @@ export class PlacesDetailComponent implements OnInit {
 
   submitted: boolean = false;
 
-  saveTable() {
-    let Table = this._tablesService.getTable();
-    let TableToUpdate = new TableLocation(this.placeForm.get("id").value,
+  savePlace() {
+    let place = this._placesService.getPlace();
+    let placeToUpdate = new Place(this.placeForm.get("id").value,
     this.placeForm.get("name").value,
-    this.placeForm.get("table").value,
-    this.placeForm.get("locationSelect").value);
+    this.placeForm.get("table").value);
     
     this.submitted = true;
-    console.log(TableToUpdate);
+    console.log(placeToUpdate);
 
-    if(Table.name == "EmptyTable"){
-      this._tablesService.addTable(TableToUpdate).subscribe();
+    if(place.name == "EmptyPlace"){
+      this._placesService.addPlace(placeToUpdate).subscribe();
     }
     else{
-      this._tablesService.updateTable(TableToUpdate).subscribe();
+      this._placesService.updatePlace(placeToUpdate).subscribe();
     }
 
     setTimeout(()=>{                          
@@ -73,34 +74,73 @@ export class PlacesDetailComponent implements OnInit {
       }
     )
   }
+  getTables(): void{
+    this._tablesService.getTables().subscribe(
+      result => {
+      this.allTables = result;
+      }
+    )
+  }
+
   initfunc(): void{
-    this.getLocations();
+    this._tablesService.getTables().subscribe(
+      result => {
+      this.allTables = result;
+    })
     this._locationsService.getLocations().subscribe(
       result => {
       this.locations = result;
-      this._tablesService.getTables().subscribe(
-        result => {
-        this.allTables = result;
-    
-        this.placeForm.get('selectedLocation').valueChanges.subscribe(location => {
-          this.filteredTables = this.allTables.filter(table => table.location.name == location.name);
-          this.zones = [... new Set(this.filteredTables.map(table => table.zone))];
-            
-        });
-        this.placeForm.get('selectedZone').valueChanges.subscribe(zone => {
-          console.log(zone);
-          this.filteredTables2 = this.filteredTables.filter(table => table.zone == zone);
-        });
-      })
     })
+
+    this.placeForm.get('selectedLocation').valueChanges.subscribe(location => {
+      this.filteredTables = this.allTables.filter(table => table.location.name == location.name);
+      this.zones = [... new Set(this.filteredTables.map(table => table.zone))];
+      console.log(this.allTables)
+      console.log(this.filteredTables)
+      console.log(this.zones)
+      console.log(typeof this.placeForm.get('selectedLocation').value)
+            
+    });
+    this.placeForm.get('selectedZone').valueChanges.subscribe(zone => {
+      console.log(zone);
+      this.filteredTables2 = this.filteredTables.filter(table => table.zone == zone);
+    });
   }
 
 
   ngOnInit(): void {
+    this.getLocations();
+    this.getTables();    
+    if (this.placeForm.controls['name'].value=="EmptyPlace") {
+      this.router.navigate(["/places"]);
+    }
     this.place = this._placesService.getPlace();
-    this.placeForm.setValue({id: (this.place).id,name:(this.place).name,table:(this.place).tableLocation,selectedLocation: ((this.place).tableLocation).location,selectedZone:((this.place).tableLocation).zone})
-    console.log("Test 1 : "+this.placeForm.controls['selectedLocation'].value.name);
-    console.log("Test 2 : "+this.placeForm.controls['table'].value.name);
+    
+    this._tablesService.getTables().subscribe(
+      result => {
+      this.allTables = result;
+      this.filteredTables = this.allTables.filter(table => table.location.name == ((this.place).tableLocation).location.name);
+      console.log(this.filteredTables)
+      this.zones = [... new Set(this.filteredTables.map(table => table.zone))];
+      this.filteredTables2 = this.filteredTables.filter(table => table.zone == ((this.place).tableLocation).zone);
+      console.log(this.filteredTables2)
+      }
+    )
+
+    if (this.place.name != "EmptyPlace") {
+      console.log(this.placeForm.get('selectedLocation').value.name)
+      this.placeForm.setValue({id: (this.place).id,name:(this.place).name,table:(this.place).tableLocation,selectedLocation: ((this.place).tableLocation).location,selectedZone:((this.place).tableLocation).zone})
+      
+    }
+    else{
+      this.place = this._placesService.getPlace();
+      this.placeForm.setValue({id: (this.place).id,name:"Nieuwe Plaats",table:(this.place).tableLocation,selectedLocation: ((this.place).tableLocation).location,selectedZone:((this.place).tableLocation).zone})
+      console.log(this.place)
+
+    }
+    //console.log("Test 1 : "+this.placeForm.controls['selectedLocation'].value.name);
+    console.log("Test 2 : "+this.placeForm.controls['id'].value);
     this.initfunc();
+    
   }
 }

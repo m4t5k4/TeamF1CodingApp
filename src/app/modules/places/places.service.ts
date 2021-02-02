@@ -13,7 +13,7 @@ export class PlacesService {
 
   private tables = this._tablesService.getTables()
 
-  private place = new Place(0,"EmptyTable",this.tables[0]);
+  private place = new Place(0,"EmptyPlace",this.tables[0]);
 
   getPlaces() : Observable<Place[]>
   {
