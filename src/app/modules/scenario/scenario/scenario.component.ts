@@ -15,8 +15,11 @@ import { HttpClient } from '@angular/common/http';
 export class ScenarioComponent implements OnInit {
   submitted: boolean = false;
   scenarios = ['Groen', 'Geel', 'Oranje', 'Rood', 'Zwart'];
-  constructor(private fb: FormBuilder, private _scenarioService: ScenarioService) { }
-  places : Place[];
+  constructor(private fb: FormBuilder, private _scenarioService: ScenarioService, private router: Router) { }
+  places: Place[];
+  placesTotal: Place[];
+  hideForm: boolean = true;
+  code: String = "";
 
   ngOnInit(): void {
   }
@@ -27,34 +30,50 @@ export class ScenarioComponent implements OnInit {
     }
   );
 
-  onSubmit() : void{
-    let i = 0;
+  onSubmit(): void {
     this.submitted = true;
+    this._scenarioService.getAllPlaces().subscribe(
+      result => this.placesTotal = result);
     if (this.scenarioForm.controls['scenarioControl'].value == "Rood") {
-      console.log("code rood")
-      this._scenarioService.setandgetPlacesCodeRood().subscribe(result=>
+      this.code = "Rood";
+      this._scenarioService.setandgetPlacesCodeRood().subscribe(result =>
         this.places = result);
     }
-    else if (this.scenarioForm.controls['scenarioControl'].value == "Groen"){
-      console.log("code groen")
-      this._scenarioService.setandgetPlacesCodeGroen().subscribe(result=>
+    else if (this.scenarioForm.controls['scenarioControl'].value == "Groen") {
+      this.code = "Groen";
+      this._scenarioService.setandgetPlacesCodeGroen().subscribe(result =>
         this.places = result);
     }
-    else if (this.scenarioForm.controls['scenarioControl'].value == "Geel"){
-      console.log("code geel")
-      this._scenarioService.setandgetPlacesCodeGeel().subscribe(result=>
+    else if (this.scenarioForm.controls['scenarioControl'].value == "Geel") {
+      this.code = "Geel";
+      this._scenarioService.setandgetPlacesCodeGeel().subscribe(result =>
         this.places = result);
     }
-    else if (this.scenarioForm.controls['scenarioControl'].value == "Oranje"){
-      console.log("code oranje")
-      this._scenarioService.setandgetPlacesCodeOranje().subscribe(result=>
+    else if (this.scenarioForm.controls['scenarioControl'].value == "Oranje") {
+      this.code = "Oranje";
+      this._scenarioService.setandgetPlacesCodeOranje().subscribe(result =>
         this.places = result);
     }
-    else if (this.scenarioForm.controls['scenarioControl'].value == "Zwart"){
-      console.log("code zwart")
-      this._scenarioService.setandgetPlacesCodeZwart().subscribe(result=>
+    else if (this.scenarioForm.controls['scenarioControl'].value == "Zwart") {
+      this.code = "Zwart";
+      this._scenarioService.setandgetPlacesCodeZwart().subscribe(result =>
         this.places = result);
     }
+    setTimeout(() => {
+      this.hideForm = false;
+    },1000);
   }
-} 
+
+
+  btnReturn() {
+    this.router.navigate([""]);
+  }
+
+  btnRefresh() {
+    window.location.reload();
+  }
+}
+
+
+
 

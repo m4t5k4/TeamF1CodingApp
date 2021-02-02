@@ -12,6 +12,11 @@ export class ScenarioService {
 
   constructor(private http: HttpClient) { }
 
+  getAllPlaces() : Observable<Place[]>
+  {
+    return this.http.get<Place[]>(`${environment.baseUrl}places`);
+  }
+
   setandgetPlacesCodeRood() : Observable<Place[]>
   {
     return this.http.get<Place[]>(`${environment.baseUrl}scenario-rood`);

@@ -1,10 +1,22 @@
-<h3 class="ml-5">Aanpassen scenario</h3>
-<form [formGroup]="scenarioForm" (ngSubmit)="onSubmit()" class="ml-5 mr-5 mt-5">
-    <select formControlName="scenarioControl" class="form-control">
-        <option [ngValue]="null">Kies een scenario</option>
-        <option [ngValue]="scenario" *ngFor="let scenario of scenarios">{{scenario}}</option>
-      </select>
-    <p><button mat-raised-button type="submit" class="mt-5"
-        [disabled]="!scenarioForm.valid || submitted"><span *ngIf="submitted" class="spinner-border spinner-border-sm mr-1"></span>Bewerken</button></p>
-    <p *ngIf="submitted || places != null">Aantal plaatsen: {{places.length}}</p>      
+<h3 class="ml-5 text-center">Aanpassen scenario</h3>
+<ul class="list-group m-5">
+  <li class="list-group-item groen">Code groen: alle plaatsen zijn beschikbaar 100% bezetting.</li>
+  <li class="list-group-item geel">Code geel: 75% van alle plaatsen is beschikbaar.</li>
+  <li class="list-group-item oranje">Code oranje: 50% van alle plaatsen is beschikbaar.</li>
+  <li class="list-group-item rood">Code rood: 25% van alle plaatsen is beschikbaar.</li>
+  <li class="list-group-item zwart">Code zwart: er zijn geen plaatsen beschikbaar thuiswerken is verplicht!</li>
+</ul>
+<form [formGroup]="scenarioForm" (ngSubmit)="onSubmit()" class="ml-5 mr-5 mt-5" *ngIf="hideForm">
+  <select formControlName="scenarioControl" class="form-control">
+    <option [ngValue]="null">Kies een scenario</option>
+    <option [ngValue]="scenario" *ngFor="let scenario of scenarios">{{scenario}}</option>
+  </select>
+  <p><button mat-raised-button type="submit" class="mt-5" [disabled]="!scenarioForm.valid || submitted"><span
+        *ngIf="submitted" class="spinner-border spinner-border-sm mr-1"></span>Bewerken</button></p>
 </form>
+<div *ngIf="submitted || places != null || placesTotal != null " class="p-3 mb-2 bg-light text-dark m-5 rounded border border-dark">
+  <h4>Scenario bijgewerkt naar code: {{code}} </h4>
+  <p><b>Actieve plaatsen: {{places.length}} / totaal aantal plaatsen {{placesTotal.length}}</b></p> </div>
+ <button class="ml-5" (click)="btnReturn();">Terug naar overzicht</button>
+ <button class="ml-5 mt-1" (click)="btnRefresh();">Opnieuw scenario aanpassen</button>
+  

@@ -49,7 +49,7 @@ const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'places', component: PlacesComponent, canActivate: [AuthGuard]},
   { path: 'places/edit', component: PlacesDetailComponent, canActivate: [AuthGuard]},
-  {path: 'scenario', component: ScenarioComponent, canActivate:[AuthGuard]}
+  {path: 'scenarios', component: ScenarioComponent, canActivate:[AuthGuard]}
 ];
 
 @NgModule({
