@@ -8,8 +8,7 @@ import { ReservationService } from '../reservations/reservation.service';
 import { TokenStorageService } from '../../../security/services/token-storage.service';
 import { LocalDate, LocalTime } from '@js-joda/core';
 import { Router } from '@angular/router';
-import { Place } from 'src/app/shared/models/place.model';
-import { TableLocation } from 'src/app/shared/models/table-location.model';
+import { RxwebValidators } from '@rxweb/reactive-form-validators';
 
 @Component({
   selector: 'app-reserve',
@@ -20,17 +19,17 @@ export class ReserveComponent implements OnInit {
 
 
   reservateForm = this.formBuilder.group({
-    selectedLocation: ['Corda campus 1',Validators.required],
+    selectedLocation: ['',Validators.required],
     selectedZone: ['',Validators.required],
     selectedTable: ['',Validators.required],
     from: ['',Validators.required],
     till: ['',Validators.required],
     date: [LocalDate.now,Validators.required],
     amountPersons: [1,Validators.required],
-    description: ['',Validators.required],
+    description: [''],
     places: this.formBuilder.array([
-      this.formBuilder.control(null)
-    ],[Validators.required])
+      this.formBuilder.group({ place: ['',[RxwebValidators.unique(),Validators.required]]})
+    ])
   });
 
   locations = [];
@@ -38,6 +37,9 @@ export class ReserveComponent implements OnInit {
   tables = [];
   places = [];
   result = [];
+
+  today = LocalDate.now().toString();
+  future = LocalDate.now().plusYears(1).toString();
 
   submitted: boolean = false;
 
@@ -57,24 +59,28 @@ export class ReserveComponent implements OnInit {
     console.log(this.currentUser);
 
     this._placesService.getPlaces().subscribe(places => {
-      this.places = places;
+      this.places = places.filter(place =>
+          place.tableLocation.location.name == this.reservateForm.value.selectedLocation &&
+          place.tableLocation.zone == this.reservateForm.value.selectedZone &&
+          place.tableLocation.name == this.reservateForm.value.selectedTable);
+
       this.reservateForm.get('selectedLocation').valueChanges.subscribe(location => {
-        this.places = places.filter(place => place.tableLocation.location.name == location);
-        console.log(this.places);
+        this.places = places.filter(place =>
+          place.tableLocation.location.name == location &&
+          place.tableLocation.zone == this.reservateForm.value.selectedZone &&
+          place.tableLocation.name == this.reservateForm.value.selectedTable);
       });
       this.reservateForm.get('selectedZone').valueChanges.subscribe(zone => {
         this.places = places.filter(place =>
           place.tableLocation.name == this.reservateForm.value.selectedTable &&
           place.tableLocation.zone == zone &&
           place.tableLocation.location.name == this.reservateForm.value.selectedLocation);
-        console.log(this.places);
       });
       this.reservateForm.get('selectedTable').valueChanges.subscribe(table => {
         this.places = places.filter(place =>
           place.tableLocation.name == table &&
           place.tableLocation.zone == this.reservateForm.value.selectedZone &&
           place.tableLocation.location.name == this.reservateForm.value.selectedLocation);
-        console.log(this.places);
 
       });
       this.reservateForm.get('places').valueChanges.subscribe(array => {
@@ -85,26 +91,42 @@ export class ReserveComponent implements OnInit {
     })
 
     this._tablesService.getTables().subscribe(tables => {
-      console.log(tables);
+
       this.locations = [... new Set(tables.map(table => table.location.name))];
+      this.zones = [... new Set(tables.map(table => table.zone))];
+
+      this.reservateForm.controls['selectedLocation'].setValue(this.locations[0]);
+      this.reservateForm.controls['selectedZone'].setValue('');
+
+      this.tables = tables.filter(table =>
+          table.location.name == this.reservateForm.value.selectedLocation &&
+          table.zone == this.reservateForm.value.selectedZone);
+      console.log(this.tables);
+
+      this.reservateForm.controls['selectedTable'].setValue('');
+      console.log(this.reservateForm.value.selectedTable);
 
       this.reservateForm.get('selectedLocation').valueChanges.subscribe(location => {
         console.log(location);
+
         this.tables = tables.filter(table => table.location.name == location);
-        this.zones = [... new Set(this.tables.map(table => table.zone))];
         console.log(this.tables);
+        this.reservateForm.controls['selectedZone'].setValue('');
+        console.log("ln116 " +this.reservateForm.value.selectedTable.name);
+
       });
 
       this.reservateForm.get('selectedZone').valueChanges.subscribe(zone => {
         console.log(zone);
         this.tables = tables.filter(table => table.zone == zone && table.location.name == this.reservateForm.value.selectedLocation);
         console.log(this.tables);
-        console.log(this.reservateForm.value.selectedLocation);
+        this.reservateForm.controls['selectedTable'].setValue('');
+        console.log(this.reservateForm.value.selectedTable);
       });
 
       let time = LocalTime.now().toString().slice(0,-7);
 
-      this.reservateForm.controls['selectedLocation'].setValue(this.locations[0]);
+
       this.reservateForm.controls['date'].setValue(LocalDate.now());
       this.reservateForm.controls['from'].setValue(time);
       this.reservateForm.controls['till'].setValue(time);
@@ -125,10 +147,10 @@ export class ReserveComponent implements OnInit {
     let date = this.reservateForm.value.date;
     let startHour = this.reservateForm.value.from;
     let endHour = this.reservateForm.value.till;
-    let amountPersons = this.reservateForm.value.amountPersons;
+    let amountPersons = places.length;
     let description = this.reservateForm.value.description;
-    let start = LocalTime.parse(startHour);
-    let end = LocalTime.parse(endHour);
+    let start = startHour
+    let end = endHour;
     let user = this.currentUser;
     user.roles = [];
 
@@ -147,7 +169,7 @@ export class ReserveComponent implements OnInit {
   }
 
   addPlace() {
-    (this.reservateForm.get('places') as FormArray).push(this.formBuilder.control(null));
+    (this.reservateForm.get('places') as FormArray).push(this.formBuilder.group({ place:['',[RxwebValidators.unique(),Validators.required]]}));
   }
 
   removePlace() {

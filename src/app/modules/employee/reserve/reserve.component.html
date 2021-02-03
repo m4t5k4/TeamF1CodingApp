@@ -16,34 +16,60 @@
 
         <div class="form-row">
           <div class="form-group col">
-            <label for="location">Locatie</label>
-            <select name="location" id="location" formControlName="selectedLocation" class="form-control">
-              <option *ngFor="let loc of locations" value="{{loc}}">{{loc}}</option>
-            </select>
+            <mat-label for="location">Locatie</mat-label>
+            <mat-select name="location" id="location" formControlName="selectedLocation" class="form-control">
+              <mat-option *ngFor="let loc of locations" value="{{loc}}">{{loc}}</mat-option>
+            </mat-select>
           </div>
         </div>
 
         <div class="form-row">
           <div class="form-group col" *ngIf="reservateForm.value.selectedLocation">
-            <label for="zone">Zone</label>
-            <select name="zone" id="zone" formControlName="selectedZone" class="form-control">
-              <option *ngFor="let zone of zones" value="{{zone}}">{{zone}}</option>
-            </select>
+            <mat-label for="zone">Zone</mat-label>
+            <mat-select name="zone" id="zone" formControlName="selectedZone" class="form-control">
+              <mat-option *ngFor="let zone of zones" value="{{zone}}">{{zone}}</mat-option>
+            </mat-select>
           </div>
 
-          <div class="form-group col" *ngIf="reservateForm.value.selectedZone">
-            <label for="table">Tafel</label>
-            <select name="table" id="table" formControlName="selectedTable" class="form-control">
-              <option *ngFor="let table of tables" value="{{table.name}}">{{table.name}}</option>
-            </select>
+          <div class="form-group col">
+            <mat-label for="table">Tafel</mat-label>
+            <mat-select name="table" id="table" formControlName="selectedTable" class="form-control" required>
+              <mat-option *ngFor="let table of tables" value="{{table.name}}">{{table.name}}</mat-option>
+            </mat-select>
+          </div>
+        </div>
+
+        <div class="form-row">
+
+          <div class="form-group col" *ngIf="reservateForm.value.selectedTable">
+            <mat-label>Plaats: </mat-label>
+            <div formArrayName="places">
+              <div style="margin: 0.5em;" *ngFor="let placeControl of getPlacesFormControls(); let i=index">
+                <div [formGroupName]="i">
+                  <mat-select name="place" id="place" formControlName="place" class="form-control">
+                    <mat-option *ngFor="let place of this.places" value="{{place.name}}">{{place.name}}</mat-option>
+
+                  </mat-select>
+                  <div *ngIf="placeControl.invalid" class="text-muted">
+                    <small>controleer plaats*</small>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
+          <div class="from-group col" *ngIf="reservateForm.value.selectedTable">
+            <button type="button" class="btn" (click)="addPlace()" style="margin: 0.5em;"
+              [disabled]="reservateForm.controls.places.value.length == this.places.length">Meer plaatsen</button>
+            <button type="button" class="btn" (click)="removePlace()"
+              [disabled]="reservateForm.controls.places.value.length == 1">Minder plaatsen</button>
+          </div>
         </div>
 
         <div class="form-row" *ngIf="reservateForm.value.selectedLocation">
           <div class="form-group col">
             <label for="date">Datum</label>
-            <input type="date" id="date" name="date" formControlName="date" class="form-control">
+            <input type="date" id="date" name="date" min="{{today}}" max="{{future}}" formControlName="date" class="form-control">
           </div>
         </div>
 
@@ -51,40 +77,25 @@
 
           <div class="form-group col">
             <label for="from">van</label>
-            <input type="time" name="from" id="from" formControlName="from" class="form-control">
+            <input [ngxTimepicker]="from" name="from" id="from" formControlName="from" class="form-control" [format]="24" [min]="'08:00'" [max]="'19:00'">
+            <ngx-material-timepicker #from></ngx-material-timepicker>
           </div>
 
           <div class="form-group col">
             <label for="till">tot</label>
-            <input type="time" name="till" id="till" formControlName="till" class="form-control">
+            <input [ngxTimepicker]="till" name="till" id="till" formControlName="till" class="form-control" [format]="24"
+              [min]="'08:00'" [max]="'19:00'">
+            <ngx-material-timepicker #till></ngx-material-timepicker>
           </div>
-
         </div>
 
-        <div class="form-row" *ngIf="reservateForm.value.selectedTable">
+        <!-- <div class="form-row" *ngIf="reservateForm.value.selectedTable">
           <div class="form-group col">
             <label for="amountPersons">Aantal personen</label>
             <input type="number" id="amountPersons" name="amountPersons" formControlName="amountPersons"
               class="form-control">
           </div>
-        </div>
-
-        <div class="form-row">
-
-          <div class="form-group col" *ngIf="reservateForm.value.selectedTable">
-            <div *ngFor="let place of getPlacesFormControls()">
-              <label>Plaats: </label>
-              <select name="place" id="place" [formControl]="place" class="form-control">
-                <option *ngFor="let place of this.places" value="{{place.name}}">{{place.name}}</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="from-group col" *ngIf="reservateForm.value.selectedTable">
-            <button type="button" class="btn" (click)="addPlace()" [disabled]="reservateForm.controls.places.value.length == this.places.length">Meer plaatsen</button>
-            <button type="button" class="btn" (click)="removePlace()" [disabled]="reservateForm.controls.places.value.length == 1">Minder plaatsen</button>
-          </div>
-        </div>
+        </div> -->
 
         <div class="form-row" *ngIf="reservateForm.value.selectedTable">
           <div class="form-group col">
