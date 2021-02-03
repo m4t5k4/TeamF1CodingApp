@@ -12,13 +12,14 @@ import { UserService } from 'src/app/security/services/user.service';
   styleUrls: ['./nav.component.scss']
 })
 export class NavComponent implements OnInit {
-  currentUser: any;
+  currentUser: "";
   token: any;
 
   constructor(private tokenStorage: TokenStorageService, public authService: AuthService, public authGuard: AuthGuard) { }
 
   ngOnInit(): void {
     this.currentUser = this.tokenStorage.getUser();
+    console.log(this.tokenStorage.getUser());
   }
 
   reloadPage(): void {

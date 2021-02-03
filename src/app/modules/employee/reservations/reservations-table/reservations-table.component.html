@@ -6,7 +6,7 @@
   </mat-form-field>
 </div>
 
-<div class="col">
+<div class="col mb-5">
 
   <table mat-table [dataSource]="dataSource" matSort>
 
@@ -33,6 +33,13 @@
     <ng-container matColumnDef="endHour">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> tot </th>
       <td mat-cell *matCellDef="let row" data-label="endHour"> {{row.endHour}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="btn">
+      <th mat-header-cell *matHeaderCellDef mat-header> </th>
+      <td mat-cell *matCellDef="let row" data-label="">
+        <button class="btn-sm mr-1" (click)="showDetailReservation(row)">Bewerken</button>
+      </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

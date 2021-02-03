@@ -1,0 +1,19 @@
+<h3 class="ml-5">Reservatie bewerken</h3>
+<form [formGroup]="reservationForm" (ngSubmit)="onSubmit()" class="ml-5 mr-5 mt-5">
+  <input type="hidden" id="Id" name="Id" formControlName="id">
+  <p>Datum:
+    <input matInput type="text" formControlName="name" class="form-control" />
+  </p>
+  <p>van - tot:
+    <input matInput type="text" formControlName="address" class="form-control" />
+  </p>
+  <p>beschrijving:
+    <input matInput type="text" formControlName="description" class="form-control" />
+  </p>
+  <p>aankomst bevestigd:
+    <input matInput type="text" formControlName="description" class="form-control" />
+  </p>
+  <p><button mat-raised-button type="submit" [disabled]="!reservationForm.valid || submitted"><span *ngIf="submitted"
+        class="spinner-border spinner-border-sm mr-1"></span>Bewerken</button></p>
+</form>
+<button mat-raised-button class="ml-5" (click)="btnReturn();">Terug naar overzicht</button>

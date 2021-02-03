@@ -5,6 +5,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import { Reservation } from 'src/app/shared/models/reservation.model';
 import { ReservationService } from '../reservation.service';
 import { TokenStorageService } from '../../../../security/services/token-storage.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-reservations-table',
@@ -13,11 +14,12 @@ import { TokenStorageService } from '../../../../security/services/token-storage
 })
 export class ReservationsTableComponent implements OnInit {
 
-  displayedColumns = ['amountPersons', 'date', 'description', 'startHour', 'endHour'];
+  displayedColumns = ['amountPersons', 'date', 'description', 'startHour', 'endHour', 'btn'];
   dataSource = new MatTableDataSource<Reservation>();
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   constructor(private _reservationService: ReservationService,
+    private router: Router,
     private _token: TokenStorageService) {
       this._reservationService.getReservationsById(_token.getUser().id).subscribe(
         result => {
@@ -43,5 +45,10 @@ export class ReservationsTableComponent implements OnInit {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
     this.dataSource.filter = filterValue;
+  }
+
+  showDetailReservation(reservation) {
+    this._reservationService.setReservation(reservation);
+    this.router.navigate(['/reservation/edit'])
   }
 }

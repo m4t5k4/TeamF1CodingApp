@@ -24,8 +24,10 @@
             <input type="password" id="password" name="password" formControlName="password" class="form-control">
         </div>
 
-        <!-- <p><button mat-raised-button color="primary" type="submit" [disabled]="!userForm.valid || submitted"><span
-                    *ngIf="submitted" class="spinner-border spinner-border-sm mr-1"></span>Bewerken</button></p> -->
+        <p><button type="submit" class="btn" type="submit" [disabled]="!userForm.valid || submitted"><span
+                    *ngIf="submitted" class="spinner-border spinner-border-sm mr-1"></span>Bewerken</button></p>
+
+        <button class="btn" (click)="btnReturn();">Terug naar overzicht</button>
     </form>
-    <button mat-raised-button class="ml-5" (click)="btnReturn();">Terug naar overzicht</button>
+    
 </div>

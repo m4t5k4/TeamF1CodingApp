@@ -41,9 +41,16 @@ export class LocationsComponent implements OnInit {
   }
 
   deleteLocation(locationId: number, naam: string) {
-    if (confirm("Wil je deze locatie: " + naam + " verwijderen?")) {
-      this._locationService.deleteLocation(locationId).subscribe();
-      window.location.reload();
+    if (window.confirm("Wil je deze locatie: " + naam + " verwijderen?")) {                       
+        this._locationService.deleteLocation(locationId).subscribe();
+        setTimeout(()=>{                          
+          this._locationService.getLocations().subscribe(
+            result => {
+              this.dataSource = new MatTableDataSource<Location>(result);
+              this.dataSource.paginator = this.paginator;
+              this.dataSource.sort = this.sort;
+            })
+        }, 1000); 
     }
   }
 
@@ -59,7 +66,6 @@ export class LocationsComponent implements OnInit {
   }
 
   btnClickNew(): void {
-    console.log('trigger');
     this.router.navigate(['/location/add']);
   };
 

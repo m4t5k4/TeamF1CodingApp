@@ -1,14 +1,13 @@
-<div class="row m-5">
-    <div class="col-sm-11"><button mat-raised-button (click)="btnClickNew();">Voeg een nieuwe locatie toe</button></div>
-    <div class="col-sm-11">
-        <div class="example-header" fxLayout="row">
-            <mat-form-field>
-                <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-            </mat-form-field>
-        </div>
+<h2 class="text-center">Locaties</h2>
+<div class="m-5">
+    <button mat-raised-button (click)="btnClickNew();">Voeg een nieuwe locatie toe</button>
+    <div class="example-header mt-4">
+        <mat-form-field>
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+        </mat-form-field>
     </div>
 </div>
-<div class="col">
+<div class="col mb-5">
     <table mat-table [dataSource]="dataSource" matSort>
         <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Naam </th>
@@ -25,8 +24,8 @@
         <ng-container matColumnDef="btn">
             <th mat-header-cell *matHeaderCellDef mat-header> </th>
             <td mat-cell *matCellDef="let row" data-label="">
-                <button class="btn-sm mr-1" (click)="showDetailLocation(row)">Bewerken</button>
-                <button (click)="deleteLocation(row.id,row.name)" class="btn-sm mr-1">Verwijderen</button>
+                <button class="btn-sm mr-1" (click)="showDetailLocation(row)"><mat-icon aria-hidden="false" class="icon-v-align" aria-label="Example home icon">edit</mat-icon></button>
+                <button (click)="deleteLocation(row.id,row.name)" class="btn-sm mr-1"><mat-icon aria-hidden="false" class="icon-v-align" aria-label="Example home icon">delete</mat-icon></button>
             </td>
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

@@ -1,8 +1,8 @@
 <h2 class="text-center">Tafels</h2>
-<div class="row m-5">
-    <div class="col-sm-2"><button mat-raised-button (click)="addTable();">Voeg een nieuwe tafel toe</button></div>
-    <div class="col-sm-10">
-        <div class="example-header" fxLayout="row">
+<div class="m-5">
+    <div ><button mat-raised-button (click)="addTable();">Voeg een nieuwe tafel toe</button></div>
+    <div>
+        <div class="example-header mt-4" fxLayout="row">
             <mat-form-field>
                 <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
             </mat-form-field>
@@ -26,8 +26,8 @@
         <ng-container matColumnDef="btn">
             <th mat-header-cell *matHeaderCellDef mat-header> </th>
             <td mat-cell *matCellDef="let row" data-label="">
-                <button class="btn-sm mr-1" (click)="showDetailTable(row)">Bewerken</button>
-                <button (click)="deleteTable(row.id)" class="btn-sm mr-1">Verwijderen</button>
+                <button class="btn-sm mr-1" (click)="showDetailTable(row)"><mat-icon aria-hidden="false" class="icon-v-align" aria-label="Example home icon">edit</mat-icon></button>
+                <button (click)="deleteTable(row.id,row.name)" class="btn-sm mr-1"><mat-icon aria-hidden="false" class="icon-v-align" aria-label="Example home icon">delete</mat-icon></button>
             </td>
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

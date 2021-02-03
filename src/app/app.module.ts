@@ -20,16 +20,17 @@ import { HttpClientModule } from '@angular/common/http';
 import { NavComponent } from './modules/nav/nav.component';
 import { FooterComponent } from './modules/footer/footer.component';
 import { HomeModule } from './modules/home/home.module';
-import {DashboardModule} from './modules/dashboard/dashboard.module';
-import {AdminDashboardModule}  from './modules/admin-dashboard/admin-dashboard.module';
-import { PlacesComponent } from './modules/places/places/places.component'
+import { DashboardModule } from './modules/dashboard/dashboard.module';
+import { AdminDashboardModule }  from './modules/admin-dashboard/admin-dashboard.module';
+import { PlacesModule } from './modules/places/places.module';
+import {ScenarioModule} from './modules/scenario/scenario.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavComponent,
     FooterComponent,
-    PlacesComponent
+    //AdminComponent,
   ],
   imports: [
     SharedModule,
@@ -49,7 +50,9 @@ import { PlacesComponent } from './modules/places/places/places.component'
     MatProgressSpinnerModule,
     HomeModule,
     DashboardModule,
-    AdminDashboardModule
+    AdminDashboardModule,
+    PlacesModule,
+    ScenarioModule
   ],
   bootstrap: [AppComponent]
 })

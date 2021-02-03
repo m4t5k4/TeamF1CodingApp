@@ -1,0 +1,48 @@
+button {
+    background:#D40000 !important;
+    border: none;
+    border-radius: 2em;
+    color: white;
+    padding: .5em 1em;
+  }
+
+  button:disabled,button[disabled]
+  {
+      opacity: 0.4;
+  }
+
+
+  .mat-table .mat-cell {
+    border-bottom: 1px solid white;
+  }
+
+  .rood
+{
+  background-color: #f22c2c;
+  color: black;
+  font-size: 25px;
+}
+
+.oranje {
+  background-color: orange;
+  color: black;
+  font-size: 25px;
+}
+
+.geel{
+  background-color: yellow;
+  color: black;
+  font-size: 25px;
+}
+
+.groen{
+  background-color: green;
+  color: black;
+  font-size: 25px;
+}
+
+.zwart{
+  background-color: black;
+  color: white;
+  font-size: 25px;
+}

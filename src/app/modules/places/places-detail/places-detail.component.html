@@ -1,1 +1,25 @@
-<p>places-detail works!</p>
+<form [formGroup]="placeForm" (ngSubmit)="savePlace()" class="ml-5 mr-5 mt-5">
+    <input type="hidden" id="Id" name="Id" formControlName="id">
+    <p>Locatie:
+        <select formControlName="selectedLocation" class="form-control">
+            <option *ngFor="let location of locations" [ngValue]="location" [selected]="location.id === place.tableLocation.location.id">{{location.name}}</option>
+        </select>
+    </p>
+    <div class="form-group col" *ngIf="placeForm.value.selectedLocation">
+        <label for="zone">Zone</label>
+        <select name="zone" id="zone" formControlName="selectedZone" class="form-control">
+            <option *ngFor="let zone of zones" value="{{zone}}" [selected]="zone === place.tableLocation.zone">{{zone}}</option>
+        </select>
+    </div>
+    <p>Tafel:
+        <select formControlName="selectedTable" class="form-control" >
+            <option *ngFor="let table of filteredTables2" [selected]="table.id === place.tableLocation.id">{{table.name}}</option>
+        </select>
+    </p>
+    <p>Naam:
+        <input type="text" formControlName="name" class="form-control" />
+    </p>
+    <p><button mat-raised-button class="btn btn-primary" color="primary" type="submit"
+            [disabled]="!placeForm.valid || submitted">Opslaan</button></p>
+</form>
+<button mat-raised-button class="ml-5 btn btn-primary" (click)="btnReturn();">Terug naar overzicht</button>

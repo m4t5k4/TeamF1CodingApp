@@ -14,20 +14,22 @@ import { observable } from 'rxjs';
   styleUrls: ['./tables-detail.component.scss']
 })
 export class TablesDetailComponent implements OnInit {
+  
+  locations: Location[];
+  Table:TableLocation;
 
   constructor(private _tablesService: TablesService,private _locationsService: LocationsService, private router: Router) {
     this.getLocations();
-   }
+  }
 
-  locations: Location[];
-  allLocations: Location[];
+
 
   tableForm = new FormGroup(
     {
-      id: new FormControl(this._tablesService.getTable().id),
-      name: new FormControl(this._tablesService.getTable().name, Validators.required),
-      zone: new FormControl(this._tablesService.getTable().zone, Validators.required),
-      locationSelect: new FormControl(null, Validators.required),
+      id: new FormControl(""),
+      name: new FormControl("", Validators.required && Validators.maxLength(20)),
+      zone: new FormControl("", Validators.required && Validators.maxLength(1)),
+      locationSelect: new FormControl("", Validators.required),
     }
   )
 
@@ -35,9 +37,10 @@ export class TablesDetailComponent implements OnInit {
 
   saveTable() {
     let Table = this._tablesService.getTable();
+    let zone = this.tableForm.get("zone").value
     let TableToUpdate = new TableLocation(this.tableForm.get("id").value,
     this.tableForm.get("name").value,
-    this.tableForm.get("zone").value,
+    zone.toUpperCase(),
     this.tableForm.get("locationSelect").value);
     
     this.submitted = true;
@@ -69,23 +72,22 @@ export class TablesDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this._tablesService.getTable().name+ " Test1")
-    let Table = this._tablesService.getTable();
-    this.getLocations();
+    this._locationsService.getLocations().subscribe(
+      result => {
+      this.locations = result;
+      }
+    )
+    this.Table = this._tablesService.getTable();
+    //console.log(this.Table.name)
 
-    if(Table.name == "EmptyTable"){
-      this.tableForm.setValue({id:0,name:"",zone:"",locationSelect:""});
+
+    if(this.Table.name == "EmptyTable"){
+      this.tableForm.setValue({id:0,name:"Nieuwe Tafel",zone:"A",locationSelect:(this.Table).location});
     }
     else{
-      this._locationsService.getLocations().subscribe(
-        result => {
-        this.allLocations = result;
-        console.log("Test 1 : "+this.tableForm.controls['locationSelect'].value);
-        var currentLocation: Location = this.allLocations[Table.location.id-1];
-        this.tableForm.setValue({id:Table.id,name:Table.name,zone:Table.zone,locationSelect: currentLocation});
-        console.log(this.tableForm.controls['locationSelect'].value) 
-        }
-      )      
+      console.log("Test 1 : "+this.tableForm.controls['locationSelect'].value);
+      this.tableForm.setValue({id:this.Table.id,name:this.Table.name,zone:this.Table.zone,locationSelect: (this.Table).location});
+      console.log("Test 2 : "+this.tableForm.controls['locationSelect'].value.name)       
     }
   }
 }
