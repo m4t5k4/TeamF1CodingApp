@@ -1,5 +1,4 @@
-import { Role } from './role.model';
-
+import { Scenario } from './scenario.model';
 function getRandomString(length) {
   var randomChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   var result = '';
@@ -9,9 +8,9 @@ function getRandomString(length) {
   return result;
 }
 
-describe('Role', () => {
+
+describe('Scenario', () => {
   it('should create an instance', () => {
-    expect(new Role(Math.floor(Math.random() * 10), getRandomString(10)
-    )).toBeTruthy();
+    expect(new Scenario(Math.floor(Math.random() * 10),getRandomString(10))).toBeTruthy();
   });
 });

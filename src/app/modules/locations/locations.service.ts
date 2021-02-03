@@ -35,7 +35,6 @@ export class LocationsService {
   setLocation(location : Location)
   {
     this.location = location;
-    console.log(this.location);
   }
 
   getLocation()

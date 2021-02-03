@@ -32,9 +32,7 @@ export class LocationDetailComponent implements OnInit {
 
   onSubmit() {
     let locationToUpdate = new Location(this.locationForm.get("id").value,this.locationForm.get("name").value, this.locationForm.get("address").value, this.locationForm.get("description").value);
-    
     this.submitted = true;
-    console.log(locationToUpdate);
     this._locationService.putLocation(locationToUpdate).subscribe();
     setTimeout(()=>{                          
       this.router.navigate(["/locations"]);

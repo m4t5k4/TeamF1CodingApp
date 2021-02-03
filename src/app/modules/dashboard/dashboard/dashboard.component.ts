@@ -27,10 +27,16 @@ export class DashboardComponent implements OnInit {
   constructor(private _dashboardService: DashboardService) {
     this._dashboardService.getIot().subscribe(
       result => {
-        this.iots = result;
-        this.iot_output = this.iots[this.iots.length - 1];
-        this.date = new Date(this.iot_output.timeStamp);
-        this.last_update = formatDate(this.date, 'dd/MM/yyyy HH:mm', 'en-UK');
+        if (result.length >= 1 ){
+          this.iots = result;
+          this.iot_output = this.iots[this.iots.length - 1];
+          this.date = new Date(this.iot_output.timeStamp);
+          this.last_update = formatDate(this.date, 'dd/MM/yyyy HH:mm', 'en-UK');
+        }
+        else{
+          this.last_update = "Geen data beschikbaar";
+          this.iot_output = new Iot(0,null,this.date)
+        }
       }
     );
   }
@@ -43,10 +49,16 @@ export class DashboardComponent implements OnInit {
     setInterval(() => {
       this._dashboardService.getIot().subscribe(
         result => {
-          this.iots = result;
-          this.iot_output = this.iots[this.iots.length - 1];
-          this.date = new Date(this.iot_output.timeStamp);
-          this.last_update = formatDate(this.date, 'dd/MM/yyyy HH:mm', 'en-UK');
+          if (result.length >= 1 ){
+            this.iots = result;
+            this.iot_output = this.iots[this.iots.length - 1];
+            this.date = new Date(this.iot_output.timeStamp);
+            this.last_update = formatDate(this.date, 'dd/MM/yyyy HH:mm', 'en-UK');
+          }
+          else{
+            this.last_update = "Geen data beschikbaar";
+            this.iot_output = new Iot(0,null,this.date)
+          }
         }
       );
     }, 10000)

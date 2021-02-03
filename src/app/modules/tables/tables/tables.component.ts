@@ -16,6 +16,8 @@ import { MatPaginator } from '@angular/material/paginator';
 })
 export class TablesComponent implements OnInit {
 
+  locations: Location[];
+
   displayedColumns = ["location.name", 'zone', 'name', 'btn'];
   dataSource = new MatTableDataSource<TableLocation>();
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -30,6 +32,11 @@ export class TablesComponent implements OnInit {
             default: return item[property];
           }
         };
+        this.dataSource.filterPredicate = (data: TableLocation, filter: string) => {
+          return data.name.toLocaleLowerCase().includes(filter) ||
+          data.zone.toLocaleLowerCase().includes(filter) ||
+          data.location.name.toLocaleLowerCase().includes(filter);
+        }
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
       }
@@ -43,16 +50,35 @@ export class TablesComponent implements OnInit {
   }   
 
   addTable() {
-    let locations = this._locationsService.getLocations();
-    let table = new TableLocation(0,"EmptyTable","EmptyZone",locations[0]);
+    let table = new TableLocation(0,"EmptyTable","EmptyZone",this.locations[0]);
     this._tablesService.setEditTable(table)
     this.router.navigate(['/tables/edit']);
   }
 
-  deleteTable(id: number) {
-    this._tablesService.deleteTable(id).subscribe();
-    window.location.reload();
-    this.router.navigate(['/tables']);
+  deleteTable(id: number, name: string) {
+    if (window.confirm("Wil je deze tafel: " + name + " verwijderen?")) { 
+      this._tablesService.deleteTable(id).subscribe();
+      setTimeout(()=>{                          
+        this._tablesService.getTables().subscribe(
+          result => {
+            this.dataSource = new MatTableDataSource<TableLocation>(result);
+            this.dataSource.sortingDataAccessor = (item, property) => {
+              switch(property) {
+                case 'location.name': return item.location.name;
+                default: return item[property];
+              }
+            };
+            this.dataSource.filterPredicate = (data: TableLocation, filter: string) => {
+              return data.name.toLocaleLowerCase().includes(filter) ||
+              data.zone.toLocaleLowerCase().includes(filter) ||
+              data.location.name.toLocaleLowerCase().includes(filter);
+            }
+            this.dataSource.paginator = this.paginator;
+            this.dataSource.sort = this.sort;
+          }
+        )
+      }, 1000); 
+    }
   }
 
   showDetailTable(table: TableLocation) {
@@ -62,6 +88,10 @@ export class TablesComponent implements OnInit {
   }
 
   ngOnInit(): void {    
+    this._locationsService.getLocations().subscribe(
+      result => {
+      this.locations = result;
+    })
   }
 
   applyFilter(filterValue: string) {
