@@ -23,47 +23,62 @@ export class PlacesComponent implements OnInit {
   tables: TableLocation[];
   places: Place[];
 
-  displayedColumns = ["table.location.name", "table.name", "name", 'btn'];
+  displayedColumns = ["table.location.name","table.zone","table.name","name", 'btn'];
   dataSource = new MatTableDataSource<Place>();
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private _tablesService: TablesService, private _placesService: PlacesService, private _locationsService: LocationsService, private router: Router) {
+  constructor(private _tablesService : TablesService,private _placesService: PlacesService,private _locationsService:LocationsService, private router: Router) {
+    this.sorting();
+    this.getLocations();
+    this.getPlaces();
+   }
+
+   getLocations():void{
+    this._locationsService.getLocations().subscribe(
+      result => {
+          this.locations = result
+      }
+    )
+   }
+
+   getPlaces():void{
+    this._placesService.getPlaces().subscribe(
+      result => {
+          this.places = result
+      }
+    )
+   }
+
+   sorting(): void{
     this._placesService.getPlaces().subscribe(
       result => {
         this.dataSource = new MatTableDataSource<Place>(result);
         this.dataSource.sortingDataAccessor = (item, property) => {
           switch (property) {
-            case 'table.location.name': return item.tableLocation.location.name;
-            case 'table.name': return item.tableLocation.name;
-            default: return item[property];
+              case 'table.location.name': return item.tableLocation.location.name;
+              case 'table.name': return item.tableLocation.name;
+              case 'table.zone': return item.tableLocation.zone;
+              default: return item[property];
           }
         }
         this.dataSource.filterPredicate = (data: Place, filter: string) => {
           return data.name.toLocaleLowerCase().includes(filter) ||
-            data.tableLocation.name.toLocaleLowerCase().includes(filter) ||
-            data.tableLocation.location.name.toLocaleLowerCase().includes(filter);
+          data.tableLocation.name.toLocaleLowerCase().includes(filter) ||
+          data.tableLocation.location.name.toLocaleLowerCase().includes(filter) ||
+          data.tableLocation.zone.toLocaleLowerCase().includes(filter);
         }
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
         console.log(this.dataSource);
       }
     )
-    this._locationsService.getLocations().subscribe(
-      result => {
-        this.locations = result
-      }
-    )
-    this._placesService.getPlaces().subscribe(
-      result => {
-        this.places = result
-      }
-    )
-  }
+   }
 
-  @ViewChild(MatSort) sort: MatSort;
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+
+   @ViewChild(MatSort) sort: MatSort;
+   ngAfterViewInit() {
+     this.dataSource.paginator = this.paginator;
+     this.dataSource.sort = this.sort;
   }
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
