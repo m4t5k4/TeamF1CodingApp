@@ -25,6 +25,10 @@ export class DashboardComponent implements OnInit {
   public date = new Date;
   public path = ""
   constructor(private _dashboardService: DashboardService) {
+    setInterval(() => {
+      const date = new Date();
+      this.updateClock(date);
+    }, 1000)
     this._dashboardService.getIot().subscribe(
       result => {
         if (result.length >= 1 ){
@@ -42,10 +46,6 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    setInterval(() => {
-      const date = new Date();
-      this.updateClock(date);
-    }, 1000)
     setInterval(() => {
       this._dashboardService.getIot().subscribe(
         result => {

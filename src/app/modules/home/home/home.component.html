@@ -4,7 +4,7 @@
             <div class="card mb-4">
                 <img class="card-img-top" src="../../../../assets/corda-campus.jpg" alt="Card image cap">
                 <div class="card-body">
-                    <h2 class="card-title text-center">Corda campus 1 & 2</h2>
+                    <h2 class="card-title">Corda campus</h2>
                     <p class="card-text">Beste werknemer, vanaf nu is het mogelijk om reservaties te plaatsen via dit
                         platform. Er is de mogelijkheid om te reserveren op de Corda campus 1 & 2.</p>
                     <a (click)="routeToReservate()" class="btn nav-link">Reserveren &rarr;</a>
@@ -13,22 +13,10 @@
             <div class="card mb-4">
                 <img class="card-img-top" src="../../../../assets/safety-first.jpg" alt="Card image cap">
                 <div class="card-body">
-                    <h2 class="card-title text-center">Dashboard</h2>
+                    <h2 class="card-title">Dashboard</h2>
                     <p class="card-text">Niet zeker hoeveel volk er aanwezig is? Bekijk ons dashboard voor een beeld van
                         de keuken en kijk hoeveel mensen er binnen zijn gekomen.</p>
                     <a (click)="routeToDashboard()" class="btn nav-link">Dashboard &rarr;</a>
-                </div>
-            </div>
-            <div class="card mb-4">
-                <img class="card-img-top" src="../../../../assets/CORDA-1.jpg" alt="Card image cap">
-                <div class="card-body">
-                    <h2 class="card-title text-center">Corda campus 1</h2>
-                </div>
-            </div>
-            <div class="card mb-4">
-                <img class="card-img-top" src="../../../../assets/CORDA-2.jpg" alt="Card image cap">
-                <div class="card-body">
-                    <h2 class="card-title text-center">Corda campus 2</h2>
                 </div>
             </div>
         </div>
@@ -36,31 +24,15 @@
             <div class="card my-4">
                 <h5 class="card-header color">Links</h5>
                 <div class="card-body">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <ul class="list-unstyled">
-                                <li>
-                                    <a href="https://www.elision.eu/" class="nav-link">Website Elision</a>
-                                </li>
-                                <li>
-                                    <a (click)="routeToReservate()" class="nav-link">Reserveren</a>
-                                </li>
-                                <li>
-                                    <a (click)="routeToDashboard()" class="nav-link">Dashboard</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col-lg-6">
-                            <ul class="list-unstyled mb-0">
-                                <li>
-                                    <button matTooltip="Kopieer de url"
-                                        aria-label="Kopieer de knop"
-                                        class="btn" [cdkCopyToClipboard]="longText">Kopieer link reservatie
-                                        website</button>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+                    <ul class="list-group">
+                        <li class="list-group-item"><a href="https://www.elision.eu/" class="nav-link">Website
+                                Elision</a></li>
+                        <li class="list-group-item"><a (click)="routeToReservate()" class="nav-link">Reserveren</a></li>
+                        <li class="list-group-item"><a (click)="routeToDashboard()" class="nav-link">Dashboard</a></li>
+                        <li class="list-group-item">
+                            <a class="nav-link" matTooltip="Kopieer de url" [cdkCopyToClipboard]="longText" aria-label="Kopieer de knop">Kopieer url</a>
+                                                        </li>
+                    </ul>
                 </div>
             </div>
             <div class="card my-4">
