@@ -21,6 +21,7 @@ export class PlacesComponent implements OnInit {
   locations: Location[];
   test: Place[];
   tables: TableLocation[];
+  places: Place[];
 
   displayedColumns = ["table.location.name","table.name","name", 'btn'];
   dataSource = new MatTableDataSource<Place>();
@@ -50,6 +51,11 @@ export class PlacesComponent implements OnInit {
     this._locationsService.getLocations().subscribe(
       result => {
           this.locations = result
+      }
+    )
+    this._placesService.getPlaces().subscribe(
+      result => {
+          this.places = result
       }
     )
    }

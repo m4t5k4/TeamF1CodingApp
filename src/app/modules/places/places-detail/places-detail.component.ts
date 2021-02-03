@@ -9,6 +9,8 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { observable } from 'rxjs';
 import { Place } from 'src/app/shared/models/place.model';
+import { ScenarioService } from '../../scenario/scenario.service';
+import { Scenario } from 'src/app/shared/models/scenario.model';
 
 @Component({
   selector: 'app-places-detail',
@@ -17,23 +19,37 @@ import { Place } from 'src/app/shared/models/place.model';
 })
 export class PlacesDetailComponent implements OnInit {
 
-  constructor(private _tablesService: TablesService,private _locationsService: LocationsService,private _placesService: PlacesService, private router: Router) {
-    this.getLocations();
+  
+  constructor(private _tablesService: TablesService,private _scenariosService: ScenarioService,private _locationsService: LocationsService,private _placesService: PlacesService, private router: Router) {
     this.getTables();
-   }
+    this.getLocations();
+    this._scenariosService.getScenario().subscribe(
+      result => {
+      this.scenarios = result;
+      }
+    )
+    this._placesService.getPlaces().subscribe(
+      result => {
+      this.places = result;
+      }
+    )
+  }
 
   locations: Location[];
   allTables: TableLocation[];
-  zones = [];
   filteredTables : TableLocation[];
   filteredTables2 : TableLocation[];
+  zones = [];
   place: Place;
+  places: Place[];
+  placeToUpdate: Place;
+  scenarios: Scenario[];
 
   placeForm = new FormGroup(
     {
       id: new FormControl(""),
       name: new FormControl("", Validators.required),
-      table: new FormControl("", Validators.required),
+      selectedTable: new FormControl("", Validators.required),
       selectedLocation: new FormControl("", Validators.required),
       selectedZone: new FormControl("",Validators.required)
     }
@@ -42,20 +58,82 @@ export class PlacesDetailComponent implements OnInit {
   submitted: boolean = false;
 
   savePlace() {
-    let place = this._placesService.getPlace();
-    let placeToUpdate = new Place(this.placeForm.get("id").value,
-    this.placeForm.get("name").value,
-    this.placeForm.get("table").value,
-    this.place.active);
-    
-    this.submitted = true;
-    console.log(placeToUpdate);
-
-    if(place.name == "EmptyPlace"){
-      this._placesService.addPlace(placeToUpdate).subscribe();
+    console.log(typeof this.placeForm.get("selectedTable").value)
+    if((typeof this.placeForm.get("selectedTable").value)== "string"){
+      
+      this.place = this._placesService.getPlace();
+      this.placeToUpdate = new Place(this.placeForm.get("id").value,
+      this.placeForm.get("name").value,
+      this.filteredTables2.filter(table => table.name == this.placeForm.get("selectedTable").value)[0],
+      this.place.active);
     }
     else{
-      this._placesService.updatePlace(placeToUpdate).subscribe();
+      this.place = this._placesService.getPlace();
+      this.placeToUpdate = new Place(this.placeForm.get("id").value,
+      this.placeForm.get("name").value,
+      this.placeForm.get("selectedTable").value,
+      this.place.active);
+    }
+
+    this.places = this.places.filter(place => place.tableLocation.id == this.placeForm.get("selectedTable").value.id)
+    let length = this.places.length + 1;
+
+    switch(this.scenarios[0].scenario){
+      case "Groen": { 
+        console.log("Groen")
+        this.placeToUpdate.active = true;
+        console.log(this.placeToUpdate.active) 
+        break; 
+      }
+      case "Geel": { 
+        console.log("Geel")
+        if (length % 4 == 0) {
+          this.placeToUpdate.active = false;
+        } 
+        else {
+          this.placeToUpdate.active = true;
+        }
+        console.log(this.placeToUpdate.active) 
+        break; 
+      } 
+      case "Oranje": { 
+        console.log("Oranje")
+        if (this.places.length % 2 == 0) {
+          this.placeToUpdate.active = true;
+        } 
+        else {
+          this.placeToUpdate.active = false;
+        }
+        console.log(this.placeToUpdate.active) 
+        break; 
+      }
+      case "Rood": { 
+        console.log("Rood")
+        if (this.places.length % 4 == 0) {
+          this.placeToUpdate.active = true;
+        } 
+        else {
+          this.placeToUpdate.active = false;
+        }
+        console.log(this.placeToUpdate.active) 
+        break; 
+      } 
+      case "Zwart": { 
+        console.log("Zwart")
+        this.place.active = false;
+        console.log(this.placeToUpdate.active) 
+        break; 
+      }   
+    }    
+    
+    this.submitted = true;
+    console.log(this.placeToUpdate);
+
+    if(this.place.name == "EmptyPlace"){
+      this._placesService.addPlace(this.placeToUpdate).subscribe();
+    }
+    else{
+      this._placesService.updatePlace(this.placeToUpdate).subscribe();
     }
 
     setTimeout(()=>{                          
@@ -84,34 +162,21 @@ export class PlacesDetailComponent implements OnInit {
   }
 
   initfunc(): void{
-    this._tablesService.getTables().subscribe(
-      result => {
-      this.allTables = result;
-    })
-    this._locationsService.getLocations().subscribe(
-      result => {
-      this.locations = result;
-    })
-
+    this.getLocations();
+    this.getTables();
     this.placeForm.get('selectedLocation').valueChanges.subscribe(location => {
       this.filteredTables = this.allTables.filter(table => table.location.name == location.name);
       this.zones = [... new Set(this.filteredTables.map(table => table.zone))];
-/*       console.log(this.allTables)
-      console.log(this.filteredTables)
-      console.log(this.zones)
-      console.log(typeof this.placeForm.get('selectedLocation').value) */
-            
     });
     this.placeForm.get('selectedZone').valueChanges.subscribe(zone => {
-      //console.log(zone);
       this.filteredTables2 = this.filteredTables.filter(table => table.zone == zone);
     });
   }
 
 
   ngOnInit(): void {
-    this.getLocations();
-    this.getTables();    
+    this.getTables();
+        
     if (this.placeForm.controls['name'].value=="EmptyPlace") {
       this.router.navigate(["/places"]);
     }
@@ -121,26 +186,21 @@ export class PlacesDetailComponent implements OnInit {
       result => {
       this.allTables = result;
       this.filteredTables = this.allTables.filter(table => table.location.name == ((this.place).tableLocation).location.name);
-      //console.log(this.filteredTables)
       this.zones = [... new Set(this.filteredTables.map(table => table.zone))];
       this.filteredTables2 = this.filteredTables.filter(table => table.zone == ((this.place).tableLocation).zone);
-      //console.log(this.filteredTables2)
+      this.place.tableLocation = this.filteredTables2.filter(table => table.id === this.place.tableLocation.id)[0];
       }
     )
 
     if (this.place.name != "EmptyPlace") {
-      //console.log(this.placeForm.get('selectedLocation').value.name)
-      this.placeForm.setValue({id: (this.place).id,name:(this.place).name,table:(this.place).tableLocation,selectedLocation: ((this.place).tableLocation).location,selectedZone:((this.place).tableLocation).zone})
+      this.placeForm.reset({id: (this.place).id,name:(this.place).name,selectedTable:this.place.tableLocation,selectedLocation: ((this.place).tableLocation).location,selectedZone:((this.place).tableLocation).zone})
       
     }
     else{
       this.place = this._placesService.getPlace();
-      this.placeForm.setValue({id: (this.place).id,name:"Nieuwe Plaats",table:(this.place).tableLocation,selectedLocation: ((this.place).tableLocation).location,selectedZone:((this.place).tableLocation).zone})
-      //console.log(this.place)
+      this.placeForm.reset({id: (this.place).id,name:"Nieuwe Plaats",selectedTable:(this.place).tableLocation,selectedLocation: ((this.place).tableLocation).location,selectedZone:((this.place).tableLocation).zone})
 
     }
-    //console.log("Test 1 : "+this.placeForm.controls['selectedLocation'].value.name);
-    //console.log("Test 2 : "+this.placeForm.controls['id'].value);
     this.initfunc();
     
   }
