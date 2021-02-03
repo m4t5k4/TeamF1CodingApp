@@ -22,9 +22,15 @@ export class AdminUsersComponent implements AfterViewInit {
     this._adminService.getUsers().subscribe(
       result => {
         this.dataSource = new MatTableDataSource<User>(result);
+        // this.dataSource.sortingDataAccessor = (item, property) => {
+        //   switch (property) {
+        //     case 'role.name': return item.roles.name;
+        //     default: return item[property]
+        //   }
+        // }
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
-        console.log(this.dataSource);
+        // console.log(this.dataSource);
        }
     );
   }

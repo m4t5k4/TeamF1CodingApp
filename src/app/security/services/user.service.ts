@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Role } from 'src/app/shared/models/role.model';
 import { environment } from 'src/environments/environment';
 
 const API_URL = environment.baseUrl + 'test/';
@@ -11,6 +12,7 @@ const API_URL = environment.baseUrl + 'test/';
 export class UserService {
 
   constructor(private http: HttpClient) { }
+
 
   getPublicContent(): Observable<any> {
     return this.http.get(API_URL + 'all', { responseType: 'text' });
@@ -24,5 +26,4 @@ export class UserService {
     return this.http.get(API_URL + 'admin', { responseType: 'text' });
   }
 
-  // getRole():
 }

@@ -29,10 +29,15 @@
             <ng-container matColumnDef="btn">
                 <th mat-header-cell *matHeaderCellDef mat-header> Action </th>
                 <td mat-cell *matCellDef="let row" data-label="">
-                    <button class="btn mr-2 mb-2" style="background-color: #000000; color: white;"
-                        (click)="editUser(row)">Bewerken</button>
-                    <button class="btn mr-2 mb-2" style="background-color: #D40000; color: white;"
-                        (click)="deleteUser(row.id,row.username)">Verwijderen</button>
+                    <button class="btn-sm mr-1" (click)="editUser(row)">
+                        <mat-icon aria-hidden="false" class="icon-v-align" aria-label="Example home icon">edit
+                        </mat-icon>
+                    </button>
+                    
+                    <button class="btn-sm mr-1" (click)="deleteUser(row.id,row.username)">
+                        <mat-icon aria-hidden="false" class="icon-v-align" aria-label="Example home icon">delete
+                        </mat-icon>
+                    </button>
                 </td>
             </ng-container>
 
