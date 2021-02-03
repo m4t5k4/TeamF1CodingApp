@@ -1,18 +1,20 @@
-<form [formGroup]="tableForm" (ngSubmit)="saveTable()" class="ml-5 mr-5 mt-5">
-    <input type="hidden" id="Id" name="Id" formControlName="id">
-    <p>Locatie:
-        <select formControlName="locationSelect" class="form-control">
-            <option *ngFor="let location of locations" [ngValue]="location" [selected]="location.id === Table.location.id">{{location.name}}</option>
-        </select>
-    </p>
-    <p>Zone:
-        <input type="text" formControlName="zone" class="form-control" />
-    </p>
-    <p>Naam:
-        <input type="text" formControlName="name" class="form-control" />
-    </p>
-    <p><button mat-raised-button type="submit"
-            [disabled]="!tableForm.valid || submitted"><span *ngIf="submitted"
-            class="spinner-border spinner-border-sm mr-1"></span>Opslaan</button></p>
-</form>
-<button mat-raised-button class="ml-5" (click)="btnReturn();">Terug naar overzicht</button>
+<div class="container">
+    <form [formGroup]="tableForm" (ngSubmit)="saveTable()" class="ml-5 mr-5 mt-5">
+        <input type="hidden" id="Id" name="Id" formControlName="id">
+        <p>Locatie:
+            <select formControlName="locationSelect" class="form-control">
+                <option *ngFor="let location of locations" [ngValue]="location" [selected]="location.id === Table.location.id">{{location.name}}</option>
+            </select>
+        </p>
+        <p>Zone:
+            <input type="text" formControlName="zone" class="form-control" />
+        </p>
+        <p>Naam:
+            <input type="text" formControlName="name" class="form-control" />
+        </p>
+        <p><button mat-raised-button type="submit"
+                [disabled]="!tableForm.valid || submitted"><span *ngIf="submitted"
+                class="spinner-border spinner-border-sm mr-1"></span>Opslaan</button></p>
+    </form>
+    <button mat-raised-button class="ml-5" (click)="btnReturn();">Terug naar overzicht</button>
+</div>
