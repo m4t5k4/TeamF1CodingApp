@@ -136,7 +136,7 @@ export class PlacesDetailComponent implements OnInit {
     else{
       this.place = this._placesService.getPlace();
       this.placeForm.setValue({id: (this.place).id,name:"Nieuwe Plaats",table:(this.place).tableLocation,selectedLocation: ((this.place).tableLocation).location,selectedZone:((this.place).tableLocation).zone})
-      //console.log(this.place)
+      console.log("edsffd " + this.place);
 
     }
     //console.log("Test 1 : "+this.placeForm.controls['selectedLocation'].value.name);
