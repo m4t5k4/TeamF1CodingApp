@@ -1,61 +1,43 @@
-<h2 class="text-center">Locaties</h2>
-<div class="m-5">
-    <button mat-raised-button (click)="btnClickNew();">Voeg een nieuwe locatie toe</button>
-    <div class="example-header mt-4">
-        <mat-form-field>
-            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-        </mat-form-field>
+<div class="container">
+    <h2 class="text-center">Locaties</h2>
+    <div class="m-5">
+        <button mat-raised-button (click)="btnClickNew();">Voeg een nieuwe locatie toe</button>
+        <div class="example-header mt-4">
+            <mat-form-field>
+                <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Zoeken">
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="col mb-5">
+        <table mat-table [dataSource]="dataSource" matSort>
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Naam </th>
+                <td mat-cell *matCellDef="let row" data-label="name"> {{row.name}}</td>
+            </ng-container>
+            <ng-container matColumnDef="address">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Adres </th>
+                <td mat-cell *matCellDef="let row" data-label="address"> {{row.address}} </td>
+            </ng-container>
+            <ng-container matColumnDef="description">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Omschrijving </th>
+                <td mat-cell *matCellDef="let row" data-label="description"> {{row.description}}</td>
+            </ng-container>
+            <ng-container matColumnDef="btn">
+                <th mat-header-cell *matHeaderCellDef mat-header> </th>
+                <td mat-cell *matCellDef="let row" data-label="">
+                    <button class="btn-sm mr-1" (click)="showDetailLocation(row)">
+                        <mat-icon aria-hidden="false" class="icon-v-align" aria-label="Example home icon">edit
+                        </mat-icon>
+                    </button>
+                    <button (click)="deleteLocation(row.id,row.name)" class="btn-sm mr-1">
+                        <mat-icon aria-hidden="false" class="icon-v-align" aria-label="Example home icon">delete
+                        </mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
     </div>
 </div>
-<div class="col mb-5">
-    <table mat-table [dataSource]="dataSource" matSort>
-        <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Naam </th>
-            <td mat-cell *matCellDef="let row" data-label="name"> {{row.name}}</td>
-        </ng-container>
-        <ng-container matColumnDef="address">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Adres </th>
-            <td mat-cell *matCellDef="let row" data-label="address"> {{row.address}} </td>
-        </ng-container>
-        <ng-container matColumnDef="description">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Omschrijving </th>
-            <td mat-cell *matCellDef="let row" data-label="description"> {{row.description}}</td>
-        </ng-container>
-        <ng-container matColumnDef="btn">
-            <th mat-header-cell *matHeaderCellDef mat-header> </th>
-            <td mat-cell *matCellDef="let row" data-label="">
-                <button class="btn-sm mr-1" (click)="showDetailLocation(row)"><mat-icon aria-hidden="false" class="icon-v-align" aria-label="Example home icon">edit</mat-icon></button>
-                <button (click)="deleteLocation(row.id,row.name)" class="btn-sm mr-1"><mat-icon aria-hidden="false" class="icon-v-align" aria-label="Example home icon">delete</mat-icon></button>
-            </td>
-        </ng-container>
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
-
-    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
-</div>
-
-<!-- <h1 class="text-center">Locaties</h1>
-<button mat-raised-button class="ml-5" (click)="btnClickNew();">Voeg een nieuwe locatie toe</button>
-<div class="table-responsive">
-    <table class="table m-5">
-        <thead>
-            <tr>
-                <th scope="col">Naam</th>
-                <th scope="col">Adres</th>
-                <th scope="col">Omschrijving</th>
-                <th scope="col"></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let l of locations">
-                <td>{{l.name}}</td>
-                <td>{{l.address}}</td>
-                <td>{{l.description}}</td>
-                <td><button class="btn-sm mr-1"
-                        (click)="showDetailLocation(l)">Bewerken</button><button
-                        (click)="deleteLocation(l.id,l.name)" class="btn-sm mr-1">Verwijderen</button></td>
-            </tr>
-        </tbody>
-    </table>
-</div> -->
