@@ -19,7 +19,6 @@ import { AdminModule } from "./modules/admin/admin.module";
 import { HttpClientModule } from '@angular/common/http';
 import { NavComponent } from './modules/nav/nav.component';
 import { FooterComponent } from './modules/footer/footer.component';
-import { AdminComponent } from './modules/admin/admin/admin.component';
 import { HomeModule } from './modules/home/home.module';
 import {DashboardModule} from './modules/dashboard/dashboard.module';
 import {AdminDashboardModule}  from './modules/admin-dashboard/admin-dashboard.module';

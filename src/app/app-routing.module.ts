@@ -9,7 +9,7 @@ import { LocationFormComponent } from './modules/locations/location-form/locatio
 import { LocationsComponent } from './modules/locations/locations/locations.component';
 import { LoginComponent } from './security/login/login.component';
 import { RegisterComponent } from './security/register/register.component';
-import { ProfileComponent } from './security/profile/profile.component';
+import { ProfileComponent } from './security/profile/profile/profile.component';
 import { TablesComponent } from './modules/tables/tables/tables.component';
 import { TablesDetailComponent } from './modules/tables/tables-detail/tables-detail.component';
 import { LogoutComponent } from './security/logout/logout.component';
@@ -20,6 +20,7 @@ import {DashboardComponent} from './modules/dashboard/dashboard/dashboard.compon
 import { AdminEditUserComponent } from './modules/admin/admin-edit-user/admin-edit-user.component';
 import {AdminDashboardComponent} from './modules/admin-dashboard/admin-dashboard/admin-dashboard.component';
 import {HomeComponent} from './modules/home/home/home.component';
+import { ProfileEditComponent } from './security/profile/profile-edit/profile-edit.component';
 
 const routes: Routes = [
   { path: 'employee', component: ReserveComponent, canActivate: [AuthGuard] },
@@ -28,6 +29,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent},
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
+  { path: 'profile/edit', component: ProfileEditComponent, canActivate: [AuthGuard] },
   { path: 'location', component: LocationsComponent, canActivate: [AuthGuard] },
   { path: 'location/add', component: LocationFormComponent, canActivate: [AuthGuard] },
   { path: 'location/edit', component: LocationDetailComponent, canActivate: [AuthGuard] },

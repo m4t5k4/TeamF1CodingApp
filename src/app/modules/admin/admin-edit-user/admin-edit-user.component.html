@@ -6,24 +6,30 @@
 
         <div class="form-group">
             <label for="firstname">Voornaam:</label>
-            <input matInput type="text" id="firstname" formControlName="firstname" class="form-control" [readonly]="true" />
+            <input matInput type="text" id="firstname" formControlName="firstname" class="form-control"
+                [readonly]="true" />
         </div>
 
         <div class="form-group">
             <label for="lastname">Achternaam:</label>
-            <input matInput type="text" id="lastname" formControlName="lastname" class="form-control" [readonly]="true" />
+            <input matInput type="text" id="lastname" formControlName="lastname" class="form-control"
+                [readonly]="true" />
         </div>
 
         <div class="form-group">
             <label for="username">Gebruikersnaam:</label>
-            <input matInput type="text" id="username" formControlName="username" class="form-control" [readonly]="true" />
+            <input matInput type="text" id="username" formControlName="username" class="form-control"
+                [readonly]="true" />
         </div>
 
         <div class="form-group">
-            <label for="role">Role:</label>
-            <input matInput type="text" id="role" formControlName="roles" class="form-control" />
+            <select formControlName="selectedRole" class="form-control">
+                <option *ngFor="let role of roles" ngValue="{{role.id}}" [selected]="role.id">
+                    {{role.name}}
+                </option>
+            </select>
         </div>
-        
+
         <p><button mat-raised-button color="primary" type="submit" [disabled]="!userForm.valid || submitted"><span
                     *ngIf="submitted" class="spinner-border spinner-border-sm mr-1"></span>Bewerken</button></p>
     </form>

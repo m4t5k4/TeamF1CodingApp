@@ -3,6 +3,9 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/shared/models/user.model';
 import { AdminService } from '../admin.service';
+import { Role } from 'src/app/shared/models/role.model';
+import { UserService } from 'src/app/security/services/user.service';
+import { resolveSanitizationFn } from '@angular/compiler/src/render3/view/template';
 
 @Component({
   selector: 'app-admin-edit-user',
@@ -11,17 +14,10 @@ import { AdminService } from '../admin.service';
 })
 export class AdminEditUserComponent implements OnInit {
 
-  constructor(private _adminService: AdminService, private router: Router, private fb: FormBuilder, private activatedRoute: ActivatedRoute) { }
+  roles: any;
+  users = [];
 
-  // userForm = this.fb.group({
-  //   firstname: ['', Validators.required],
-  //   lastname: ['', Validators.required],
-  //   username: ['', Validators.required],
-  //   password: ['', Validators.required]
-  // })
-
-  // id;
-  // user: User;
+  constructor(private _adminService: AdminService, private router: Router) { }
 
   userForm = new FormGroup(
     {
@@ -30,33 +26,49 @@ export class AdminEditUserComponent implements OnInit {
       lastname: new FormControl(this._adminService.getUser().lastname, Validators.required),
       username: new FormControl(this._adminService.getUser().username, Validators.required),
       password: new FormControl(this._adminService.getUser().password),
-      roles: new FormControl(this._adminService.getUser().roles, Validators.required),
-      roless: new FormGroup({
-        id: new FormControl(''),
-        role: new FormControl('')
-      })
+      selectedRole: new FormControl(this._adminService.getUser().roles, Validators.required),
     }
   );
 
-  ngOnInit(): void {
-    // this.activatedRoute.paramMap.subscribe(params  => {
-    //   this.id = params.get('id');
-    //   this.findUser();
-    // });
+  getRoles(): void {
+    this._adminService.getRoles().subscribe(
+      result => {
+        this.roles = result;
+      }
+    )
   }
 
-  // findUser(){
-  //   this._adminService.getUser
-  // }
+  initfunc(): void {
+    this.getRoles();
+    this._adminService.getRoles().subscribe(
+      result => {
+        this.roles = result;
+      }
+    )
+  }
+
+  ngOnInit(): void {
+    this.initfunc();
+
+    this._adminService.getUsers().subscribe(users => {
+      this.roles = [... new Set(users.map(user => user.roles))];
+      // console.log(this.roles);
+  })
+}
 
   submitted: boolean = false;
 
   onSubmit() {
-    let userToUpdate = new User(this.userForm.get("id").value, this.userForm.get("firstname").value, this.userForm.get("lastname").value, this.userForm.get("username").value, this.userForm.get("password").value, this.userForm.get("roles").value);
-    console.log(this.userForm.get(['roles.id']).value);
+
+    let selectedRoleID = this.userForm.get('selectedRole').value;
+    let selectedRole: Role[] = [this.roles.find(role => role.id == selectedRoleID)];
+
+    let userToUpdate = new User(this.userForm.get("id").value, this.userForm.get("firstname").value, this.userForm.get("lastname").value, this.userForm.get("username").value, this.userForm.get("password").value, selectedRole);
+    
     this.submitted = true;
     console.log(userToUpdate);
-    this._adminService.putUser(this.userForm.value.id, userToUpdate).subscribe();
+
+    this._adminService.putUser(userToUpdate).subscribe();
     setTimeout(() => {
       this.router.navigate(["/admin/users"]);
     }, 1000);
