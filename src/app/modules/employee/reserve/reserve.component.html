@@ -100,7 +100,8 @@
         <div class="form-row" *ngIf="reservateForm.value.selectedTable">
           <div class="form-group col">
             <label for="description">Beschrijving</label>
-            <input type="text" id="description" name="description" formControlName="description" class="form-control">
+            <input type="text" id="description" name="description" placeholder="optioneel" formControlName="description" class="form-control">
+            <small>optioneel*</small>
           </div>
         </div>
 

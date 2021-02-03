@@ -59,29 +59,34 @@ export class ReserveComponent implements OnInit {
     console.log(this.currentUser);
 
     this._placesService.getPlaces().subscribe(places => {
+      console.log(places);
       this.places = places.filter(place =>
+          place.active == true &&
           place.tableLocation.location.name == this.reservateForm.value.selectedLocation &&
           place.tableLocation.zone == this.reservateForm.value.selectedZone &&
           place.tableLocation.name == this.reservateForm.value.selectedTable);
-
       this.reservateForm.get('selectedLocation').valueChanges.subscribe(location => {
         this.places = places.filter(place =>
+          place.active == true &&
           place.tableLocation.location.name == location &&
           place.tableLocation.zone == this.reservateForm.value.selectedZone &&
           place.tableLocation.name == this.reservateForm.value.selectedTable);
       });
       this.reservateForm.get('selectedZone').valueChanges.subscribe(zone => {
         this.places = places.filter(place =>
+          place.active == true &&
           place.tableLocation.name == this.reservateForm.value.selectedTable &&
           place.tableLocation.zone == zone &&
           place.tableLocation.location.name == this.reservateForm.value.selectedLocation);
       });
       this.reservateForm.get('selectedTable').valueChanges.subscribe(table => {
         this.places = places.filter(place =>
+          place.active == true &&
           place.tableLocation.name == table &&
           place.tableLocation.zone == this.reservateForm.value.selectedZone &&
           place.tableLocation.location.name == this.reservateForm.value.selectedLocation);
 
+        console.log(this.places);
       });
       this.reservateForm.get('places').valueChanges.subscribe(array => {
         this.result = array;
@@ -123,6 +128,24 @@ export class ReserveComponent implements OnInit {
         this.reservateForm.controls['selectedTable'].setValue('');
         console.log(this.reservateForm.value.selectedTable);
       });
+
+      this.reservateForm.get('date').valueChanges.subscribe(date => {
+        this._reservationService.getReservationsByDate(date).subscribe(reservations => {
+          console.log(reservations);
+          let matches = [];
+          for(var i=0; i < reservations.length; i++) {
+            for(var j=0; j < reservations[i].places.length; j++) {
+              if (reservations[i].places[j].tableLocation.location.name == this.reservateForm.value.selectedLocation &&
+                reservations[i].places[j].tableLocation.zone == this.reservateForm.value.selectedZone &&
+                reservations[i].places[j].tableLocation.name == this.reservateForm.value.selectedTable) {
+                  matches.push(reservations[i]);
+                }
+            }
+          }
+
+          console.log(matches);
+        })
+      })
 
       let time = LocalTime.now().toString().slice(0,-7);
 
