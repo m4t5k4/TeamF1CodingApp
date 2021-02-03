@@ -12,7 +12,7 @@
         </select>
     </div>
     <p>Tafel:
-        <select formControlName="table" class="form-control">
+        <select formControlName="selectedTable" class="form-control" >
             <option *ngFor="let table of filteredTables2" [selected]="table.id === place.tableLocation.id">{{table.name}}</option>
         </select>
     </p>
