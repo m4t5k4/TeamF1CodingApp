@@ -25,8 +25,13 @@
                     aria-expanded="false">Admin</a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" routerLink="/admin/users">Gebruikers</a>
+                    <a class="dropdown-item" routerLink="/locations">Locaties</a>
+                    <a class="dropdown-item" routerLink="/scenarios">Scenarios</a>
+                    <a class="dropdown-item" routerLink="/tables">Tafels</a>
+                    <a class="dropdown-item" routerLink="/places">Plaatsen</a>
+                    <a class="dropdown-item" routerLink="/admin-dashboard">Admin dashboard</a> 
                 </div>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a *ngIf="authService.isLoggedIn() && authService.isLoggedInAsAdmin()" class="nav-link" routerLink="/admin-dashboard"
                     [routerLinkActive]="['active']">Admin dashboard</a>
             </li>
@@ -45,7 +50,7 @@
             <li class="nav-item">
                 <a *ngIf="authService.isLoggedIn()  && authService.isLoggedInAsAdmin()" class="nav-link"
                     routerLink="/places" [routerLinkActive]="['active']">Plaatsen</a>
-            </li>
+            </li> -->
         </ul>
 
         <!-- Knoppen rechts -->

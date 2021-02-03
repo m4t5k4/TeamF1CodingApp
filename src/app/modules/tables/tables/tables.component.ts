@@ -55,10 +55,30 @@ export class TablesComponent implements OnInit {
     this.router.navigate(['/tables/edit']);
   }
 
-  deleteTable(id: number) {
-    this._tablesService.deleteTable(id).subscribe();
-    window.location.reload();
-    this.router.navigate(['/tables']);
+  deleteTable(id: number, name: string) {
+    if (window.confirm("Wil je deze tafel: " + name + " verwijderen?")) { 
+      this._tablesService.deleteTable(id).subscribe();
+      setTimeout(()=>{                          
+        this._tablesService.getTables().subscribe(
+          result => {
+            this.dataSource = new MatTableDataSource<TableLocation>(result);
+            this.dataSource.sortingDataAccessor = (item, property) => {
+              switch(property) {
+                case 'location.name': return item.location.name;
+                default: return item[property];
+              }
+            };
+            this.dataSource.filterPredicate = (data: TableLocation, filter: string) => {
+              return data.name.toLocaleLowerCase().includes(filter) ||
+              data.zone.toLocaleLowerCase().includes(filter) ||
+              data.location.name.toLocaleLowerCase().includes(filter);
+            }
+            this.dataSource.paginator = this.paginator;
+            this.dataSource.sort = this.sort;
+          }
+        )
+      }, 1000); 
+    }
   }
 
   showDetailTable(table: TableLocation) {

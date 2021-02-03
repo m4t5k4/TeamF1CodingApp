@@ -27,7 +27,7 @@
             <th mat-header-cell *matHeaderCellDef mat-header> </th>
             <td mat-cell *matCellDef="let row" data-label="">
                 <button class="btn-sm mr-1" (click)="showDetailPlace(row)">Bewerken</button>
-                <button (click)="deletePlace(row.id)" class="btn-sm mr-1">Verwijderen</button>
+                <button (click)="deletePlace(row.id, row.name)" class="btn-sm mr-1">Verwijderen</button>
             </td>
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
