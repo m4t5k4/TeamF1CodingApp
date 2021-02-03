@@ -1,11 +1,13 @@
-<h2 class="text-center">Plaatsen</h2>
-<div class="m-5">
-    <div><button mat-raised-button (click)="addPlace();">Voeg een nieuwe plaats toe</button></div>
-    <div>
-        <div class="example-header mt-4" fxLayout="row">
-            <mat-form-field>
-                <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-            </mat-form-field>
+<div class="container">
+    <h2 class="text-center">Plaatsen</h2>
+    <div class="m-5">
+        <div><button mat-raised-button (click)="addPlace();">Voeg een nieuwe plaats toe</button></div>
+        <div>
+            <div class="example-header mt-4" fxLayout="row">
+                <mat-form-field>
+                    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Zoeken">
+                </mat-form-field>
+            </div>
         </div>
     </div>
 </div>
@@ -45,5 +47,3 @@
     </table>
     <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
 </div>
-
-
