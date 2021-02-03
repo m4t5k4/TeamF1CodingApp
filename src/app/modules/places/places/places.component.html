@@ -26,8 +26,8 @@
         <ng-container matColumnDef="btn">
             <th mat-header-cell *matHeaderCellDef mat-header> </th>
             <td mat-cell *matCellDef="let row" data-label="">
-                <button class="btn-sm mr-1" (click)="showDetailPlace(row)">Bewerken</button>
-                <button (click)="deletePlace(row.id, row.name)" class="btn-sm mr-1">Verwijderen</button>
+                <button class="btn-sm mr-1" (click)="showDetailPlace(row)"><mat-icon aria-hidden="false" class="icon-v-align" aria-label="Example home icon">edit</mat-icon></button>
+                <button (click)="deletePlace(row.id)" class="btn-sm mr-1"><mat-icon aria-hidden="false" class="icon-v-align" aria-label="Example home icon">delete</mat-icon></button>
             </td>
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
