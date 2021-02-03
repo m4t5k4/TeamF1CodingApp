@@ -27,9 +27,6 @@ import { AdminEditUserComponent } from './admin-edit-user/admin-edit-user.compon
     MatPaginatorModule,
     MatSortModule,
     MatProgressSpinnerModule
-  ],
-  exports: [
-    AdminComponent
   ]
 })
 export class AdminModule { }

@@ -10,7 +10,7 @@ import { LocationFormComponent } from './modules/locations/location-form/locatio
 import { LocationsComponent } from './modules/locations/locations/locations.component';
 import { LoginComponent } from './security/login/login.component';
 import { RegisterComponent } from './security/register/register.component';
-import { ProfileComponent } from './security/profile/profile.component';
+import { ProfileComponent } from './security/profile/profile/profile.component';
 import { TablesComponent } from './modules/tables/tables/tables.component';
 import { TablesDetailComponent } from './modules/tables/tables-detail/tables-detail.component';
 import { LogoutComponent } from './security/logout/logout.component';
@@ -19,6 +19,7 @@ import { AdminComponent } from './modules/admin/admin/admin.component';
 import { AdminUsersComponent } from './modules/admin/admin-users/admin-users.component';
 import { DashboardComponent } from './modules/dashboard/dashboard/dashboard.component';
 import { AdminEditUserComponent } from './modules/admin/admin-edit-user/admin-edit-user.component';
+import { ProfileEditComponent } from './security/profile/profile-edit/profile-edit.component';
 import { AdminDashboardComponent } from './modules/admin-dashboard/admin-dashboard/admin-dashboard.component';
 import { HomeComponent } from './modules/home/home/home.component';
 import { PlacesComponent } from './modules/places/places/places.component';
@@ -34,6 +35,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent},
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
+  { path: 'profile/edit', component: ProfileEditComponent, canActivate: [AuthGuard] },
   { path: 'locations', component: LocationsComponent, canActivate: [AuthGuard], data: { role: 'Admin' } },
   { path: 'location/add', component: LocationFormComponent, canActivate: [AuthGuard], data: { role: 'Admin' } },
   { path: 'location/edit', component: LocationDetailComponent, canActivate: [AuthGuard], data: { role: 'Admin' } },

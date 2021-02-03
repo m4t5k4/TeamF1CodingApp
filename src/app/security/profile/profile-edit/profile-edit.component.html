@@ -1,0 +1,33 @@
+<div class="container">
+    <h3 class="ml-5 text-center">Gebruiker bewerken</h3>
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="ml-5 mr-5 mt-5">
+        <input type="hidden" id="Id" name="Id" formControlName="id">
+        <input type="hidden" id="role" name="role" formControlName="role">
+
+        <div class="form-group">
+            <label for="firstname">Voornaam:</label>
+            <input matInput type="text" id="firstname" formControlName="firstname" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label for="lastname">Achternaam:</label>
+            <input matInput type="text" id="lastname" formControlName="lastname" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label for="username">Gebruikersnaam:</label>
+            <input matInput type="text" id="username" formControlName="username" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label for="password">Wachtwoord:</label>
+            <input type="password" id="password" name="password" formControlName="password" class="form-control">
+        </div>
+
+        <p><button type="submit" class="btn" type="submit" [disabled]="!userForm.valid || submitted"><span
+                    *ngIf="submitted" class="spinner-border spinner-border-sm mr-1"></span>Bewerken</button></p>
+
+        <button class="btn" (click)="btnReturn();">Terug naar overzicht</button>
+    </form>
+    
+</div>
