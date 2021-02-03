@@ -23,7 +23,7 @@ export class PlacesComponent implements OnInit {
   tables: TableLocation[];
   places: Place[];
 
-  displayedColumns = ["table.location.name","table.zone","table.name","name", 'btn'];
+  displayedColumns = ["table.location.name","table.zone","table.name","name","active", 'btn'];
   dataSource = new MatTableDataSource<Place>();
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
