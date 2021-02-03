@@ -2,4 +2,12 @@
 
 .template{
     background-color: blue !important;
+
+}
+
+.background
+{
+    background-image: url("../assets/cool-background.png") !important;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
