@@ -35,21 +35,20 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent},
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'locations', component: LocationsComponent, canActivate: [AuthGuard], data: { role: 'Admin' } },
-  { path: 'location/add', component: LocationFormComponent, canActivate: [AuthGuard] },
-  { path: 'location/edit', component: LocationDetailComponent, canActivate: [AuthGuard] },
+  { path: 'location/add', component: LocationFormComponent, canActivate: [AuthGuard], data: { role: 'Admin' } },
+  { path: 'location/edit', component: LocationDetailComponent, canActivate: [AuthGuard], data: { role: 'Admin' } },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
-  { path: 'tables', component: TablesComponent, canActivate: [AuthGuard] },
+  { path: 'tables', component: TablesComponent, canActivate: [AuthGuard], data: { role: 'Admin' } },
   { path: 'logout', component: LogoutComponent },
-  { path: 'tables', component: TablesComponent},
-  { path: 'tables/edit', component: TablesDetailComponent},
-  { path: 'admin', component: AdminComponent },
-  { path: 'admin/users', component: AdminUsersComponent },
-  { path: 'admin/user/edit', component: AdminEditUserComponent },
-  { path: 'admin-dashboard', component : AdminDashboardComponent, canActivate: [AuthGuard]},
+  { path: 'tables/edit', component: TablesDetailComponent,canActivate: [AuthGuard], data: { role: 'Admin' }},
+  { path: 'admin', component: AdminComponent, canActivate: [AuthGuard],data: { role: 'Admin' } },
+  { path: 'admin/users', component: AdminUsersComponent ,canActivate: [AuthGuard], data: { role: 'Admin' }},
+  { path: 'admin/user/edit', component: AdminEditUserComponent, canActivate: [AuthGuard],data: { role: 'Admin' } },
+  { path: 'admin-dashboard', component : AdminDashboardComponent, canActivate: [AuthGuard], data: { role: 'Admin' }},
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
-  { path: 'places', component: PlacesComponent, canActivate: [AuthGuard]},
-  { path: 'places/edit', component: PlacesDetailComponent, canActivate: [AuthGuard]},
-  {path: 'scenarios', component: ScenarioComponent, canActivate:[AuthGuard]}
+  { path: 'places', component: PlacesComponent, canActivate: [AuthGuard], data: { role: 'Admin' }},
+  { path: 'places/edit', component: PlacesDetailComponent, canActivate: [AuthGuard], data: { role: 'Admin' }},
+  { path: 'scenarios', component: ScenarioComponent, canActivate:[AuthGuard], data: { role: 'Admin' }}
 ];
 
 @NgModule({

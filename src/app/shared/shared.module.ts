@@ -7,6 +7,8 @@ import { MaterialModule } from './material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RxReactiveFormsModule } from "@rxweb/reactive-form-validators";
+import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 
 @NgModule({
     imports: [
@@ -18,7 +20,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         MaterialModule,
         FlexLayoutModule,
         BrowserAnimationsModule,
-        BrowserModule
+        BrowserModule,
+        RxReactiveFormsModule,
+        NgxMaterialTimepickerModule,
     ],
     declarations: [],
     exports: [
@@ -26,13 +30,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         FormsModule,
         ReactiveFormsModule,
         RouterModule,
-
+        NgbModule,
         MaterialModule,
         FlexLayoutModule,
-        NgbModule,
-
         BrowserAnimationsModule,
-        BrowserModule
+        BrowserModule,
+        RxReactiveFormsModule,
+        NgxMaterialTimepickerModule,
     ]
 })
 export class SharedModule { }

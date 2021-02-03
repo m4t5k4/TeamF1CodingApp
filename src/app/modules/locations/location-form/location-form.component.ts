@@ -23,14 +23,12 @@ export class LocationFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.locationForm.valueChanges.subscribe(val => {
-      console.log(val);
     })
   }
 
   submitted: boolean = false;
 
   onSubmit() {
-    console.log(this.locationForm.value);
     this.submitted = true;
     this._locationService.addLocation(this.locationForm.value).subscribe();
     setTimeout(()=>{                          

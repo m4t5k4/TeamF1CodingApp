@@ -59,7 +59,6 @@ export class LocationsComponent implements OnInit {
   }
 
   btnClickNew(): void {
-    console.log('trigger');
     this.router.navigate(['/location/add']);
   };
 

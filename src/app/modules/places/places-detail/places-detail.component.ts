@@ -199,7 +199,6 @@ export class PlacesDetailComponent implements OnInit {
     else{
       this.place = this._placesService.getPlace();
       this.placeForm.reset({id: (this.place).id,name:"Nieuwe Plaats",selectedTable:(this.place).tableLocation,selectedLocation: ((this.place).tableLocation).location,selectedZone:((this.place).tableLocation).zone})
-
     }
     this.initfunc();
     

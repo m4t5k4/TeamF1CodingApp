@@ -1,9 +1,10 @@
 import { FlatTreeControl } from '@angular/cdk/tree';
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnInit } from '@angular/core';
 import { MatTreeFlattener, MatTreeFlatDataSource } from '@angular/material/tree';
 import { TablesService } from 'src/app/modules/tables/tables.service';
 import { ReservationService } from '../../reservations/reservation.service';
 import { PlacesService } from '../../../places/places.service';
+import { LocalDate } from '@js-joda/core';
 
 interface Node {
   name: string;
@@ -23,6 +24,7 @@ interface ExampleFlatNode {
   styleUrls: ['./reservation-timesheet.component.scss']
 })
 export class ReservationTimesheetComponent implements OnInit {
+  @Input() location: String;
 
   private _transformer = (node: Node, level: number) => {
     return {
@@ -52,6 +54,7 @@ export class ReservationTimesheetComponent implements OnInit {
 
   ngOnInit(): void {
 
+
     this._tablesService.getTables().subscribe(tables => {
       console.log(tables);
       var corda1 = tables.filter(table => table.location.name == 'Corda campus 1');
@@ -59,11 +62,19 @@ export class ReservationTimesheetComponent implements OnInit {
       console.log(zoneA);
     });
 
-    this._reservationService.getReservations().subscribe(reservations => {
+    var res;
+    let localDate = LocalDate.now();
+    console.log(localDate);
+    this._reservationService.getReservationsByDate(localDate.toString()).subscribe(reservations => {
+      let array = [];
+      reservations.forEach(reservation => {
+        res = reservation;
+        let places = reservation.places;
+      });
+      console.log(res);
       console.log(reservations);
-    });
 
-    let data: Node[] = [
+      let data: Node[] = [
       {
         name: 'Zone A',
         children: [
@@ -77,7 +88,12 @@ export class ReservationTimesheetComponent implements OnInit {
           {
             name: 'Tafel 1',
             children: [
-              {name: 'Plaats 1'},
+              {
+                name: 'Plaats 1',
+                children: [
+                  {name: res.user.username}
+                ]
+            },
               {name: 'Plaats 2'},
             ]
           }, {
@@ -91,6 +107,7 @@ export class ReservationTimesheetComponent implements OnInit {
       },
     ];
     this.dataSource.data = data;
+    });
   }
 
 }
