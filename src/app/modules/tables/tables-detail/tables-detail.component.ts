@@ -27,8 +27,8 @@ export class TablesDetailComponent implements OnInit {
   tableForm = new FormGroup(
     {
       id: new FormControl(""),
-      name: new FormControl("", Validators.required),
-      zone: new FormControl("", Validators.required),
+      name: new FormControl("", Validators.required && Validators.maxLength(20)),
+      zone: new FormControl("", Validators.required && Validators.maxLength(1)),
       locationSelect: new FormControl("", Validators.required),
     }
   )
@@ -37,9 +37,10 @@ export class TablesDetailComponent implements OnInit {
 
   saveTable() {
     let Table = this._tablesService.getTable();
+    let zone = this.tableForm.get("zone").value
     let TableToUpdate = new TableLocation(this.tableForm.get("id").value,
     this.tableForm.get("name").value,
-    this.tableForm.get("zone").value,
+    zone.toUpperCase(),
     this.tableForm.get("locationSelect").value);
     
     this.submitted = true;
