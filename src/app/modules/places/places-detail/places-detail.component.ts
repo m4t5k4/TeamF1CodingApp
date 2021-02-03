@@ -48,7 +48,7 @@ export class PlacesDetailComponent implements OnInit {
   placeForm = new FormGroup(
     {
       id: new FormControl(""),
-      name: new FormControl("", Validators.required),
+      name: new FormControl("", Validators.required && Validators.maxLength(20)),
       selectedTable: new FormControl("", Validators.required),
       selectedLocation: new FormControl("", Validators.required),
       selectedZone: new FormControl("",Validators.required)
