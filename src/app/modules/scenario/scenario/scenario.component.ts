@@ -79,7 +79,7 @@ export class ScenarioComponent implements OnInit {
 
 
   btnReturn() {
-    this.router.navigate([""]);
+    this.router.navigate(["/places"]);
   }
 
   btnRefresh() {

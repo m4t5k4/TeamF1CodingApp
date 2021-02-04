@@ -19,7 +19,7 @@
 <div *ngIf="submitted || places != null || placesTotal != null " class="p-3 mb-2 bg-light text-dark m-5 rounded border border-dark">
   <h4>Scenario bijgewerkt naar code: {{code}} </h4>
   <p><b>Actieve plaatsen: {{places}} / totaal aantal plaatsen {{placesTotal}}</b></p> </div>
- <button class="ml-5" (click)="btnReturn();">Terug naar overzicht</button>
+ <button class="ml-5" (click)="btnReturn();">Overzicht plaatsen</button>
  <button class="ml-5 mt-1" (click)="btnRefresh();" *ngIf="!hideForm">Opnieuw scenario aanpassen</button>
 </div>
 
