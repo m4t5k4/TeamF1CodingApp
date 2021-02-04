@@ -30,8 +30,15 @@
             </select>
         </div>
 
-        <p><button type="submit" class="btn" [disabled]="!userForm.valid || submitted"><span
-                    *ngIf="submitted" class="spinner-border spinner-border-sm mr-1"></span>Bewerken</button></p>
+        <p><button type="submit" class="btn" [disabled]="!userForm.valid || submitted"><span *ngIf="submitted"
+                    class="spinner-border spinner-border-sm mr-1"></span>Bewerken</button></p>
+        <p>
+            <button *ngIf="!rfidSubmitted" type="button" (click)="onPushRfid();">Stel RFID in van de gebruiker</button>
+        </p>
     </form>
+    <div *ngIf="rfidSubmitted" class="p-3 mb-2 bg-light text-dark m-5 rounded border border-dark">
+        <h4>RFID bijgewerkt</h4>
+        <p>De id van de gebruiker werd verstuurd.</p>
+    </div>
     <button class="ml-5" (click)="btnReturn();">Terug naar overzicht</button>
 </div>

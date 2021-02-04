@@ -19,7 +19,6 @@ export class NavComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentUser = this.tokenStorage.getUser();
-    console.log(this.tokenStorage.getUser());
   }
 
   reloadPage(): void {
