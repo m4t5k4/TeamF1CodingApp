@@ -1,7 +1,7 @@
 <div class="container">
     <form *ngIf="!isSuccessful" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate
         class="ml-5 mr-5 mt-5">
-        <h2 class="mb-5">Registreren</h2>
+        <h2 class="mb-5 text-center">Registreren</h2>
         <div class="form-group mt-3">
             <label for="firstname">Voornaam</label>
             <input type="text" class="form-control" name="firstname" [(ngModel)]="form.firstname" #firstname="ngModel">
@@ -33,7 +33,7 @@
         </div>
 
         <div class="form-group mt-3">
-            <button class="btn btn-primary btn-block">Registreer</button>
+            <button class="btn btn-block">Registreer</button>
         </div>
 
         <div class="form-group mt-3">

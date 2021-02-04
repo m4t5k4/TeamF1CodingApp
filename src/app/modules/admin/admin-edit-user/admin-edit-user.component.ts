@@ -17,7 +17,9 @@ export class AdminEditUserComponent implements OnInit {
   roles: any;
   users = [];
 
-  constructor(private _adminService: AdminService, private router: Router) { }
+  constructor(private _adminService: AdminService, private router: Router) { 
+    this.getRoles();
+  }
 
   userForm = new FormGroup(
     {
@@ -26,7 +28,7 @@ export class AdminEditUserComponent implements OnInit {
       lastname: new FormControl(this._adminService.getUser().lastname, Validators.required),
       username: new FormControl(this._adminService.getUser().username, Validators.required),
       password: new FormControl(this._adminService.getUser().password),
-      selectedRole: new FormControl(this._adminService.getUser().roles, Validators.required),
+      selectedRole: new FormControl(this._adminService.getUser().roles, Validators.required)
     }
   );
 

@@ -65,7 +65,7 @@
             </li>
             <li class="nav-item" display="inline-block">
                 <a *ngIf="authService.isLoggedIn()" class="nav-link" routerLink="/profile">Welkom <span
-                        style="color: rebeccapurple; margin-right: 1em;">{{currentUser.firstname}}</span></a>
+                        style="font-weight: bold; margin-right: 1em;">{{currentUser.firstname}}</span></a>
             </li>
             <li class="nav-item">
                 <a *ngIf="authService.isLoggedIn()" class="nav-link" routerLink="/logout">Uitloggen</a>
