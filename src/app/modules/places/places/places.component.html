@@ -13,7 +13,7 @@
     <div class="col">
         <table mat-table [dataSource]="dataSource" matSort>
             <ng-container matColumnDef="table.location.name">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>Tafel </th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Locatie </th>
                 <td mat-cell *matCellDef="let row" class="pr-1" data-label="table.location.name">
                     {{row.tableLocation.location.name}}</td>
             </ng-container>

@@ -1,22 +1,25 @@
-<div class="container" *ngIf="currentUser; else loggedOut">
-    <h3 class="text-center">Profiel van <strong>{{ currentUser.firstname }} {{ currentUser.lastname }}</strong></h3>
+<div class="container mt-5" *ngIf="currentUser; else loggedOut">
+    <header class="jumbotron">
+    <h3>Profiel van <strong>{{ currentUser.firstname }} {{ currentUser.lastname }}</strong></h3>
     <br/>
-    <p class="text-center">
+    <p>
         <strong>Naam: </strong>
         {{ currentUser.firstname }}
         {{ currentUser.lastname }}
     </p>
-    <p class="text-center">
+    <p>
         <strong>Gebruikersnaam: </strong>
         {{ currentUser.username }}
     </p>
-    <p class="text-center" *ngFor="let role of currentUser.roles">
+    <p *ngFor="let role of currentUser.roles">
         <strong>Role: </strong>
         {{ role }}
     </p>
     <br />
 
     <!-- <button class="btn" (click)="btnEdit();">Gegevens bewerken</button> -->
+</header>
+
 </div>
 
 <ng-template #loggedOut>

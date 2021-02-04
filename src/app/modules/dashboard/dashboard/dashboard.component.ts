@@ -23,7 +23,9 @@ export class DashboardComponent implements OnInit {
   public iot_output = new Iot(0, 4, new Date());
   public last_update = "";
   public date = new Date;
-  public path = ""
+  public path = "";
+  imageSrc = "https://project40ftp.azurewebsites.net/capture.jpg";
+
   constructor(private _dashboardService: DashboardService) {
     setInterval(() => {
       const date = new Date();
@@ -46,6 +48,7 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.imageSrc = `https://project40ftp.azurewebsites.net/capture.jpg?time=${Date.now()}`;
     setInterval(() => {
       this._dashboardService.getIot().subscribe(
         result => {
@@ -61,6 +64,7 @@ export class DashboardComponent implements OnInit {
           }
         }
       );
+      this.imageSrc = `https://project40ftp.azurewebsites.net/capture.jpg?time=${Date.now()}`;
     }, 10000)
   }
 
@@ -73,7 +77,9 @@ export class DashboardComponent implements OnInit {
       (date.getHours() * 30 + date.getMinutes() * 0.5) + 'deg)';
   }
 
-  refresh(): void {
-    window.location.reload();
+  refresh() 
+  {
+    this.imageSrc = `https://project40ftp.azurewebsites.net/capture.jpg?time=${Date.now()}`;
   }
+    
 }

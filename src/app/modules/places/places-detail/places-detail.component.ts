@@ -167,6 +167,7 @@ export class PlacesDetailComponent implements OnInit {
     this.placeForm.get('selectedLocation').valueChanges.subscribe(location => {
       this.filteredTables = this.allTables.filter(table => table.location.name == location.name);
       this.zones = [... new Set(this.filteredTables.map(table => table.zone))];
+      this.filteredTables2 = this.filteredTables.filter(table => table.zone == this.place.tableLocation.zone);
     });
     this.placeForm.get('selectedZone').valueChanges.subscribe(zone => {
       this.filteredTables2 = this.filteredTables.filter(table => table.zone == zone);

@@ -16,7 +16,7 @@ export class AdminEditUserComponent implements OnInit {
 
   roles: any;
   users = [];
-
+  rfidSubmitted = false;
   constructor(private _adminService: AdminService, private router: Router) { 
     this.getRoles();
   }
@@ -54,7 +54,6 @@ export class AdminEditUserComponent implements OnInit {
 
     this._adminService.getUsers().subscribe(users => {
       this.roles = [... new Set(users.map(user => user.roles))];
-      // console.log(this.roles);
   })
 }
 
@@ -74,6 +73,16 @@ export class AdminEditUserComponent implements OnInit {
     setTimeout(() => {
       this.router.navigate(["/admin/users"]);
     }, 1000);
+  }
+
+  onPushRfid()
+  {
+    this.rfidSubmitted = true;
+    let Id = this.userForm.get("id").value;
+    this._adminService.setRfid(Id).subscribe();
+    setTimeout(() => {
+      this.rfidSubmitted = false;
+    }, 4000);
   }
 
   btnReturn() {

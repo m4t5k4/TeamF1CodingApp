@@ -9,3 +9,24 @@ a:hover{
     color: black !important;
     cursor: pointer !important;
 }
+
+.objecthover{
+    -webkit-transform: translate(0px, 4px);
+    transform: translate(0px, 4px);
+    -webkit-transition-duration: 1s;
+        transition-duration: 1s;
+}
+
+.objecthover:hover {
+    -webkit-transform: translate(0px, -4px);
+            transform: translate(0px, -4px);
+    -webkit-transition-duration: 1s;
+            transition-duration: 1s;
+    -webkit-box-shadow: 0px 4px 6px lightgrey;
+            box-shadow: 0px 4px 6px lightgrey;
+  }
+
+.borderless
+{
+    border: none;
+}
