@@ -4,7 +4,7 @@
         <div class="card text-center text-dark">
             <div class="card-body">
                 <h5 class="card-title">Live foto keuken</h5>
-                <img src="https://project40ftp.azurewebsites.net/capture.jpg" class="img-fluid" alt="Foto aan het ophalen">
+                <img [src]='imageSrc'  class="img-fluid" alt="Foto aan het ophalen">
                 <p class="mt-5"><button class="btn-sm mr-1" (click)="refresh();">Refresh</button></p>
             </div>
         </div>
