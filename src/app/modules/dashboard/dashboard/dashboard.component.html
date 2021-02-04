@@ -1,7 +1,7 @@
 <h2 class="text-center">Dashboard</h2>
 <div class="row m-5" height="400px">
     <div class="col-sm-6">
-        <div class="card text-center text-dark">
+        <div class="card text-center text-dark objecthover">
             <div class="card-body">
                 <h5 class="card-title">Live foto keuken</h5>
                 <img [src]='imageSrc'  class="img-fluid" alt="Foto aan het ophalen">
@@ -10,7 +10,7 @@
         </div>
     </div>
     <div class="col-sm-6 text-dark">
-        <div class="card text-center">
+        <div class="card text-center objecthover">
             <div class="card-body">
                 <h5 class="card-title">Aantal mensen binnen</h5>
                 <p class="card-text">{{iot_output.totalInside}}</p>
