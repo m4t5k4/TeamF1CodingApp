@@ -19,24 +19,35 @@ export class AdminUsersComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(private _adminService: AdminService, private router: Router) {
+    this.sorting();
+  }
+
+  getUsers(): void {
+    this._adminService.getUsers().subscribe(
+      result => {
+        this.users = result;
+      }
+    )
+  }
+
+  sorting(): void {
     this._adminService.getUsers().subscribe(
       result => {
         this.dataSource = new MatTableDataSource<User>(result);
-        // this.dataSource.sortingDataAccessor = (item, property) => {
-        //   switch (property) {
-        //     case 'role.name': return item.roles.name;
-        //     default: return item[property]
-        //   }
-        // }
+        this.dataSource.sortingDataAccessor = (item, property) => {
+          switch (property) {
+            case 'role.name': return item.roles;
+            default: return item[property]
+          }
+        }
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
-        // console.log(this.dataSource);
-       }
-    );
+        console.log(this.dataSource);
+      }
+    )
   }
 
   @ViewChild(MatSort) sort: MatSort;
-
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
@@ -49,7 +60,7 @@ export class AdminUsersComponent implements AfterViewInit {
     this.dataSource.filter = filterValue;
   }
 
-  editUser(user: User){
+  editUser(user: User) {
     this._adminService.setUser(user);
     this.router.navigate(['/admin/user/edit']);
   }
