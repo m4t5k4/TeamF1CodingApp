@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 })
 export class ReservationsTableComponent implements OnInit {
 
-  displayedColumns = ['amountPersons', 'date', 'description', 'startHour', 'endHour', 'btn'];
+  displayedColumns = ['date', 'startHour', 'endHour', 'confirmed', 'description', 'btn'];
   dataSource = new MatTableDataSource<Reservation>();
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -23,8 +23,9 @@ export class ReservationsTableComponent implements OnInit {
     private _token: TokenStorageService) {
       this._reservationService.getReservationsById(_token.getUser().id).subscribe(
         result => {
+
           this.dataSource = new MatTableDataSource<Reservation>(result);
-          console.log(this.dataSource);
+          //console.log(this.dataSource);
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
 
@@ -50,5 +51,19 @@ export class ReservationsTableComponent implements OnInit {
   showDetailReservation(reservation) {
     this._reservationService.setReservation(reservation);
     this.router.navigate(['/reservation/edit'])
+  }
+
+  deleteReservation(id) {
+    if (confirm("Wil je deze reservatie: " + id +" verwijderen?" )) {
+      this._reservationService.deleteReservation(id).subscribe(() => {
+        this._reservationService.getReservationsById(this._token.getUser().id).subscribe(result => {
+          this.dataSource = new MatTableDataSource<Reservation>(result);
+          //console.log(this.dataSource);
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
+
+      })
+      });
+    }
   }
 }

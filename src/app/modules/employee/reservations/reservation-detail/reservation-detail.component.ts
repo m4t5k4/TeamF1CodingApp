@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Reservation } from 'src/app/shared/models/reservation.model';
 import { ReservationService } from '../reservation.service';
 
 @Component({
@@ -9,28 +10,19 @@ import { ReservationService } from '../reservation.service';
 })
 export class ReservationDetailComponent implements OnInit {
 
+  reservation: Reservation
+
   constructor(
     private _reservationService: ReservationService,
     private router: Router
   ) { }
 
-  reservationForm;
 
   ngOnInit(): void {
+    this.reservation = this._reservationService.getReservation()
   }
 
-  submitted: boolean = false;
 
-  onSubmit() {
-    let reservationToUpdate;
-
-    this.submitted = true;
-    console.log(reservationToUpdate);
-    this._reservationService.updateReservation(reservationToUpdate).subscribe();
-    setTimeout(()=>{
-      this.router.navigate(["/reservations"]);
-    }, 1000);
-  }
 
   btnReturn() {
     this.router.navigate(["/reservations"]);

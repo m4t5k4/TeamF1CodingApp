@@ -24,6 +24,51 @@ import { DashboardModule } from './modules/dashboard/dashboard.module';
 import { AdminDashboardModule }  from './modules/admin-dashboard/admin-dashboard.module';
 import { PlacesModule } from './modules/places/places.module';
 import {ScenarioModule} from './modules/scenario/scenario.module';
+import { NotifierModule, NotifierOptions } from "angular-notifier";
+
+/**
+ * Custom angular notifier options
+ */
+const options: NotifierOptions = {
+  position: {
+		horizontal: {
+			position: 'right',
+			distance: 12
+		},
+		vertical: {
+			position: 'bottom',
+			distance: 12,
+			gap: 10
+		}
+	},
+  theme: 'material',
+  behaviour: {
+    autoHide: 5000,
+    onClick: 'hide',
+    onMouseover: 'pauseAutoHide',
+    showDismissButton: true,
+    stacking: 4
+  },
+  animations: {
+    enabled: true,
+    show: {
+      preset: 'slide',
+      speed: 300,
+      easing: 'ease'
+    },
+    hide: {
+      preset: 'fade',
+      speed: 300,
+      easing: 'ease',
+      offset: 50
+    },
+    shift: {
+      speed: 300,
+      easing: 'ease'
+    },
+    overlap: 150
+  }
+};
 
 @NgModule({
   declarations: [
@@ -52,7 +97,8 @@ import {ScenarioModule} from './modules/scenario/scenario.module';
     DashboardModule,
     AdminDashboardModule,
     PlacesModule,
-    ScenarioModule
+    ScenarioModule,
+    NotifierModule.withConfig(options),
   ],
   bootstrap: [AppComponent]
 })

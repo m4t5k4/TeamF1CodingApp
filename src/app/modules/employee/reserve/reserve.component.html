@@ -6,7 +6,6 @@
     <div class="con">
       <img *ngIf="reservateForm.value.selectedLocation == 'Corda campus 1'" src="../../../../assets/CORDA-1v2.jpg" alt="">
       <img *ngIf="reservateForm.value.selectedLocation == 'Corda campus 2'" src="../../../../assets/CORDA-2v2.jpg" alt="">
-      <!-- <button class="btn">pop up</button> -->
     </div>
   </ng-container>
 
@@ -59,10 +58,12 @@
           </div>
 
           <div class="from-group col" *ngIf="reservateForm.value.selectedTable">
-            <button type="button" class="btn" (click)="addPlace()" style="margin: 0.5em;"
-              [disabled]="reservateForm.controls.places.value.length == this.places.length">Meer plaatsen</button>
-            <button type="button" class="btn" (click)="removePlace()"
-              [disabled]="reservateForm.controls.places.value.length == 1">Minder plaatsen</button>
+            <button type="button" class="btn" (click)="addPlace()" style="margin: 0.5em;margin-top:2.5em"
+              [disabled]="reservateForm.controls.places.value.length == this.places.length">
+                <mat-icon aria-hidden="false" class="icon-v-align">add_cirlce_outline</mat-icon></button>
+            <button type="button" class="btn" (click)="removePlace()" style="margin: 0.5em;margin-top:2.5em"
+              [disabled]="reservateForm.controls.places.value.length == 1">
+                <mat-icon aria-hidden="false" class="icon-v-align">remove_cirlce_outline</mat-icon></button>
           </div>
         </div>
 
@@ -89,19 +90,11 @@
           </div>
         </div>
 
-        <!-- <div class="form-row" *ngIf="reservateForm.value.selectedTable">
-          <div class="form-group col">
-            <label for="amountPersons">Aantal personen</label>
-            <input type="number" id="amountPersons" name="amountPersons" formControlName="amountPersons"
-              class="form-control">
-          </div>
-        </div> -->
-
         <div class="form-row" *ngIf="reservateForm.value.selectedTable">
           <div class="form-group col">
             <label for="description">Beschrijving</label>
             <input type="text" id="description" name="description" placeholder="optioneel" formControlName="description" class="form-control">
-            
+
           </div>
         </div>
 
@@ -112,11 +105,4 @@
       </form>
     </div>
   </ng-container>
-
-  <ng-container>
-    <div class="timesheet">
-      <app-reservation-timesheet></app-reservation-timesheet>
-    </div>
-  </ng-container>
-
 </div>
