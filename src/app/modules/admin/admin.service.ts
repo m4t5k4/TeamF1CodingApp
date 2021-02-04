@@ -57,4 +57,8 @@ export class AdminService {
     this.role = role;
     console.log(this.role);
   }
+
+  setRfid(id : number){
+    return this.http.post<number>(`${environment.baseUrl}rfid/` + id,null)
+  }
 }
