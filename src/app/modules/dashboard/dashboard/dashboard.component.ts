@@ -6,7 +6,6 @@ import { registerLocaleData } from '@angular/common';
 import localeNlbe from '@angular/common/locales/nl-BE';
 import localeNlBeExtra from '@angular/common/locales/extra/nl-BE';
 import { HttpClient } from '@angular/common/http';
-
 registerLocaleData(localeNlbe, localeNlBeExtra);
 
 @Component({
@@ -25,6 +24,7 @@ export class DashboardComponent implements OnInit {
   public last_update = "";
   public date = new Date;
   public path = "";
+  public actRefresh = true;
   imageSrc = "https://project40ftp.azurewebsites.net/capture.jpg";
 
   constructor(private _dashboardService: DashboardService, private _http: HttpClient) {
@@ -79,7 +79,11 @@ export class DashboardComponent implements OnInit {
   }
 
   refresh() {
+    this.actRefresh = false;
     this.imageSrc = `https://project40ftp.azurewebsites.net/capture0.jpg?time=${Date.now()}`;
+    setInterval(() => {
+     this.actRefresh = true;
+    }, 5000)
   }
 
 }

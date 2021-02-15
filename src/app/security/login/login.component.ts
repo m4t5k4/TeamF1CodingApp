@@ -35,7 +35,10 @@ export class LoginComponent implements OnInit {
         this.isLoggedIn = true;
         this.roles = this.tokenStorage.getUser().roles;
         setTimeout(() => {
-          this.router.navigate(['profile']);
+          this.router.navigate(['']).then(() => 
+          {
+            window.location.reload();
+          });
         }, 1000); //1s timeout
       },
       err => {
