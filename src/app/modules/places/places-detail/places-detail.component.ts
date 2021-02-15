@@ -58,7 +58,6 @@ export class PlacesDetailComponent implements OnInit {
   submitted: boolean = false;
 
   savePlace() {
-    console.log(typeof this.placeForm.get("selectedTable").value)
     if((typeof this.placeForm.get("selectedTable").value)== "string"){
       
       this.place = this._placesService.getPlace();
@@ -80,54 +79,43 @@ export class PlacesDetailComponent implements OnInit {
 
     switch(this.scenarios[0].scenario){
       case "Groen": { 
-        console.log("Groen")
         this.placeToUpdate.active = true;
-        console.log(this.placeToUpdate.active) 
         break; 
       }
       case "Geel": { 
-        console.log("Geel")
         if (length % 4 == 0) {
           this.placeToUpdate.active = false;
         } 
         else {
           this.placeToUpdate.active = true;
         }
-        console.log(this.placeToUpdate.active) 
         break; 
       } 
       case "Oranje": { 
-        console.log("Oranje")
         if (this.places.length % 2 == 0) {
           this.placeToUpdate.active = true;
         } 
         else {
           this.placeToUpdate.active = false;
         }
-        console.log(this.placeToUpdate.active) 
         break; 
       }
       case "Rood": { 
-        console.log("Rood")
         if (this.places.length % 4 == 0) {
           this.placeToUpdate.active = true;
         } 
         else {
           this.placeToUpdate.active = false;
         }
-        console.log(this.placeToUpdate.active) 
         break; 
       } 
       case "Zwart": { 
-        console.log("Zwart")
         this.place.active = false;
-        console.log(this.placeToUpdate.active) 
         break; 
       }   
     }    
     
     this.submitted = true;
-    console.log(this.placeToUpdate);
 
     if(this.place.name == "EmptyPlace"){
       this._placesService.addPlace(this.placeToUpdate).subscribe();
@@ -168,9 +156,11 @@ export class PlacesDetailComponent implements OnInit {
       this.filteredTables = this.allTables.filter(table => table.location.name == location.name);
       this.zones = [... new Set(this.filteredTables.map(table => table.zone))];
       this.filteredTables2 = this.filteredTables.filter(table => table.zone == this.place.tableLocation.zone);
+      this.placeForm.get("selectedTable").setValue(this.filteredTables2[0]);
     });
     this.placeForm.get('selectedZone').valueChanges.subscribe(zone => {
       this.filteredTables2 = this.filteredTables.filter(table => table.zone == zone);
+      this.placeForm.get("selectedTable").setValue(this.filteredTables2[0]);
     });
   }
 
