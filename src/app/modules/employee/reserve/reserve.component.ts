@@ -68,6 +68,7 @@ export class ReserveComponent implements OnInit {
           place.tableLocation.location.name == this.reservateForm.value.selectedLocation &&
           place.tableLocation.zone == this.reservateForm.value.selectedZone &&
           place.tableLocation.name == this.reservateForm.value.selectedTable);
+
       this.reservateForm.get('selectedLocation').valueChanges.subscribe(location => {
         this.places = places.filter(place =>
           place.active == true &&
@@ -75,6 +76,7 @@ export class ReserveComponent implements OnInit {
           place.tableLocation.zone == this.reservateForm.value.selectedZone &&
           place.tableLocation.name == this.reservateForm.value.selectedTable);
       });
+
       this.reservateForm.get('selectedZone').valueChanges.subscribe(zone => {
         this.places = places.filter(place =>
           place.active == true &&
@@ -82,6 +84,7 @@ export class ReserveComponent implements OnInit {
           place.tableLocation.zone == zone &&
           place.tableLocation.location.name == this.reservateForm.value.selectedLocation);
       });
+
       this.reservateForm.get('selectedTable').valueChanges.subscribe(table => {
         this.places = places.filter(place =>
           place.active == true &&
@@ -91,12 +94,13 @@ export class ReserveComponent implements OnInit {
 
         //console.log(this.places);
       });
+
       this.reservateForm.get('places').valueChanges.subscribe(array => {
         this.result = array;
         //console.log(this.result);
-      })
+      });
 
-    })
+    });
 
     this._tablesService.getTables().subscribe(tables => {
 
@@ -133,14 +137,22 @@ export class ReserveComponent implements OnInit {
         this._reservationService.getReservationsByDate(date).subscribe(reservations => {
           //console.log(reservations);
           let matchingTableReservations = [];
+
+          //alle reservaties op die dag overlopen
           for(var i=0; i < reservations.length; i++) {
+
+            //alle plaatsen per reservatie controleren op conflict
             for(var j=0; j < reservations[i].places.length; j++) {
               //console.log(reservations[i].places[j]);
+
+              //als de tafel overeen komt met de tafel van een bestaande reservatie
               if (reservations[i].places[j].tableLocation.location.name == this.reservateForm.value.selectedLocation &&
                 reservations[i].places[j].tableLocation.zone == this.reservateForm.value.selectedZone &&
                 reservations[i].places[j].tableLocation.name == this.reservateForm.value.selectedTable) {
                   let selectedPlaces = this.result.map(x => x.place);
                   //console.log(selectedPlaces);
+
+                  //als een gereserveerde plaats zich binnen de collectie van geselecteerde plaatsen bevind
                   if (selectedPlaces.includes(reservations[i].places[j].name)) {
                     //console.log("result includes: "+reservations[i].places[j].name);
                     //console.log(reservations[i]);
@@ -212,17 +224,23 @@ export class ReserveComponent implements OnInit {
 
           //console.log(reservations);
           let matchingTableReservations = [];
+
+          //alle reservaties op die dag overlopen
           for(var i=0; i < reservations.length; i++) {
+
+            //alle plaatsen per reservatie controleren op conflict
             for(var j=0; j < reservations[i].places.length; j++) {
-              console.log(reservations[i].places[j]);
+
+              //als de tafel overeen komt met de tafel van een bestaande reservatie
               if (reservations[i].places[j].tableLocation.location.name == this.reservateForm.value.selectedLocation &&
                 reservations[i].places[j].tableLocation.zone == this.reservateForm.value.selectedZone &&
                 reservations[i].places[j].tableLocation.name == this.reservateForm.value.selectedTable) {
                   let selectedPlaces = this.result.map(x => x.place);
                   //console.log(selectedPlaces);
+
+                  //als een gereserveerde plaats zich binnen de collectie van geselecteerde plaatsen bevind
                   if (selectedPlaces.includes(reservations[i].places[j].name)) {
-                    //console.log("result includes: "+reservations[i].places[j].name);
-                    //console.log(reservations[i]);
+
                     let from = LocalTime.parse(reservations[i].startHour.toString());
                     let end = LocalTime.parse(reservations[i].endHour.toString());
                     let selectedFrom = LocalTime.parse(this.reservateForm.value.from);
@@ -276,7 +294,7 @@ export class ReserveComponent implements OnInit {
           if (!reservatieBegintTillEindigtNaFrom && !reservatieBegintNaFromEindigtNaTill && !reservatieBegintVoorFromEindigtVoorTill && !reservatieBegintNaFromEindigtVoorTill) {
             this._reservationService.addReservation(reservation).subscribe({
             next: () => {
-              console.log(reservation + " toegevoegd");
+              //console.log(reservation + " toegevoegd");
               this.submitted = false;
               this.router.navigate(['/reservations']);
             },

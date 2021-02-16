@@ -5,10 +5,10 @@
       <p>plaatsen:</p>
       <ul>
         <li><p>locatie: {{reservation.places[0].tableLocation.location.name}}</p></li>
-        <li *ngFor="let place of reservation.places"><p>zone: {{place.tableLocation.zone}}, tafel: {{place.tableLocation.name}}, plaats: {{place.name}}</p></li>
+        <li *ngFor="let place of reservation.places"><p>zone: {{place.tableLocation.zone}}, {{place.tableLocation.name}}, {{place.name}}</p></li>
       </ul>
       <p>datum: {{reservation.date}} </p>
-      <p>van - tot: {{reservation.startHour}} - {{reservation.endHour}} </p>
+      <p>van: {{reservation.startHour}} - tot: {{reservation.endHour}} </p>
       <p>beschrijving: {{reservation.description}} </p>
       <p>aankomst bevestigd: {{reservation.confirmed?'ja':'nee'}}</p>
       <button mat-raised-button class="ml-5" (click)="btnReturn();">Terug naar overzicht</button>
