@@ -14,8 +14,10 @@ export class LogoutComponent implements OnInit {
 
   ngOnInit(): void {
     this.tokenStorageService.signOut();
-    this.router.navigate(['login']);
-    
+    this.router.navigate(['login']).then(() => 
+    {
+      window.location.reload();
+    });
   }
 
 }
