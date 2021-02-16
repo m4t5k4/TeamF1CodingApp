@@ -56,23 +56,23 @@ export class ReservationTimesheetComponent implements OnInit {
 
 
     this._tablesService.getTables().subscribe(tables => {
-      console.log(tables);
+      //console.log(tables);
       var corda1 = tables.filter(table => table.location.name == 'Corda campus 1');
       var zoneA = corda1.filter(table => table.zone == 'A');
-      console.log(zoneA);
+     // console.log(zoneA);
     });
 
     var res;
     let localDate = LocalDate.now();
-    console.log(localDate);
+    //console.log(localDate);
     this._reservationService.getReservationsByDate(localDate.toString()).subscribe(reservations => {
       let array = [];
       reservations.forEach(reservation => {
         res = reservation;
         let places = reservation.places;
       });
-      console.log(res);
-      console.log(reservations);
+      //console.log(res);
+      //console.log(reservations);
 
       let data: Node[] = [
       {

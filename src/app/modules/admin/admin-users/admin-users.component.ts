@@ -42,7 +42,7 @@ export class AdminUsersComponent implements AfterViewInit {
         }
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
-        console.log(this.dataSource);
+        //console.log(this.dataSource);
       }
     )
   }

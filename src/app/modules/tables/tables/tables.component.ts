@@ -83,7 +83,7 @@ export class TablesComponent implements OnInit {
 
   showDetailTable(table: TableLocation) {
     this._tablesService.setEditTable(table)
-    console.log(this._tablesService.getTable().name)
+    //console.log(this._tablesService.getTable().name)
     this.router.navigate(['/tables/edit']);
   }
 

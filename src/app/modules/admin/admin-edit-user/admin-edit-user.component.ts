@@ -67,7 +67,7 @@ export class AdminEditUserComponent implements OnInit {
     let userToUpdate = new User(this.userForm.get("id").value, this.userForm.get("firstname").value, this.userForm.get("lastname").value, this.userForm.get("username").value, this.userForm.get("password").value, selectedRole);
     
     this.submitted = true;
-    console.log(userToUpdate);
+    //console.log(userToUpdate);
 
     this._adminService.putUser(userToUpdate).subscribe();
     setTimeout(() => {

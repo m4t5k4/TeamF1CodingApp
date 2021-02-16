@@ -44,7 +44,7 @@ export class TablesDetailComponent implements OnInit {
     this.tableForm.get("locationSelect").value);
     
     this.submitted = true;
-    console.log(TableToUpdate);
+    //console.log(TableToUpdate);
 
     if(Table.name == "EmptyTable"){
       this._tablesService.addTable(TableToUpdate).subscribe();

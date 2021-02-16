@@ -20,7 +20,7 @@ export class ReservationsComponent implements OnInit {
   ngOnInit(): void {
     this._reservationService.getReservationsById(this._tokenService.getUser().id).subscribe(reservations => {
       this.reservations = reservations;
-      console.log(this.reservations);
+      //console.log(this.reservations);
 
     })
   }

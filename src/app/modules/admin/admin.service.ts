@@ -32,7 +32,7 @@ export class AdminService {
   setUser(user: User)
   {
     this.user = user;
-    console.log(this.user);
+    //console.log(this.user);
   }
 
   getUser() {
@@ -55,7 +55,7 @@ export class AdminService {
 
   setRole(role : Role){
     this.role = role;
-    console.log(this.role);
+    //console.log(this.role);
   }
 
   setRfid(id : number){

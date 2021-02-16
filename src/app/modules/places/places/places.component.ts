@@ -69,7 +69,7 @@ export class PlacesComponent implements OnInit {
         }
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
-        console.log(this.dataSource);
+        //console.log(this.dataSource);
       }
     )
    }
