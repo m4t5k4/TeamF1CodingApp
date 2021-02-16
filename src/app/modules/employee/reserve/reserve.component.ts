@@ -57,7 +57,7 @@ export class ReserveComponent implements OnInit {
   ) { this.notifier = notifier; }
 
   ngOnInit(): void {
-    this.notifier.notify("success", "Welkom terug "+this.token.getUser().firstname);
+    //this.notifier.notify("success", "Welkom terug "+this.token.getUser().firstname);
     this.currentUser = this.token.getUser();
     //console.log(this.currentUser);
 
